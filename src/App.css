@@ -2,6 +2,7 @@
   text-align: center;
   min-height: 100vh;
   color: white;
+  padding-top: 100px;
 }
 
 .App-header {
@@ -313,22 +314,28 @@
   width: 100vw;
   display: flex;
   justify-content: space-between;
-  align-items: flex-start;
-  background: #222;
-  padding: 24px 40px 0 40px;
-  min-height: 80px;
+  align-items: center;
+  background: rgba(34, 34, 34, 0.8);
+  backdrop-filter: blur(10px);
+  padding: 20px 40px;
+  min-height: 60px;
   box-sizing: border-box;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
 }
 
 .header-left .logo-tjc {
-  font-family: 'Montserrat', 'Pretendard', sans-serif;
-  font-size: 2.2rem;
-  font-weight: bold;
-  background: linear-gradient(90deg, #ff5fa2 0%, #7f7fff 100%);
+  font-family: 'Segoe UI', 'Roboto', 'Helvetica Neue', sans-serif;
+  font-size: 1.8rem;
+  font-weight: 600;
+  background: linear-gradient(90deg, #90ee90 0%, #98fb98 50%, #87ceeb 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  letter-spacing: 2px;
+  letter-spacing: 1px;
+  margin-left: 90px;
 }
 
 .header-center .subtitle-tjc {
@@ -352,7 +359,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  margin-top: 60px;
+  margin-top: 20px;
   margin-bottom: 40px;
 }
 

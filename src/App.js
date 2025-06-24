@@ -7,7 +7,7 @@ function App() {
       {/* 상단 헤더 영역 */}
       <header className="custom-header">
         <div className="header-left">
-          <span className="logo-tjc">농비티아이</span>
+          <span className="logo-tjc">N(農)BTI</span>
         </div>
       </header>
 
