@@ -57,9 +57,9 @@ function App() {
             나에게 딱 맞는 작물이 뭘까?
           </h1>
           <div className="hero-subtitle">
-            <h2 className="brand-name">농비티아이</h2>
-            <p className="brand-description">NongBTI</p>
-            <p className="tagline">질문을 기반으로 한 맞춤형 텃밭 작물 추천 '농(農)'</p>
+            <h2 className="brand-name">N(農)BTI</h2>
+            <p className="brand-description">농비티아이</p>
+            <p className="tagline">질문을 기반으로 한 맞춤형 텃밭 작물 추천 '농(農)'비티아이</p>
           </div>
         </div>
       </section>
@@ -166,7 +166,7 @@ function App() {
 
       {/* CTA 섹션 */}
       <section className="final-cta scroll-animate">
-        <h3>진짜 나를 알고 진짜 작물을 찾아가는 여정<br />지금 바로 농비티아이에서 시작하세요</h3>
+        <h3>진짜 나를 알고 진짜 작물을 찾아가는 여정<br />지금 바로 N(農)BTI에서 시작하세요</h3>
         <button className="start-button scroll-animate-delay-1">
           🚀 지금 시작하기
         </button>
@@ -175,10 +175,10 @@ function App() {
       {/* 하단 CTA */}
       <section className="bottom-cta scroll-animate">
         <p><strong>텃밭을 시작할 때의 내 모습, 16가지 작물 유형으로 확인해 보세요!</strong><br />
-        나를 알고 진짜 작물을 찾는 여정, 지금 농비티아이에서 시작해 보세요.</p>
+        나를 알고 진짜 작물을 찾는 여정, 지금 N(農)BTI에서 시작해 보세요.</p>
         <div className="bottom-buttons">
           <button className="test-button scroll-animate-delay-1">검사 응시하기</button>
-          <button className="intro-button scroll-animate-delay-2">농비티아이 바로가기</button>
+          <button className="intro-button scroll-animate-delay-2">N(農)BTI 바로가기</button>
         </div>
       </section>
     </div>
