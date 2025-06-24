@@ -7,7 +7,7 @@ function App() {
       {/* 상단 헤더 영역 */}
       <header className="custom-header">
         <div className="header-left">
-          <span className="logo-tjc">텃작추</span>
+          <span className="logo-tjc">농비티아이</span>
         </div>
       </header>
 
@@ -25,10 +25,10 @@ function App() {
       {/* 인트로 섹션 */}
       <section className="intro-section">
         <h1 className="main-title">
-          <strong>가든 매치</strong>
+          <strong>농비티아이</strong>
         </h1>
-        <h2 className="subtitle">Garden Matching</h2>
-        <p className="tagline">질문을 기반으로 한 맞춤형 텃밭 작물 추천</p>
+        <h2 className="subtitle">NongBTI</h2>
+        <p className="tagline">질문을 기반으로 한 맞춤형 텃밭 작물 추천 '농(農)'</p>
       </section>
 
       {/* 메인 질문 섹션 */}
@@ -103,7 +103,7 @@ function App() {
 
       {/* CTA 섹션 */}
       <section className="final-cta">
-        <h3>진짜 나를 알고 진짜 작물을 찾아가는 여정<br />지금 바로 가든 매치에서 시작하세요</h3>
+        <h3>진짜 나를 알고 진짜 작물을 찾아가는 여정<br />지금 바로 농비티아이에서 시작하세요</h3>
         <button className="start-button">
           🚀 지금 시작하기
         </button>
@@ -112,10 +112,10 @@ function App() {
       {/* 하단 CTA */}
       <section className="bottom-cta">
         <p><strong>텃밭을 시작할 때의 내 모습, 16가지 작물 유형으로 확인해 보세요!</strong><br />
-        나를 알고 진짜 작물을 찾는 여정, 지금 가든 매치에서 시작해 보세요.</p>
+        나를 알고 진짜 작물을 찾는 여정, 지금 농비티아이에서 시작해 보세요.</p>
         <div className="bottom-buttons">
           <button className="test-button">검사 응시하기</button>
-          <button className="intro-button">가든 매치 바로가기</button>
+          <button className="intro-button">농비티아이 바로가기</button>
         </div>
       </section>
     </div>
