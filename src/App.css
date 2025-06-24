@@ -1,0 +1,424 @@
+.App {
+  text-align: center;
+  min-height: 100vh;
+  color: white;
+}
+
+.App-header {
+  padding: 20px;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* 인트로 섹션 */
+.intro-section {
+  margin-bottom: 60px;
+  padding: 40px 0;
+}
+
+.main-title {
+  font-size: 3.5rem;
+  margin-bottom: 10px;
+  background: linear-gradient(45deg, #90ee90, #32cd32);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.subtitle {
+  font-size: 1.5rem;
+  margin-bottom: 20px;
+  color: #e0e0e0;
+}
+
+.tagline {
+  font-size: 1.2rem;
+  color: #b0b0b0;
+  margin-bottom: 30px;
+}
+
+/* 메인 질문 섹션 */
+.main-question {
+  margin-bottom: 60px;
+  padding: 40px 0;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  backdrop-filter: blur(10px);
+}
+
+.question-title {
+  font-size: 2.5rem;
+  margin-bottom: 30px;
+  line-height: 1.3;
+}
+
+.garden-types h3 {
+  font-size: 1.3rem;
+  color: #e0e0e0;
+}
+
+/* 작물 카드 섹션 */
+.crop-cards {
+  margin-bottom: 60px;
+}
+
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 30px;
+  margin-top: 40px;
+}
+
+.crop-card {
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 15px;
+  padding: 30px 20px;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.crop-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.card-icon {
+  font-size: 3rem;
+  margin-bottom: 15px;
+}
+
+.crop-card h4 {
+  font-size: 1.3rem;
+  margin-bottom: 10px;
+  color: #fff;
+}
+
+.crop-card p {
+  color: #e0e0e0;
+  font-size: 0.9rem;
+}
+
+/* 타입 질문 섹션 */
+.type-question {
+  margin-bottom: 60px;
+  padding: 40px 0;
+}
+
+.type-question h3 {
+  font-size: 1.8rem;
+  margin-bottom: 30px;
+  line-height: 1.4;
+}
+
+.cta-button {
+  background: linear-gradient(45deg, #32cd32, #228b22);
+  border: none;
+  padding: 15px 30px;
+  border-radius: 50px;
+  color: white;
+  font-size: 1.1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.cta-button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 5px 20px rgba(50, 205, 50, 0.4);
+}
+
+/* 특징 섹션 */
+.features {
+  margin-bottom: 60px;
+  padding: 40px 0;
+}
+
+.features h3 {
+  font-size: 1.8rem;
+  margin-bottom: 40px;
+  line-height: 1.4;
+}
+
+.feature-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 30px;
+}
+
+.feature-item {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 15px;
+  padding: 30px;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.feature-item h4 {
+  font-size: 1.2rem;
+  margin-bottom: 15px;
+  line-height: 1.4;
+}
+
+.feature-tag {
+  color: #90ee90;
+  font-weight: bold;
+  margin-bottom: 15px;
+  font-size: 0.9rem;
+}
+
+.feature-image {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 20px;
+  border-radius: 10px;
+  font-size: 0.9rem;
+  color: #e0e0e0;
+}
+
+/* 최종 CTA 섹션 */
+.final-cta {
+  margin-bottom: 60px;
+  padding: 40px 0;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  backdrop-filter: blur(10px);
+}
+
+.final-cta h3 {
+  font-size: 1.8rem;
+  margin-bottom: 30px;
+  line-height: 1.4;
+}
+
+.start-button {
+  background: linear-gradient(45deg, #228b22, #006400);
+  border: none;
+  padding: 18px 40px;
+  border-radius: 50px;
+  color: white;
+  font-size: 1.2rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.start-button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 5px 20px rgba(34, 139, 34, 0.4);
+}
+
+/* 공유 섹션 */
+.share-section {
+  margin-bottom: 60px;
+  padding: 40px 0;
+}
+
+.share-section h4 {
+  font-size: 1.5rem;
+  margin-bottom: 20px;
+}
+
+.share-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+.share-btn {
+  background: rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  padding: 10px 20px;
+  border-radius: 25px;
+  color: white;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.share-btn:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+/* 하단 CTA */
+.bottom-cta {
+  margin-bottom: 40px;
+  padding: 40px 0;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  backdrop-filter: blur(10px);
+}
+
+.bottom-cta p {
+  font-size: 1.1rem;
+  margin-bottom: 30px;
+  line-height: 1.6;
+}
+
+.bottom-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.test-button, .intro-button {
+  background: linear-gradient(45deg, #32cd32, #228b22);
+  border: none;
+  padding: 12px 25px;
+  border-radius: 25px;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.test-button:hover, .intro-button:hover {
+  transform: scale(1.05);
+}
+
+/* 반응형 디자인 */
+@media (max-width: 768px) {
+  .main-title {
+    font-size: 2.5rem;
+  }
+  
+  .question-title {
+    font-size: 2rem;
+  }
+  
+  .card-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .feature-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .share-buttons {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .bottom-buttons {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+.custom-header {
+  width: 100vw;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  background: #222;
+  padding: 24px 40px 0 40px;
+  min-height: 80px;
+  box-sizing: border-box;
+}
+
+.header-left .logo-tjc {
+  font-family: 'Montserrat', 'Pretendard', sans-serif;
+  font-size: 2.2rem;
+  font-weight: bold;
+  background: linear-gradient(90deg, #ff5fa2 0%, #7f7fff 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  letter-spacing: 2px;
+}
+
+.header-center .subtitle-tjc {
+  font-size: 1.1rem;
+  color: #b0b0b0;
+  font-weight: 500;
+  margin-top: 12px;
+}
+
+.header-right .desc-tjc {
+  font-size: 1rem;
+  color: #fff;
+  font-weight: 400;
+  margin-top: 8px;
+  letter-spacing: 0.5px;
+}
+
+.main-question-tjc {
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 60px;
+  margin-bottom: 40px;
+}
+
+.main-question-tjc h1 {
+  font-size: 2.8rem;
+  font-weight: bold;
+  color: #fff;
+  text-align: center;
+  line-height: 1.2;
+  letter-spacing: -1px;
+}
+
+.share-btn-tjc {
+  position: fixed;
+  right: 40px;
+  bottom: 40px;
+  background: linear-gradient(180deg, #fbeee6 0%, #e6c29d 100%);
+  border: none;
+  border-radius: 50%;
+  width: 90px;
+  height: 90px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  color: #222;
+  font-weight: bold;
+  cursor: pointer;
+  z-index: 100;
+  transition: box-shadow 0.2s;
+}
+
+.share-btn-tjc:hover {
+  box-shadow: 0 8px 32px rgba(0,0,0,0.18);
+}
+
+.share-emoji {
+  font-size: 2rem;
+  margin-bottom: 2px;
+}
+
+@media (max-width: 768px) {
+  .custom-header {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 18px 12px 0 12px;
+  }
+  .main-question-tjc h1 {
+    font-size: 2rem;
+  }
+  .share-btn-tjc {
+    right: 16px;
+    bottom: 16px;
+    width: 70px;
+    height: 70px;
+    font-size: 0.95rem;
+  }
+}
+
+.sub-question-tjc {
+  font-size: 1.6rem;
+  font-weight: 400;
+  color: #e0ffe0;
+  margin-top: 32px;
+  text-align: center;
+  line-height: 1.5;
+} 
