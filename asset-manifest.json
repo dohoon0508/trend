@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/trend/static/css/main.45819543.css",
+    "main.js": "/trend/static/js/main.856040b5.js",
+    "index.html": "/trend/index.html",
+    "main.45819543.css.map": "/trend/static/css/main.45819543.css.map",
+    "main.856040b5.js.map": "/trend/static/js/main.856040b5.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.45819543.css",
+    "static/js/main.856040b5.js"
+  ]
+}
