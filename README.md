@@ -1,13 +1,21 @@
-# 가든 매치 - 텃밭 작물 추천 서비스
+# N(農)BTI - 농비티아이
 
 질문을 기반으로 한 맞춤형 텃밭 작물 추천 서비스의 소개 페이지입니다.
 
-## 주요 기능
+## 🌱 라이브 데모
 
-- 16가지 작물 유형 분석
-- 맞춤형 작물 추천
-- AI 기반 과학적 분석
-- 반응형 웹 디자인
+**배포된 사이트:** https://dohoon0508.github.io/trend/
+
+비긴즈 BLOOM 검사 스타일을 참고하여 제작된 텃밭 작물 추천 서비스입니다.
+
+## ✨ 주요 기능
+
+- 🌿 16가지 작물 유형 분석
+- 🎯 맞춤형 작물 추천 시스템
+- 🔬 농업 전문가들의 과학적 분석
+- 📱 반응형 웹 디자인
+- 🎨 비긴즈 스타일 UI/UX
+- 🌈 초록색 그라데이션 디자인
 
 ## 시작하기
 
@@ -37,25 +45,46 @@ npm start
 npm run build
 ```
 
-## 기술 스택
+## 🛠 기술 스택
 
-- React 18
-- CSS3 (Grid, Flexbox)
-- 반응형 디자인
-- PWA 지원
+- **Frontend:** React 18
+- **Styling:** CSS3 (Grid, Flexbox, Gradient)
+- **Font:** National Park (영어), Segoe UI (한글)
+- **Deployment:** GitHub Pages
+- **Design:** 반응형 디자인, PWA 지원
+- **UI/UX:** 비긴즈 BLOOM 검사 스타일
 
-## 프로젝트 구조
+## 📁 프로젝트 구조
 
 ```
 garden-recommend-intro/
 ├── public/
+│   ├── images/          # 이미지 파일들
 │   ├── index.html
 │   └── manifest.json
 ├── src/
-│   ├── App.js
-│   ├── App.css
+│   ├── assets/
+│   │   └── images/      # 컴포넌트용 이미지
+│   ├── App.js           # 메인 컴포넌트
+│   ├── App.css          # 스타일시트
 │   ├── index.js
 │   └── index.css
 ├── package.json
 └── README.md
-``` 
+```
+
+## 🚀 배포
+
+```bash
+npm run deploy
+```
+
+GitHub Pages를 통해 자동 배포됩니다.
+
+## 🎨 디자인 특징
+
+- 반투명 고정 헤더
+- 초록색 그라데이션 로고
+- National Park 폰트 (영어)
+- 카드형 레이아웃
+- 블러 효과 및 호버 애니메이션 
