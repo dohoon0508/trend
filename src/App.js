@@ -39,7 +39,14 @@ function App() {
       {/* 상단 헤더 영역 */}
       <header className="custom-header">
         <div className="header-left">
-          <span className="logo-tjc">N(農)BTI</span>
+          <span 
+            className="logo-tjc"
+            onClick={() => window.location.reload()}
+            style={{ cursor: 'pointer' }}
+            title="홈으로 돌아가기"
+          >
+            N(農)BTI
+          </span>
         </div>
       </header>
 
