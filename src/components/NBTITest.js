@@ -365,6 +365,28 @@ const NBTITest = ({ onBack }) => {
         { text: "너무 자주 하긴 어려울 것 같아요", value: "careless" }
       ],
       description: "텃밭 활동 빈도"
+    },
+    // 4. 성향분석
+    {
+      id: 10,
+      category: "🧠 성향분석",
+      question: "새로운 재배 방법을 시도하는 걸 좋아하나요?",
+      options: [
+        { text: "네, 도전하는 걸 좋아해요", value: "도전정신" },
+        { text: "아니요, 익숙한 방식이 좋아요", value: "안정추구" }
+      ],
+      description: "도전정신 vs 안정추구"
+    },
+    // 5. 텃밭 특성
+    {
+      id: 11,
+      category: "🌟 텃밭 특성",
+      question: "효율적인 관리 방법을 선호하시나요?",
+      options: [
+        { text: "네, 효율이 중요해요", value: "효율추구" },
+        { text: "아니요, 천천히 즐기는 게 좋아요", value: "여유추구" }
+      ],
+      description: "효율추구 vs 여유추구"
     }
   ];
 
@@ -417,6 +439,9 @@ const NBTITest = ({ onBack }) => {
     
     // types 배열에서 코드로 찾기
     const foundType = types.find(t => t.code === finalCode);
+    // 성향분석, 텃밭특성 답변 추출
+    const tendencyAnswer = allAnswers[9]?.value || "-";
+    const gardenFeatureAnswer = allAnswers[10]?.value || "-";
     setResult({
       code: finalCode,
       type: foundType || {
@@ -427,7 +452,9 @@ const NBTITest = ({ onBack }) => {
         cropList: [],
         characteristics: ['디버깅 필요'],
         tips: '코드가 매칭되지 않습니다.'
-      }
+      },
+      tendency: tendencyAnswer,
+      gardenFeature: gardenFeatureAnswer
     });
     setIsCompleted(true);
   };
@@ -479,6 +506,60 @@ const NBTITest = ({ onBack }) => {
               <p className="detail-description-text">{type.detailDescription}</p>
             </div>
           )}
+          {/* 성향분석 파트 */}
+          <div className="tendency-analysis-section" style={{margin: '32px 0 24px 0', padding: '28px 18px', background: 'rgba(255,255,255,0.08)', borderRadius: 18, boxShadow: '0 2px 8px rgba(0,0,0,0.04)'}}>
+            <h3 style={{fontWeight: 700, fontSize: '1.25em', marginBottom: 24, display: 'flex', alignItems: 'center', gap: 8, color: '#fff'}}>
+              <span role="img" aria-label="chart">📊</span> 성향 분석
+            </h3>
+            {/* 적응력 */}
+            <div style={{marginBottom: 18, background: 'rgba(255,255,255,0.10)', borderRadius: 14, padding: '16px 12px'}}>
+              <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 6}}>
+                <span style={{fontWeight: 600, color: '#fff'}}>적응력</span>
+                <span style={{fontSize: '0.98em', color: '#fff'}}>재배 경험</span>
+                <span style={{fontWeight: 500, fontSize: '0.98em', color: '#fff'}}>초보자형</span>
+              </div>
+              <div style={{display: 'flex', alignItems: 'center', gap: 10}}>
+                <span style={{fontWeight: 700, color: '#fff', minWidth: 18}}>A</span>
+                <div style={{flex: 1, height: 16, background: '#e0f5e7', borderRadius: 8, position: 'relative', margin: '0 8px'}}>
+                  <div style={{width: `${type.adaptabilityScore || 0}%`, height: '100%', background: 'linear-gradient(90deg,#1ecb6b,#4be585)', borderRadius: 8, transition: 'width 0.5s'}}></div>
+                  <span style={{position: 'absolute', right: 10, top: 0, height: '100%', display: 'flex', alignItems: 'center', fontWeight: 700, color: '#fff'}}>{type.adaptabilityScore || 0}</span>
+                </div>
+                <span style={{fontWeight: 700, color: '#fff', minWidth: 18}}>N</span>
+              </div>
+            </div>
+            {/* 상품성 */}
+            <div style={{marginBottom: 18, background: 'rgba(255,255,255,0.10)', borderRadius: 14, padding: '16px 12px'}}>
+              <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 6}}>
+                <span style={{fontWeight: 600, color: '#fff'}}>상품성</span>
+                <span style={{fontSize: '0.98em', color: '#fff'}}>재배 목적</span>
+                <span style={{fontWeight: 500, fontSize: '0.98em', color: '#fff'}}>수익형</span>
+              </div>
+              <div style={{display: 'flex', alignItems: 'center', gap: 10}}>
+                <span style={{fontWeight: 700, color: '#fff', minWidth: 18}}>H</span>
+                <div style={{flex: 1, height: 16, background: '#fff7e0', borderRadius: 8, position: 'relative', margin: '0 8px'}}>
+                  <div style={{width: `${type.hobbyScore || 0}%`, height: '100%', background: 'linear-gradient(90deg,#ffb300,#ffe066)', borderRadius: 8, transition: 'width 0.5s'}}></div>
+                  <span style={{position: 'absolute', right: 10, top: 0, height: '100%', display: 'flex', alignItems: 'center', fontWeight: 700, color: '#fff'}}>{type.hobbyScore || 0}</span>
+                </div>
+                <span style={{fontWeight: 700, color: '#fff', minWidth: 18}}>P</span>
+              </div>
+            </div>
+            {/* 빈도성 */}
+            <div style={{background: 'rgba(255,255,255,0.10)', borderRadius: 14, padding: '16px 12px'}}>
+              <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 6}}>
+                <span style={{fontWeight: 600, color: '#fff'}}>빈도성</span>
+                <span style={{fontSize: '0.98em', color: '#fff'}}>관리 시간</span>
+                <span style={{fontWeight: 500, fontSize: '0.98em', color: '#fff'}}>간단관리형</span>
+              </div>
+              <div style={{display: 'flex', alignItems: 'center', gap: 10}}>
+                <span style={{fontWeight: 700, color: '#fff', minWidth: 18}}>B</span>
+                <div style={{flex: 1, height: 16, background: '#e0eaff', borderRadius: 8, position: 'relative', margin: '0 8px'}}>
+                  <div style={{width: `${type.busyScore || 0}%`, height: '100%', background: 'linear-gradient(90deg,#2979ff,#6ec6ff)', borderRadius: 8, transition: 'width 0.5s'}}></div>
+                  <span style={{position: 'absolute', right: 10, top: 0, height: '100%', display: 'flex', alignItems: 'center', fontWeight: 700, color: '#fff'}}>{type.busyScore || 0}</span>
+                </div>
+                <span style={{fontWeight: 700, color: '#fff', minWidth: 18}}>C</span>
+              </div>
+            </div>
+          </div>
           <div className="recommended-crops">
             <h3>🌱 추천 작물</h3>
             <div style={{

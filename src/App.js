@@ -83,8 +83,8 @@ function App() {
       {/* 4가지 농업 요소 태그 섹션 */}
       <section className="agriculture-tags scroll-animate">
         <div className="section-header">
-          <h2 className="section-title">🌱 3가지 요소 → 성격 중심 코드</h2>
-          <p className="section-subtitle">농업 전문가들이 개발한 과학적 분석법</p>
+          <h2 className="section-title">🌱 당신의 텃밭 성격, 3가지 키워드로 파헤치다!</h2>
+          <p className="section-subtitle">작물 관리 경험, 재배 목적, 투자 가능한 시간에 따라 나뉘는 8가지 유형!<br/>내 성향에 딱 맞는 작물을 만나보세요.</p>
         </div>
         
         <div className="tags-container">
@@ -137,13 +137,13 @@ function App() {
             </div>
           </div>
           <div className="cta-content">
-            <h3>나는 어떤 작물 유형일지<br />궁금하다면?</h3>
+            <h3>당신의 성향에 딱 맞는 작물,<br />지금 확인해보세요!</h3>
             <button 
               className="cta-button scroll-animate-delay-1"
               onClick={() => setCurrentPage('test')}
             >
               <span className="button-icon">🥕</span>
-              <span className="button-text">N(農)BTI 검사 응시하러 가기</span>
+              <span className="button-text">N(農)BTI 검사하기</span>
               <span className="button-arrow">→</span>
             </button>
           </div>
