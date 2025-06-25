@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import './App.css';
 import NBTITest from './components/NBTITest';
+import ResultSlider from './components/ResultSlider';
 
 function App() {
   const [currentPage, setCurrentPage] = useState('intro'); // 'intro' or 'test'
@@ -79,57 +80,6 @@ function App() {
         </div>
       </section>
 
-      {/* 공유하기 버튼 (우측 하단 고정) */}
-      <button className="share-btn-tjc">
-        <span className="share-emoji">🎄</span>
-        <span>공유하기</span>
-      </button>
-
-      {/* 메인 질문 섹션 */}
-      <section className="main-question scroll-animate">
-        <h2 className="question-title">
-          텃밭을 시작할 때<br />
-          나는 어떤 작물을 키우면 좋을까요?
-        </h2>
-        <div className="garden-types">
-          <h3>8가지 작물 유형과 함께<br />나의 텃밭 성향에 대해 알아보세요 🌱</h3>
-        </div>
-      </section>
-
-      {/* 작물 카드 섹션 */}
-      <section className="crop-cards scroll-animate">
-        <div className="section-header">
-          <h2 className="section-title">🌱 8가지 작물 유형</h2>
-          <p className="section-subtitle">나만의 텃밭 성향을 찾아보세요</p>
-        </div>
-        
-        <div className="card-grid">
-          <div className="crop-card scroll-animate-delay-1">
-            <div className="card-icon">🥬</div>
-            <h4>채소형</h4>
-            <p>신선한 채소를 선호하는 타입</p>
-          </div>
-          
-          <div className="crop-card scroll-animate-delay-2">
-            <div className="card-icon">🍅</div>
-            <h4>과채형</h4>
-            <p>과일과 채소를 함께 키우는 타입</p>
-          </div>
-          
-          <div className="crop-card scroll-animate-delay-3">
-            <div className="card-icon">🌿</div>
-            <h4>허브형</h4>
-            <p>향신료와 허브를 즐기는 타입</p>
-          </div>
-          
-          <div className="crop-card scroll-animate-delay-4">
-            <div className="card-icon">🌸</div>
-            <h4>꽃형</h4>
-            <p>아름다운 꽃을 가꾸는 타입</p>
-          </div>
-        </div>
-      </section>
-
       {/* 4가지 농업 요소 태그 섹션 */}
       <section className="agriculture-tags scroll-animate">
         <div className="section-header">
@@ -170,6 +120,11 @@ function App() {
         </div>
       </section>
 
+      {/* 결과 화면 갤러리 섹션 */}
+      <section className="result-gallery scroll-animate">
+        <ResultSlider />
+      </section>
+
       {/* 나는 어떤 작물 유형일지 섹션 */}
       <section className="type-question scroll-animate">
         <div className="cta-container">
@@ -191,33 +146,6 @@ function App() {
               <span className="button-text">N(農)BTI 검사 응시하러 가기</span>
               <span className="button-arrow">→</span>
             </button>
-          </div>
-        </div>
-      </section>
-
-      {/* 특징 섹션 */}
-      <section className="features scroll-animate">
-        <div className="section-header">
-          <h2 className="section-title">상대를 알기 전, 가장 먼저 알아야 할 것! 바로 '나'예요</h2>
-        </div>
-        
-        <div className="feature-grid">
-          <div className="feature-item scroll-animate-delay-1">
-            <div className="feature-icon">🌱</div>
-            <h4>텃밭을 대할 때 나의 가장 큰 장점은 무엇일까요?</h4>
-            <div className="feature-tag">#나의 매력 5가지</div>
-          </div>
-          
-          <div className="feature-item scroll-animate-delay-2">
-            <div className="feature-icon">🌿</div>
-            <h4>나는 작물들과 어떤 방식으로 관계를 맺고 있을까요?</h4>
-            <div className="feature-tag">#관계 유형 #추천 유형</div>
-          </div>
-          
-          <div className="feature-item scroll-animate-delay-3">
-            <div className="feature-icon">🔬</div>
-            <h4>농업 전문가들의 과학적인 작물 분석으로 나를 더 깊이 들여다보세요</h4>
-            <div className="feature-tag">#AI 분석 #맞춤형 추천</div>
           </div>
         </div>
       </section>
