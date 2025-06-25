@@ -54,7 +54,7 @@ function App() {
         <div className="hero-content">
           <h1 className="hero-title">
             텃밭을 시작할 때<br />
-            나에게 딱 맞는 작물이 뭘까?
+            나에게 딱 맞는 작물은?
           </h1>
           <div className="hero-subtitle">
             <h2 className="brand-name">N(農)BTI</h2>
@@ -115,6 +115,56 @@ function App() {
         </div>
       </section>
 
+      {/* 4가지 농업 요소 태그 섹션 */}
+      <section className="agriculture-tags scroll-animate">
+        <div className="section-header">
+          <h2 className="section-title">🌱 4가지 요소 → 성격 중심 코드</h2>
+          <p className="section-subtitle">농업 전문가들이 개발한 과학적 분석법</p>
+        </div>
+        
+        <div className="tags-container">
+          <div className="tag-row scroll-animate-delay-1">
+            <div className="agriculture-tag adaptability">
+              <span className="tag-english">Novice</span>
+              <span className="tag-korean">초보자형</span>
+              <span className="tag-center">적응력</span>
+              <span className="tag-right">숙련자형</span>
+              <span className="tag-right-en">Adaptable</span>
+            </div>
+          </div>
+          
+          <div className="tag-row scroll-animate-delay-2">
+            <div className="agriculture-tag profitability">
+              <span className="tag-english">Hobby</span>
+              <span className="tag-korean">취미형</span>
+              <span className="tag-center">상품성</span>
+              <span className="tag-right">수익형</span>
+              <span className="tag-right-en">Profit</span>
+            </div>
+          </div>
+          
+          <div className="tag-row scroll-animate-delay-3">
+            <div className="agriculture-tag frequency">
+              <span className="tag-english">Busy</span>
+              <span className="tag-korean">시간부족형</span>
+              <span className="tag-center">빈도성</span>
+              <span className="tag-right">관리세심형</span>
+              <span className="tag-right-en">Care</span>
+            </div>
+          </div>
+          
+          <div className="tag-row scroll-animate-delay-4">
+            <div className="agriculture-tag environment">
+              <span className="tag-english">Limited</span>
+              <span className="tag-korean">환경제한형</span>
+              <span className="tag-center">환경적합</span>
+              <span className="tag-right">환경다양형</span>
+              <span className="tag-right-en">Flexible</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* 나는 어떤 작물 유형일지 섹션 */}
       <section className="type-question scroll-animate">
         <div className="cta-container">
@@ -130,7 +180,7 @@ function App() {
             <h3>나는 어떤 작물 유형일지<br />궁금하다면?</h3>
             <button className="cta-button scroll-animate-delay-1">
               <span className="button-icon">🥕</span>
-              <span className="button-text">작물 추천 검사 응시하러 가기</span>
+              <span className="button-text">N(農)BTI 검사 응시하러 가기</span>
               <span className="button-arrow">→</span>
             </button>
           </div>

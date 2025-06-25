@@ -66,7 +66,7 @@
   text-align: center;
   max-width: 900px;
   padding: 0 40px;
-  animation: heroContentFadeIn 3s ease-out 1s both;
+  animation: heroContentFadeIn 1s ease-out 1s both;
 }
 
 .hero-title {
@@ -77,11 +77,11 @@
   margin-bottom: 60px;
   color: white;
   text-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
-  animation: heroTitleSlideUp 2.5s ease-out 1.5s both;
+  animation: heroTitleSlideUp 1s ease-out 1s both;
 }
 
 .hero-subtitle {
-  animation: heroSubtitleFadeIn 2s ease-out 2.5s both;
+  animation: heroSubtitleFadeIn 1s ease-out 1.2s both;
 }
 
 .brand-name {
@@ -228,6 +228,239 @@
   max-width: 1600px;
   margin-left: auto;
   margin-right: auto;
+}
+
+/* 4가지 농업 요소 태그 섹션 */
+.agriculture-tags {
+  margin: 120px 0;
+  padding: 0 60px;
+  max-width: 1600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.tags-container {
+  margin-top: 80px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.tag-row {
+  display: flex;
+  justify-content: center;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.tag-row.animate-in {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.agriculture-tag {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-radius: 50px;
+  padding: 0;
+  font-weight: 600;
+  font-size: 1.2rem;
+  min-width: 900px;
+  height: 100px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.agriculture-tag:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.25);
+}
+
+/* 컬러 스타일 - 농업 테마 (불규칙한 비율 변화 애니메이션) */
+.agriculture-tag.adaptability {
+  background: linear-gradient(90deg, 
+    #2e8b57 0%, 
+    #3cb371 25%, 
+    #20b2aa 50%, 
+    #48d1cc 75%, 
+    #00fa9a 100%);
+  background-size: 200% 100%;
+  animation: irregularChange1 15s ease-in-out infinite;
+}
+
+.agriculture-tag.profitability {
+  background: linear-gradient(90deg, 
+    #f0e68c 0%, 
+    #bdb76b 25%, 
+    #9acd32 50%, 
+    #6b8e23 75%, 
+    #556b2f 100%);
+  background-size: 200% 100%;
+  animation: irregularChange2 18s ease-in-out infinite;
+}
+
+/* 밝은 배경에서 글씨색 조정 (이제 profitability가 노란색 계열) */
+.agriculture-tag.profitability .tag-english {
+  color: white;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+.agriculture-tag.profitability .tag-korean {
+  color: rgba(255, 255, 255, 0.8);
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.agriculture-tag.profitability .tag-right-en {
+  color: #2d4a22;
+  text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.5);
+}
+
+.agriculture-tag.profitability .tag-right {
+  color: rgba(45, 74, 34, 0.8);
+  text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.3);
+}
+
+.agriculture-tag.profitability .tag-center {
+  color: #2d4a22;
+  background: rgba(240, 230, 140, 0.2);
+  border: 2px solid rgba(45, 74, 34, 0.3);
+}
+
+.agriculture-tag.frequency {
+  background: linear-gradient(90deg, 
+    #006400 0%, 
+    #008000 25%, 
+    #2e8b57 50%, 
+    #3cb371 75%, 
+    #90ee90 100%);
+  background-size: 200% 100%;
+  animation: irregularChange3 21s ease-in-out infinite;
+}
+
+.agriculture-tag.environment {
+  background: linear-gradient(90deg, 
+    #98fb98 0%, 
+    #adff2f 25%, 
+    #7cfc00 50%, 
+    #32cd32 75%, 
+    #228b22 100%);
+  background-size: 200% 100%;
+  animation: irregularChange4 13s ease-in-out infinite;
+}
+
+/* 밝은 초록색 배경에서 글씨색 조정 (이제 environment가 초록색 계열) */
+.agriculture-tag.environment .tag-english,
+.agriculture-tag.environment .tag-right-en {
+  color: #1a4d1a;
+  text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.5);
+}
+
+.agriculture-tag.environment .tag-korean,
+.agriculture-tag.environment .tag-right {
+  color: rgba(26, 77, 26, 0.8);
+  text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.3);
+}
+
+.agriculture-tag.environment .tag-center {
+  color: #1a4d1a;
+  background: rgba(152, 251, 152, 0.3);
+  border: 2px solid rgba(26, 77, 26, 0.4);
+}
+
+/* 불규칙한 비율 변화 애니메이션 */
+@keyframes irregularChange1 {
+  0% { background-position: -50% 0; }
+  15% { background-position: -25% 0; }
+  30% { background-position: -75% 0; }
+  45% { background-position: -40% 0; }
+  60% { background-position: -80% 0; }
+  75% { background-position: -20% 0; }
+  90% { background-position: -65% 0; }
+  100% { background-position: -50% 0; }
+}
+
+@keyframes irregularChange2 {
+  0% { background-position: -50% 0; }
+  18% { background-position: -70% 0; }
+  35% { background-position: -30% 0; }
+  52% { background-position: -85% 0; }
+  68% { background-position: -15% 0; }
+  82% { background-position: -60% 0; }
+  100% { background-position: -50% 0; }
+}
+
+@keyframes irregularChange3 {
+  0% { background-position: -50% 0; }
+  12% { background-position: -35% 0; }
+  28% { background-position: -75% 0; }
+  44% { background-position: -20% 0; }
+  59% { background-position: -80% 0; }
+  71% { background-position: -45% 0; }
+  87% { background-position: -25% 0; }
+  100% { background-position: -50% 0; }
+}
+
+@keyframes irregularChange4 {
+  0% { background-position: -50% 0; }
+  20% { background-position: -80% 0; }
+  38% { background-position: -25% 0; }
+  55% { background-position: -70% 0; }
+  72% { background-position: -35% 0; }
+  88% { background-position: -85% 0; }
+  100% { background-position: -50% 0; }
+}
+
+/* 텍스트 스타일 */
+.tag-english {
+  color: white;
+  font-size: 1.5rem;
+  font-weight: 700;
+  padding-left: 40px;
+  min-width: 200px;
+  text-align: left;
+}
+
+.tag-korean {
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 1rem;
+  font-weight: 500;
+  margin-left: -130px;
+}
+
+.tag-center {
+  color: white;
+  font-size: 1.3rem;
+  font-weight: 600;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(255, 255, 255, 0.2);
+  padding: 10px 20px;
+  border-radius: 25px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(10px);
+}
+
+.tag-right {
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 1rem;
+  font-weight: 500;
+  margin-right: -130px;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+.tag-right-en {
+  color: white;
+  font-size: 1.5rem;
+  font-weight: 700;
+  padding-right: 40px;
+  min-width: 200px;
+  text-align: right;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
 }
 
 .section-header {
@@ -642,23 +875,60 @@
   transform: scale(1.05);
 }
 
-/* 반응형 디자인 - 모바일에서도 큰 화면 느낌 유지 */
-@media (max-width: 768px) {
+/* 반응형 디자인 - 태블릿 */
+@media (max-width: 1024px) {
   .hero-title {
-    font-size: 3rem;
-    margin-bottom: 40px;
+    font-size: 3.8rem;
+    margin-bottom: 50px;
   }
   
   .brand-name {
-    font-size: 2.2rem;
+    font-size: 2.4rem;
   }
   
   .brand-description {
-    font-size: 1.4rem;
+    font-size: 1.6rem;
   }
   
   .tagline {
-    font-size: 1.1rem;
+    font-size: 1.2rem;
+  }
+  
+  .question-title {
+    font-size: 3.2rem;
+  }
+  
+  .section-title {
+    font-size: 2.8rem;
+  }
+  
+  .type-question h3 {
+    font-size: 2.6rem;
+  }
+  
+  .final-cta h3 {
+    font-size: 2.4rem;
+  }
+}
+
+/* 반응형 디자인 - 모바일 */
+@media (max-width: 768px) {
+  .hero-title {
+    font-size: 2.8rem;
+    margin-bottom: 40px;
+    line-height: 1.3;
+  }
+  
+  .brand-name {
+    font-size: 2rem;
+  }
+  
+  .brand-description {
+    font-size: 1.3rem;
+  }
+  
+  .tagline {
+    font-size: 1rem;
   }
   
   .hero-content {
@@ -666,12 +936,21 @@
   }
   
   .question-title {
-    font-size: 2.8rem;
+    font-size: 2.4rem;
+    line-height: 1.3;
   }
   
   .main-question {
     margin: 80px 20px;
-    padding: 80px 40px;
+    padding: 60px 30px;
+  }
+  
+  .section-title {
+    font-size: 2.2rem;
+  }
+  
+  .section-subtitle {
+    font-size: 1.3rem;
   }
   
   .crop-cards {
@@ -685,26 +964,103 @@
     margin-top: 60px;
   }
   
+  .agriculture-tags {
+    margin: 80px 0;
+    padding: 0 20px;
+  }
+  
+  .agriculture-tag {
+    min-width: 100%;
+    height: 80px;
+    font-size: 1rem;
+  }
+  
+  .tag-english {
+    font-size: 1.1rem;
+    padding-left: 20px;
+    min-width: 120px;
+  }
+  
+  .tag-korean {
+    font-size: 0.8rem;
+    margin-left: -80px;
+  }
+  
+  .tag-center {
+    font-size: 1rem;
+    padding: 6px 12px;
+  }
+  
+  .tag-right {
+    font-size: 0.8rem;
+    margin-right: -80px;
+  }
+  
+  .tag-right-en {
+    font-size: 1.1rem;
+    padding-right: 20px;
+    min-width: 120px;
+  }
+  
   .crop-card {
-    padding: 40px 30px;
-    min-height: 240px;
+    padding: 30px 25px;
+    min-height: 220px;
   }
   
   .card-icon {
-    font-size: 3.5rem;
-    margin-bottom: 20px;
+    font-size: 3rem;
+    margin-bottom: 15px;
   }
   
   .crop-card h4 {
-    font-size: 1.5rem;
+    font-size: 1.4rem;
   }
   
   .crop-card p {
-    font-size: 1rem;
+    font-size: 0.95rem;
+  }
+  
+  .type-question {
+    margin: 80px 20px;
+    padding: 60px 25px;
+  }
+  
+  .type-question h3 {
+    font-size: 2.2rem;
+    line-height: 1.3;
   }
   
   .feature-grid {
     grid-template-columns: 1fr;
+    gap: 30px;
+  }
+  
+  .feature-item h4 {
+    font-size: 1.3rem;
+  }
+  
+  .feature-item p {
+    font-size: 0.95rem;
+  }
+  
+  .final-cta {
+    margin: 80px 20px;
+    padding: 60px 25px;
+  }
+  
+  .final-cta h3 {
+    font-size: 2rem;
+    line-height: 1.3;
+  }
+  
+  .bottom-cta {
+    margin: 80px 20px;
+    padding: 60px 25px;
+  }
+  
+  .bottom-cta p {
+    font-size: 1.1rem;
+    line-height: 1.5;
   }
   
   .share-buttons {
@@ -715,6 +1071,114 @@
   .bottom-buttons {
     flex-direction: column;
     align-items: center;
+    gap: 15px;
+  }
+  
+  .test-button, .intro-button {
+    font-size: 1.1rem;
+    padding: 15px 30px;
+  }
+}
+
+/* 반응형 디자인 - 작은 모바일 */
+@media (max-width: 480px) {
+  .hero-title {
+    font-size: 2.2rem;
+    margin-bottom: 30px;
+  }
+  
+  .brand-name {
+    font-size: 1.7rem;
+  }
+  
+  .brand-description {
+    font-size: 1.1rem;
+  }
+  
+  .tagline {
+    font-size: 0.9rem;
+  }
+  
+  .hero-content {
+    padding: 0 15px;
+  }
+  
+  .question-title {
+    font-size: 2rem;
+  }
+  
+  .main-question {
+    margin: 60px 15px;
+    padding: 40px 20px;
+  }
+  
+  .section-title {
+    font-size: 1.8rem;
+  }
+  
+  .type-question h3 {
+    font-size: 1.8rem;
+  }
+  
+  .final-cta h3 {
+    font-size: 1.7rem;
+  }
+  
+  .crop-cards {
+    padding: 0 15px;
+  }
+  
+  .crop-card {
+    padding: 25px 20px;
+    min-height: 200px;
+  }
+  
+  .card-icon {
+    font-size: 2.5rem;
+  }
+  
+  .crop-card h4 {
+    font-size: 1.2rem;
+  }
+  
+  .crop-card p {
+    font-size: 0.9rem;
+  }
+  
+  .agriculture-tags {
+    padding: 0 15px;
+  }
+  
+  .agriculture-tag {
+    height: 70px;
+    font-size: 0.9rem;
+  }
+  
+  .tag-english {
+    font-size: 1rem;
+    padding-left: 15px;
+    min-width: 100px;
+  }
+  
+  .tag-korean {
+    font-size: 0.7rem;
+    margin-left: -60px;
+  }
+  
+  .tag-center {
+    font-size: 0.9rem;
+    padding: 5px 10px;
+  }
+  
+  .tag-right {
+    font-size: 0.7rem;
+    margin-right: -60px;
+  }
+  
+  .tag-right-en {
+    font-size: 1rem;
+    padding-right: 15px;
+    min-width: 100px;
   }
 }
 
