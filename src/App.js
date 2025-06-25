@@ -92,14 +92,14 @@ function App() {
           나는 어떤 작물을 키우면 좋을까요?
         </h2>
         <div className="garden-types">
-          <h3>16가지 작물 유형과 함께<br />나의 텃밭 성향에 대해 알아보세요 🌱</h3>
+          <h3>8가지 작물 유형과 함께<br />나의 텃밭 성향에 대해 알아보세요 🌱</h3>
         </div>
       </section>
 
       {/* 작물 카드 섹션 */}
       <section className="crop-cards scroll-animate">
         <div className="section-header">
-          <h2 className="section-title">🌱 16가지 작물 유형</h2>
+          <h2 className="section-title">🌱 8가지 작물 유형</h2>
           <p className="section-subtitle">나만의 텃밭 성향을 찾아보세요</p>
         </div>
         
@@ -133,7 +133,7 @@ function App() {
       {/* 4가지 농업 요소 태그 섹션 */}
       <section className="agriculture-tags scroll-animate">
         <div className="section-header">
-          <h2 className="section-title">🌱 4가지 요소 → 성격 중심 코드</h2>
+          <h2 className="section-title">🌱 3가지 요소 → 성격 중심 코드</h2>
           <p className="section-subtitle">농업 전문가들이 개발한 과학적 분석법</p>
         </div>
         
@@ -149,7 +149,7 @@ function App() {
           </div>
           
           <div className="tag-row scroll-animate-delay-2">
-            <div className="agriculture-tag profitability">
+            <div className="agriculture-tag environment">
               <span className="tag-english">Hobby</span>
               <span className="tag-korean">취미형</span>
               <span className="tag-center">상품성</span>
@@ -161,20 +161,10 @@ function App() {
           <div className="tag-row scroll-animate-delay-3">
             <div className="agriculture-tag frequency">
               <span className="tag-english">Busy</span>
-              <span className="tag-korean">시간부족형</span>
+              <span className="tag-korean">시간많음형</span>
               <span className="tag-center">빈도성</span>
-              <span className="tag-right">관리세심형</span>
-              <span className="tag-right-en">Care</span>
-            </div>
-          </div>
-          
-          <div className="tag-row scroll-animate-delay-4">
-            <div className="agriculture-tag environment">
-              <span className="tag-english">Limited</span>
-              <span className="tag-korean">환경제한형</span>
-              <span className="tag-center">환경적합</span>
-              <span className="tag-right">환경다양형</span>
-              <span className="tag-right-en">Flexible</span>
+              <span className="tag-right">시간부족형</span>
+              <span className="tag-right-en">Careless</span>
             </div>
           </div>
         </div>

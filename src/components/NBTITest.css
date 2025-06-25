@@ -38,8 +38,7 @@
   justify-content: center;
 }
 
-.test-container,
-.result-container {
+.test-container {
   max-width: 600px;
   width: 100%;
   background: rgba(255, 255, 255, 0.95);
@@ -48,6 +47,18 @@
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
   backdrop-filter: blur(10px);
   text-align: center;
+}
+
+.result-container {
+  max-width: 700px;
+  width: 100%;
+  background: linear-gradient(135deg, rgba(45, 90, 39, 0.9) 0%, rgba(74, 124, 89, 0.85) 50%, rgba(107, 142, 35, 0.8) 100%);
+  border-radius: 20px;
+  padding: 40px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(10px);
+  text-align: center;
+  border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 /* 테스트 헤더 */
@@ -162,7 +173,7 @@
 /* 결과 페이지 */
 .result-header h1 {
   font-size: 2.5rem;
-  color: #2d5a27;
+  color: #fff;
   margin-bottom: 20px;
 }
 
@@ -185,13 +196,13 @@
 
 .result-header h2 {
   font-size: 2rem;
-  color: #2d5a27;
+  color: #fff;
   margin-bottom: 15px;
   font-weight: 700;
 }
 
 .result-description {
-  color: #6b8e23;
+  color: rgba(255, 255, 255, 0.9);
   font-size: 1.1rem;
   line-height: 1.6;
   margin-bottom: 40px;
@@ -208,7 +219,7 @@
 
 .recommended-crops h3 {
   font-size: 1.5rem;
-  color: #2d5a27;
+  color: #fff;
   margin-bottom: 20px;
   font-weight: 600;
 }
@@ -241,7 +252,7 @@
 
 .characteristics-section h3 {
   font-size: 1.5rem;
-  color: #2d5a27;
+  color: #fff;
   margin-bottom: 20px;
   font-weight: 600;
 }
@@ -275,17 +286,21 @@
 
 .tips-section h3 {
   font-size: 1.5rem;
-  color: #2d5a27;
+  color: #fff;
   margin-bottom: 20px;
   font-weight: 600;
 }
 
 .tips-text {
-  color: #6b8e23;
+  color: rgba(255, 255, 255, 0.9);
   font-size: 1.1rem;
   line-height: 1.6;
   font-weight: 500;
   font-style: italic;
+  background: rgba(255, 255, 255, 0.1);
+  padding: 20px;
+  border-radius: 10px;
+  border-left: 4px solid rgba(255, 255, 255, 0.5);
 }
 
 /* 결과 액션 버튼 */
@@ -427,5 +442,234 @@
   .crop-tag {
     font-size: 0.85rem;
     padding: 6px 12px;
+  }
+}
+
+/* 상세 설명 섹션 */
+.detail-description-section {
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 20px;
+  padding: 30px;
+  margin: 30px 0;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.detail-description-section h3 {
+  color: #fff;
+  font-size: 1.3rem;
+  margin-bottom: 15px;
+  font-weight: 600;
+}
+
+.detail-description-text {
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 1rem;
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* 점수 차트 섹션 */
+.score-chart-section {
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 20px;
+  padding: 30px;
+  margin: 30px 0;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.score-chart-section h3 {
+  color: #fff;
+  font-size: 1.3rem;
+  margin-bottom: 25px;
+  font-weight: 600;
+}
+
+.score-bars {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.score-item {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 15px;
+  padding: 20px;
+}
+
+.score-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.score-label {
+  color: #fff;
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+.score-description {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.9rem;
+}
+
+.score-type {
+  color: #fff;
+  font-weight: 500;
+  font-size: 0.9rem;
+  background: rgba(255, 255, 255, 0.2);
+  padding: 4px 12px;
+  border-radius: 12px;
+}
+
+.score-bar {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.score-left, .score-right {
+  color: #fff;
+  font-weight: 600;
+  font-size: 1.1rem;
+  min-width: 20px;
+  text-align: center;
+}
+
+.score-progress {
+  flex: 1;
+  background: rgba(255, 255, 255, 0.2);
+  height: 25px;
+  border-radius: 12px;
+  position: relative;
+  overflow: hidden;
+}
+
+.score-fill {
+  height: 100%;
+  border-radius: 12px;
+  transition: width 0.8s ease;
+  position: relative;
+}
+
+.score-fill.adaptability {
+  background: linear-gradient(90deg, #4ade80, #22c55e);
+}
+
+.score-fill.hobby {
+  background: linear-gradient(90deg, #f59e0b, #eab308);
+}
+
+.score-fill.busy {
+  background: linear-gradient(90deg, #3b82f6, #1d4ed8);
+}
+
+.score-value {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #fff;
+  font-weight: 600;
+  font-size: 0.9rem;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+/* 유형 해설 섹션 */
+.type-explanation-section {
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 20px;
+  padding: 30px;
+  margin: 30px 0;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.type-explanation-section h3 {
+  color: #fff;
+  font-size: 1.3rem;
+  margin-bottom: 25px;
+  font-weight: 600;
+}
+
+.explanation-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+.explanation-item {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 15px;
+  padding: 25px;
+}
+
+.explanation-item h4 {
+  color: #fff;
+  font-size: 1.1rem;
+  margin-bottom: 20px;
+  font-weight: 600;
+  text-align: center;
+}
+
+.explanation-comparison {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.explanation-side {
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  padding: 20px;
+}
+
+.explanation-side h5 {
+  color: #fff;
+  font-size: 1rem;
+  margin-bottom: 10px;
+  font-weight: 600;
+}
+
+.explanation-summary {
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 0.9rem;
+  font-weight: 500;
+  margin-bottom: 12px;
+  font-style: italic;
+}
+
+.explanation-detail {
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 0.85rem;
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* 새로운 섹션들에 대한 모바일 반응형 */
+@media (max-width: 768px) {
+  .explanation-comparison {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+  
+  .score-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+  
+  .score-bar {
+    gap: 10px;
+  }
+  
+  .detail-description-section,
+  .score-chart-section,
+  .type-explanation-section {
+    padding: 20px;
+    margin: 20px 0;
   }
 } 

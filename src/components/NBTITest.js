@@ -9,261 +9,198 @@ const NBTITest = ({ onBack }) => {
 
   // 질문 데이터
   const questions = [
-    // 1. 적응력 (Novice vs Adaptable) - N/A
+    // 1. 적응력 (Adaptable vs Novice) - A/N
     {
       id: 1,
       category: "🌱 적응력",
-      question: "작물 재배 경험이 어느 정도 있으신가요?",
+      question: "다양한 환경에서 작물을 재배해본 경험이 있나요?",
       options: [
-        { text: "거의 처음이에요.", value: "novice", score: 0 },
-        { text: "몇 번 키워봤고 익숙해요.", value: "adaptable", score: 1 }
+        { text: "아니요, 처음 시도해보는 거예요", value: "novice" },
+        { text: "네, 다양한 상황에서 키워본 적 있어요", value: "adaptable" }
       ],
       description: "초보자형(N) vs 숙련자형(A)"
     },
     {
       id: 2,
       category: "🌱 적응력",
-      question: "물주기, 가지치기, 병충해 방제 등 복잡한 관리에 대해 어떻게 생각하세요?",
+      question: "작물 키우기를 어떻게 생각하시나요?",
       options: [
-        { text: "어려울 것 같고 간단한 게 좋아요.", value: "novice", score: 0 },
-        { text: "배우는 건 괜찮고 다양한 관리도 자신 있어요.", value: "adaptable", score: 1 }
+        { text: "최대한 간단했으면 좋겠어요", value: "novice" },
+        { text: "어렵더라도 직접 관리하는 걸 즐깁니다", value: "adaptable" }
       ],
-      description: "관리 복잡성에 대한 선호도를 평가합니다"
+      description: "관리 복잡도에 대한 태도"
     },
     {
       id: 3,
       category: "🌱 적응력",
-      question: "새로운 작물이나 방법에 도전하는 것을 좋아하시나요?",
+      question: "작물에 문제가 생기면?",
       options: [
-        { text: "익숙한 방식만 선호해요.", value: "novice", score: 0 },
-        { text: "새롭고 다양한 작물 키우는 걸 좋아해요.", value: "adaptable", score: 1 }
+        { text: "잘 모르겠고 도움을 받아야 할 것 같아요", value: "novice" },
+        { text: "스스로 해결하려고 찾아보거나 시도해요", value: "adaptable" }
       ],
-      description: "도전 의지를 확인합니다"
+      description: "문제 해결 의지"
     },
     // 2. 상품성 (Hobby vs Profit) - H/P
     {
       id: 4,
-      category: "💰 상품성",
-      question: "작물을 수확한 후 어떻게 활용하시나요?",
+      category: "💝 상품성",
+      question: "작물을 키우는 이유는 무엇인가요?",
       options: [
-        { text: "가족이나 이웃과 나누고 만족해요.", value: "hobby", score: 0 },
-        { text: "판매하거나 가공해서 수익을 내고 싶어요.", value: "profit", score: 1 }
+        { text: "힐링과 즐거움을 위해서예요", value: "hobby" },
+        { text: "수확해서 판매하거나 경제적 이익이 목적이에요", value: "profit" }
       ],
       description: "취미형(H) vs 수익형(P)"
     },
     {
       id: 5,
-      category: "💰 상품성",
-      question: "작물을 고를 때 가장 중요하게 생각하는 요소는 무엇인가요?",
+      category: "💝 상품성",
+      question: "작물 선택 기준은?",
       options: [
-        { text: "내가 좋아하거나 예쁜 작물이 좋아요.", value: "hobby", score: 0 },
-        { text: "시장에서 인기 있거나 가격이 좋은 작물을 고르고 싶어요.", value: "profit", score: 1 }
+        { text: "예쁘고 재미있어 보이는 작물", value: "hobby" },
+        { text: "많이 수확 가능하고 경제성 있는 작물", value: "profit" }
       ],
-      description: "작물 선택 기준을 확인합니다"
+      description: "작물 선택 우선순위"
     },
     {
       id: 6,
-      category: "💰 상품성",
-      question: "텃밭 운영에 드는 비용은 어떻게 생각하시나요?",
+      category: "💝 상품성",
+      question: "수익이나 생산량에 대해?",
       options: [
-        { text: "비용보단 즐거움이 중요해요.", value: "hobby", score: 0 },
-        { text: "비용 대비 수익이 중요하다고 생각해요.", value: "profit", score: 1 }
+        { text: "중요하지 않아요", value: "hobby" },
+        { text: "매우 중요해요, 손익계산도 합니다", value: "profit" }
       ],
-      description: "경제적 관점을 측정합니다"
+      description: "경제적 관점"
     },
-    // 3. 빈도성 (Busy vs Care) - B/C
+    // 3. 빈도성 (Busy(많음) vs Careless(부족)) - B/C
     {
       id: 7,
       category: "⏰ 빈도성",
-      question: "주 1회 이상 정기적으로 시간을 낼 수 있으신가요?",
+      question: "얼마나 자주 텃밭을 관리할 수 있나요?",
       options: [
-        { text: "바빠서 어렵습니다.", value: "busy", score: 0 },
-        { text: "네, 시간 낼 수 있습니다.", value: "care", score: 1 }
+        { text: "매일 혹은 자주 가꿉니다", value: "busy" },
+        { text: "가끔, 시간이 날 때만 관리할 수 있어요", value: "careless" }
       ],
-      description: "시간 부족형(B) vs 관리 세심형(C)"
+      description: "시간 많음/세심관리형(B) vs 시간 부족형/간단관리형(C)"
     },
     {
       id: 8,
       category: "⏰ 빈도성",
-      question: "작물 상태를 수시로 확인하고 기록하는 것에 대해 어떻게 생각하시나요?",
+      question: "작물에 관심을 쏟는 정도는?",
       options: [
-        { text: "번거롭고 어렵게 느껴져요.", value: "busy", score: 0 },
-        { text: "흥미롭고 성취감을 느껴요.", value: "care", score: 1 }
+        { text: "물 주기, 성장 확인, 병해 관리까지 정성껏 해요", value: "busy" },
+        { text: "자동화나 방치 가능 작물을 선호해요", value: "careless" }
       ],
-      description: "관리 의지를 확인합니다"
+      description: "관리 정성도"
     },
     {
       id: 9,
       category: "⏰ 빈도성",
-      question: "병해충이 발생했을 때 직접 관리하시겠어요?",
+      question: "텃밭 활동을 어떻게 생각하시나요?",
       options: [
-        { text: "어려워 보여서 꺼려져요.", value: "busy", score: 0 },
-        { text: "문제를 직접 해결해보고 싶어요.", value: "care", score: 1 }
+        { text: "주기적인 취미 활동으로 삼고 있어요", value: "busy" },
+        { text: "너무 자주 하긴 어려울 것 같아요", value: "careless" }
       ],
-      description: "문제 해결 적극성을 측정합니다"
-    },
-    // 4. 환경적합 (Limited vs Flexible) - L/F
-    {
-      id: 10,
-      category: "🏡 환경적합",
-      question: "텃밭을 운영할 공간은 어떤가요?",
-      options: [
-        { text: "베란다, 실내 등 제한된 공간이에요.", value: "limited", score: 0 },
-        { text: "마당이나 옥상처럼 비교적 자유로워요.", value: "flexible", score: 1 }
-      ],
-      description: "환경제한형(L) vs 환경다양형(F)"
-    },
-    {
-      id: 11,
-      category: "🏡 환경적합",
-      question: "햇빛과 통풍 조건은 어떤가요?",
-      options: [
-        { text: "햇빛이 부족하거나 통풍이 어려운 편이에요.", value: "limited", score: 0 },
-        { text: "햇빛이 잘 들고 통풍도 잘 돼요.", value: "flexible", score: 1 }
-      ],
-      description: "재배 환경 조건을 확인합니다"
-    },
-    {
-      id: 12,
-      category: "🏡 환경적합",
-      question: "물이나 흙을 다루는 데 제약이 있으신가요?",
-      options: [
-        { text: "물빠짐이 안 좋거나 흙 관리가 어려워요.", value: "limited", score: 0 },
-        { text: "물 공급과 토양 조건이 비교적 자유로워요.", value: "flexible", score: 1 }
-      ],
-      description: "물리적 제약 조건을 평가합니다"
+      description: "텃밭 활동 빈도"
     }
   ];
 
-  // 유형별 데이터
+  // 유형별 데이터 (8가지)
   const types = {
-    'NHLF': { 
-      name: '바쁜 도시 텃밭러', 
-      description: '초보자 + 감성 위주 + 시간 없음 + 유연한 환경', 
-      emoji: '🏙️', 
-      crops: ['상추', '바질', '체리토마토', '루꼴라'],
-      characteristics: ['간편 관리', '빠른 성장', '도시형 재배'],
-      tips: '물만 주면 자라는 간단한 작물부터 시작해보세요!'
+    'AHB': { 
+      name: '세심한 감성 마스터', 
+      description: '숙련자 + 감성 위주 + 시간 많음', 
+      emoji: '🌾', 
+      crops: ['벼', '허브정원', '꽃채소', '전통작물'],
+      characteristics: ['정성 관리', '감성적 접근', '시간 투자'],
+      tips: '시간을 충분히 투자해서 아름다운 정원을 만들어보세요!',
+      detailDescription: '풍부한 경험을 바탕으로 작물을 세심하게 돌보며, 감성과 미학을 텃밭에 반영하는 유형입니다. 힐링은 물론, 작물과의 교감 그 자체를 중요하게 생각하고, 매일의 변화를 관찰하는 것을 즐깁니다.',
+      adaptabilityScore: 96,
+      hobbyScore: 85,
+      busyScore: 90
     },
-    'NHLC': { 
-      name: '소극적 자연애호가', 
-      description: '초보자 + 감성 위주 + 시간 없음 + 제한된 환경', 
+    'AHC': { 
+      name: '감성형 도시 마스터', 
+      description: '숙련자 + 감성 위주 + 시간 없음', 
+      emoji: '🍃', 
+      crops: ['매실', '허브류', '미니정원', '관상용 채소'],
+      characteristics: ['효율적 감성', '도시형 재배', '간편 관리'],
+      tips: '바쁜 일상 속에서도 감성을 놓치지 마세요!',
+      detailDescription: '감성을 중요시하지만, 바쁜 일상 속에서 최소한의 시간으로 작물을 즐기는 고수 유형입니다. 작은 공간에서도 감성적 성취를 추구하며, 자동화나 스마트팜 기술을 효과적으로 활용할 줄 압니다.',
+      adaptabilityScore: 92,
+      hobbyScore: 78,
+      busyScore: 25
+    },
+    'APB': { 
+      name: '실속형 수익 마스터', 
+      description: '숙련자 + 수익 위주 + 시간 많음', 
       emoji: '🌿', 
-      crops: ['새싹채소', '허브', '미니화분채소', '콩나물'],
-      characteristics: ['실내 재배', '작은 공간', '향기로운 식물'],
-      tips: '베란다나 창가에서도 충분히 키울 수 있어요!'
+      crops: ['아스파라거스', '고급채소', '특용작물', '가공용 작물'],
+      characteristics: ['고품질 생산', '수익 최적화', '전문 재배'],
+      tips: '전문적인 재배로 최고의 수익을 창출해보세요!',
+      detailDescription: '수익을 내기 위한 철저한 계획과 노하우를 갖춘 유형입니다. 고수익 작물 중심으로 재배하면서도, 품질과 생산성을 모두 고려하며, 작물에 대한 이해도와 관리 능력이 뛰어납니다.',
+      adaptabilityScore: 94,
+      hobbyScore: 22,
+      busyScore: 88
     },
-    'NHBF': { 
-      name: '힐링 초보', 
-      description: '초보자 + 감성 위주 + 시간 많음 + 유연한 환경', 
-      emoji: '🧘', 
-      crops: ['라벤더', '로즈마리', '민트', '캐모마일'],
-      characteristics: ['치유 효과', '향기 요법', '정원 가꾸기'],
-      tips: '식물과 함께하는 힐링 시간을 만들어보세요!'
+    'APC': { 
+      name: '전략형 수익 실천가', 
+      description: '숙련자 + 수익 위주 + 시간 없음', 
+      emoji: '🍓', 
+      crops: ['딸기', '방울토마토', '시설재배', '고수익 작물'],
+      characteristics: ['효율적 수익', '전략적 선택', '시간 최적화'],
+      tips: '효율적인 전략으로 단시간에 최대 수익을 노려보세요!',
+      detailDescription: '시간은 부족하지만, 목표는 확실한 유형입니다. 빠르게 성장하는 작물, 시장성 있는 품목을 선호하며, 철저한 관리보다는 효율적 수익 창출에 집중합니다. 자동화, 위탁 재배 등 전략적 운영에 강점을 가집니다.',
+      adaptabilityScore: 90,
+      hobbyScore: 18,
+      busyScore: 28
     },
-    'NHBC': { 
-      name: '일상 속 미니농부', 
-      description: '초보자 + 감성 위주 + 시간 많음 + 제한된 환경', 
-      emoji: '🌱', 
-      crops: ['방울토마토', '상추', '오이', '쌈채소'],
-      characteristics: ['매일 관찰', '작은 수확', '가족 먹거리'],
-      tips: '매일 조금씩 자라는 모습을 관찰하는 재미를 느껴보세요!'
+    'NHB': { 
+      name: '힐링형 감성 초보자', 
+      description: '초보자 + 감성 위주 + 시간 많음', 
+      emoji: '🥬', 
+      crops: ['무', '배추', '상추', '쌈채소'],
+      characteristics: ['여유로운 관리', '힐링 우선', '천천히 배우기'],
+      tips: '서두르지 말고 식물과 함께하는 여유로운 시간을 즐겨보세요!',
+      detailDescription: '자연 속에서 여유롭게 감성과 힐링을 추구하는 유형입니다. 관리에 시간을 들이는 것을 부담스럽지 않게 여기며, 작물을 돌보는 과정에서 안정감과 정서적 만족을 얻습니다. 수익보다는 \'즐거움\'이 우선이며, 텃밭은 쉼터이자 취미 공간입니다.',
+      adaptabilityScore: 35,
+      hobbyScore: 82,
+      busyScore: 85
     },
-    'NPLF': { 
-      name: '현실형 농부', 
-      description: '초보자 + 수익 중심 + 시간 없음 + 유연한 환경', 
-      emoji: '💪', 
-      crops: ['시금치', '무', '배추', '대파'],
-      characteristics: ['실용적', '시장성', '대량 재배'],
-      tips: '판매 가능한 실용적인 채소부터 시작해보세요!'
+    'NHC': { 
+      name: '감성형 간편 입문자', 
+      description: '초보자 + 감성 위주 + 시간 없음', 
+      emoji: '🍆', 
+      crops: ['가지', '방울토마토', '허브', '간단한 채소'],
+      characteristics: ['쉬운 관리', '감성적 만족', '입문자 친화'],
+      tips: '간단한 작물로 시작해서 재배의 즐거움을 느껴보세요!',
+      detailDescription: '작물 재배에 로망이 있지만, 현실적인 시간 여유가 부족한 유형입니다. 간단하게 키울 수 있는 예쁜 작물이나 힐링 감성 중심의 재배를 선호하며, 짧은 시간 안에 즐거움을 얻을 수 있는 구조를 좋아합니다.',
+      adaptabilityScore: 32,
+      hobbyScore: 76,
+      busyScore: 30
     },
-    'NPLC': { 
-      name: '도전형 텃밭러', 
-      description: '초보자 + 수익 중심 + 시간 없음 + 제한된 환경', 
-      emoji: '🚀', 
-      crops: ['감자', '양파', '당근', '고구마'],
-      characteristics: ['도전 정신', '효율성', '저장성'],
-      tips: '작은 공간에서도 수익을 낼 수 있는 뿌리채소에 도전해보세요!'
+    'NPB': { 
+      name: '실속형 초보 농부', 
+      description: '초보자 + 수익 위주 + 시간 많음', 
+      emoji: '🌾', 
+      crops: ['부추', '대파', '시금치', '실용 채소'],
+      characteristics: ['실용적 선택', '경제성 중시', '꾸준한 학습'],
+      tips: '실용적인 채소로 시작해서 차근차근 수익을 늘려보세요!',
+      detailDescription: '수익성과 효율성도 중요하지만, 작물 관리에는 어느 정도 시간을 투자할 준비가 되어 있는 유형입니다. 현실적 판단력을 바탕으로 안정적이고 실용적인 재배 방식을 따르며, 장기적으로 텃밭을 확장해보고 싶어합니다.',
+      adaptabilityScore: 38,
+      hobbyScore: 24,
+      busyScore: 80
     },
-    'NPBF': { 
-      name: '실속파 초보', 
-      description: '초보자 + 수익 중심 + 시간 많음 + 유연한 환경', 
-      emoji: '📈', 
-      crops: ['고추', '가지', '토마토', '오크라'],
-      characteristics: ['경제성', '수확량', '지속 생산'],
-      tips: '한 번 심으면 오래 수확할 수 있는 작물이 좋아요!'
-    },
-    'NPBC': { 
-      name: '관리 최소 수익러', 
-      description: '초보자 + 수익 중심 + 시간 많음 + 제한된 환경', 
-      emoji: '💰', 
-      crops: ['콩', '호박', '옥수수', '들깨'],
-      characteristics: ['방치 재배', '단위당 수익', '저관리'],
-      tips: '심어놓으면 알아서 자라는 강한 작물을 선택하세요!'
-    },
-    'AHLF': { 
-      name: '감성 텃밭 마스터', 
-      description: '숙련자 + 감성 위주 + 시간 없음 + 유연한 환경', 
-      emoji: '🎨', 
-      crops: ['허브믹스', '에디블플라워', '베이비채소', '마이크로그린'],
-      characteristics: ['미적 감각', '요리 활용', '창의성'],
-      tips: '요리에 포인트가 되는 특별한 식재료를 키워보세요!'
-    },
-    'AHLC': { 
-      name: '공간 제약 정원사', 
-      description: '숙련자 + 감성 위주 + 시간 없음 + 제한된 환경', 
-      emoji: '🏡', 
-      crops: ['미니토마토', '쌈채소', '새싹채소', '허브류'],
-      characteristics: ['공간 효율', '수직 재배', '컴팩트'],
-      tips: '한정된 공간을 최대한 활용할 수 있는 재배법을 시도해보세요!'
-    },
-    'AHBF': { 
-      name: '세심한 힐링 마니아', 
-      description: '숙련자 + 감성 위주 + 시간 많음 + 유연한 환경', 
-      emoji: '🌸', 
-      crops: ['장미', '라벤더', '허브정원', '약용식물'],
-      characteristics: ['정성 관리', '치유 효과', '자연 친화'],
-      tips: '시간을 충분히 투자해서 완벽한 정원을 만들어보세요!'
-    },
-    'AHBC': { 
-      name: '일상 속 관리형 마스터', 
-      description: '숙련자 + 감성 위주 + 시간 많음 + 제한된 환경', 
-      emoji: '👨‍🌾', 
-      crops: ['토종채소', '쌈채소', '허브', '전통작물'],
-      characteristics: ['세심한 관리', '전통성', '품질 중시'],
-      tips: '정성스럽게 키운 우리 고유의 맛을 경험해보세요!'
-    },
-    'APLF': { 
-      name: '수익형 마스터', 
-      description: '숙련자 + 수익 중심 + 시간 없음 + 유연한 환경', 
-      emoji: '💼', 
-      crops: ['방울토마토', '시설채소', '수경재배', '버섯류'],
-      characteristics: ['고수익', '효율성', '기술 활용'],
-      tips: '최신 농업 기술을 활용해서 고수익을 노려보세요!'
-    },
-    'APLC': { 
-      name: '전문가형 텃밭 실천가', 
-      description: '숙련자 + 수익 중심 + 시간 없음 + 제한된 환경', 
-      emoji: '🏆', 
-      crops: ['고부가가치채소', '특용작물', '계절채소', '기능성채소'],
-      characteristics: ['전문성', '차별화', '프리미엄'],
-      tips: '남들이 하지 않는 특별한 작물로 틈새시장을 공략해보세요!'
-    },
-    'APBF': { 
-      name: '세심한 수익농부', 
-      description: '숙련자 + 수익 중심 + 시간 많음 + 유연한 환경', 
-      emoji: '🌟', 
-      crops: ['유기농채소', '희귀채소', '프리미엄작물', '수출용채소'],
-      characteristics: ['품질 최우선', '유기농', '브랜딩'],
-      tips: '최고 품질의 프리미엄 농산물로 브랜드를 만들어보세요!'
-    },
-    'APBC': { 
-      name: '전문 텃밭 경영자', 
-      description: '숙련자 + 수익 중심 + 시간 많음 + 제한된 환경', 
-      emoji: '👑', 
-      crops: ['고수익작물', '계약재배', '브랜드채소', '가공용작물'],
-      characteristics: ['경영 마인드', '계약 재배', '안정성'],
-      tips: '안정적인 판로를 확보한 후 계획적으로 재배해보세요!'
+    'NPC': { 
+      name: '도전형 초보 경작자', 
+      description: '초보자 + 수익 위주 + 시간 없음', 
+      emoji: '🍓', 
+      crops: ['딸기', '방울토마토', '쉬운 고수익 작물', '간편 재배'],
+      characteristics: ['빠른 수익', '도전 정신', '효율 추구'],
+      tips: '간단하면서도 수익성 있는 작물로 도전해보세요!',
+      detailDescription: '텃밭을 수익의 출발점으로 바라보며, 간편하게 관리 가능한 수익 작물 위주로 키우려는 경향이 있습니다. 재배 경험은 부족하지만, ROI(수익률)에 대한 관심은 높으며, 기술적 솔루션이나 자동화를 선호합니다.',
+      adaptabilityScore: 34,
+      hobbyScore: 20,
+      busyScore: 25
     }
   };
 
@@ -280,28 +217,50 @@ const NBTITest = ({ onBack }) => {
   };
 
   const calculateResult = (allAnswers) => {
-    // 1. 적응력 (N/A) - Q1,Q2,Q3 (2개 이상 숙련자형 답변 시 A)
-    const adaptabilityScore = allAnswers.slice(0, 3).reduce((sum, answer) => sum + answer.score, 0);
-    const adaptabilityCode = adaptabilityScore >= 2 ? 'A' : 'N';
+    console.log('모든 답변:', allAnswers.map(answer => ({ text: answer.text, value: answer.value })));
+    
+    // 1. 적응력 (N/A) - Q1,Q2,Q3 중 다수결
+    const adaptabilityAnswers = allAnswers.slice(0, 3);
+    const adaptabilityCount = {
+      novice: adaptabilityAnswers.filter(answer => answer.value === 'novice').length,
+      adaptable: adaptabilityAnswers.filter(answer => answer.value === 'adaptable').length
+    };
+    const adaptabilityCode = adaptabilityCount.adaptable >= 2 ? 'A' : 'N';
+    console.log('적응력 카운트:', adaptabilityCount, '코드:', adaptabilityCode);
 
-    // 2. 상품성 (H/P) - Q4,Q5,Q6 (2개 이상 수익형 답변 시 P)
-    const profitScore = allAnswers.slice(3, 6).reduce((sum, answer) => sum + answer.score, 0);
-    const profitCode = profitScore >= 2 ? 'P' : 'H';
+    // 2. 상품성 (H/P) - Q4,Q5,Q6 중 다수결
+    const profitAnswers = allAnswers.slice(3, 6);
+    const profitCount = {
+      hobby: profitAnswers.filter(answer => answer.value === 'hobby').length,
+      profit: profitAnswers.filter(answer => answer.value === 'profit').length
+    };
+    const profitCode = profitCount.profit >= 2 ? 'P' : 'H';
+    console.log('상품성 카운트:', profitCount, '코드:', profitCode);
 
-    // 3. 빈도성 (B/C) - Q7,Q8,Q9 (2개 이상 관리형 답변 시 C)
-    const careScore = allAnswers.slice(6, 9).reduce((sum, answer) => sum + answer.score, 0);
-    const careCode = careScore >= 2 ? 'C' : 'B';
+    // 3. 빈도성 (B/C) - Q7,Q8,Q9 중 다수결
+    const careAnswers = allAnswers.slice(6, 9);
+    const careCount = {
+      busy: careAnswers.filter(answer => answer.value === 'busy').length,
+      careless: careAnswers.filter(answer => answer.value === 'careless').length
+    };
+    const careCode = careCount.busy >= 2 ? 'B' : 'C';
+    console.log('빈도성 카운트:', careCount, '코드:', careCode);
 
-    // 4. 환경적합 (L/F) - Q10,Q11,Q12 (2개 이상 유연형 답변 시 F)
-    const environmentScore = allAnswers.slice(9, 12).reduce((sum, answer) => sum + answer.score, 0);
-    const environmentCode = environmentScore >= 2 ? 'F' : 'L';
-
-    // 최종 코드 조합: A + H + B + L 형태로 조합
-    const finalCode = adaptabilityCode + profitCode + careCode + environmentCode;
+    // 최종 코드 조합 (3자리)
+    const finalCode = adaptabilityCode + profitCode + careCode;
+    console.log('최종 코드:', finalCode);
+    console.log('유형 존재 여부:', types[finalCode] ? '존재' : '없음');
     
     setResult({
       code: finalCode,
-      type: types[finalCode] || { name: '알 수 없는 유형', description: '', emoji: '🌱', crops: ['기본 추천 작물'] }
+      type: types[finalCode] || { 
+        name: '알 수 없는 유형', 
+        description: `코드: ${finalCode}`, 
+        emoji: '🌱', 
+        crops: ['기본 추천 작물'], 
+        characteristics: ['디버깅 필요'], 
+        tips: '코드가 매칭되지 않습니다.' 
+      }
     });
     setIsCompleted(true);
   };
@@ -347,6 +306,79 @@ const NBTITest = ({ onBack }) => {
             <p className="result-description">{result.type.description}</p>
           </div>
 
+          {/* 상세 설명 섹션 */}
+          {result.type.detailDescription && (
+            <div className="detail-description-section">
+              <h3>📋 유형 상세 설명</h3>
+              <p className="detail-description-text">{result.type.detailDescription}</p>
+            </div>
+          )}
+
+          {/* 점수 차트 섹션 */}
+          {result.type.adaptabilityScore && (
+            <div className="score-chart-section">
+              <h3>📊 성향 분석</h3>
+              <div className="score-bars">
+                <div className="score-item">
+                  <div className="score-header">
+                    <span className="score-label">적응력</span>
+                    <span className="score-description">재배 경험</span>
+                    <span className="score-type">{result.type.adaptabilityScore >= 50 ? '숙련자형' : '초보자형'}</span>
+                  </div>
+                  <div className="score-bar">
+                    <div className="score-left">A</div>
+                    <div className="score-progress">
+                      <div 
+                        className="score-fill adaptability" 
+                        style={{ width: `${result.type.adaptabilityScore}%` }}
+                      ></div>
+                      <span className="score-value">{result.type.adaptabilityScore}</span>
+                    </div>
+                    <div className="score-right">N</div>
+                  </div>
+                </div>
+
+                <div className="score-item">
+                  <div className="score-header">
+                    <span className="score-label">상품성</span>
+                    <span className="score-description">재배 목적</span>
+                    <span className="score-type">{result.type.hobbyScore >= 50 ? '취미형' : '수익형'}</span>
+                  </div>
+                  <div className="score-bar">
+                    <div className="score-left">H</div>
+                    <div className="score-progress">
+                      <div 
+                        className="score-fill hobby" 
+                        style={{ width: `${result.type.hobbyScore}%` }}
+                      ></div>
+                      <span className="score-value">{result.type.hobbyScore}</span>
+                    </div>
+                    <div className="score-right">P</div>
+                  </div>
+                </div>
+
+                <div className="score-item">
+                  <div className="score-header">
+                    <span className="score-label">빈도성</span>
+                    <span className="score-description">관리 시간</span>
+                    <span className="score-type">{result.type.busyScore >= 50 ? '세심관리형' : '간단관리형'}</span>
+                  </div>
+                  <div className="score-bar">
+                    <div className="score-left">B</div>
+                    <div className="score-progress">
+                      <div 
+                        className="score-fill busy" 
+                        style={{ width: `${result.type.busyScore}%` }}
+                      ></div>
+                      <span className="score-value">{result.type.busyScore}</span>
+                    </div>
+                    <div className="score-right">C</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
+
           <div className="recommended-crops">
             <h3>🌱 추천 작물</h3>
             <div className="crops-list">
@@ -373,6 +405,60 @@ const NBTITest = ({ onBack }) => {
               <p className="tips-text">{result.type.tips}</p>
             </div>
           )}
+
+          {/* 유형 해설 섹션 */}
+          <div className="type-explanation-section">
+            <h3>📖 유형 해설</h3>
+            <div className="explanation-grid">
+              <div className="explanation-item">
+                <h4>A vs N: 적응력 (Adaptability)</h4>
+                <div className="explanation-comparison">
+                  <div className="explanation-side adaptable">
+                    <h5>A (숙련자형)</h5>
+                    <p className="explanation-summary">작물 관리가 익숙하고 다양한 상황에 유연하게 대응</p>
+                    <p className="explanation-detail">다양한 작물과 환경에서도 재배 경험이 있거나, 스스로 문제를 해결할 수 있는 능력이 있는 유형입니다. 시비나 병해충 대응도 능동적으로 시도하며, 텃밭 활동을 장기적으로 발전시켜 나가려는 경향이 있습니다.</p>
+                  </div>
+                  <div className="explanation-side novice">
+                    <h5>N (초보자형)</h5>
+                    <p className="explanation-summary">처음 텃밭을 시작하며 간편하고 쉬운 작물을 선호</p>
+                    <p className="explanation-detail">텃밭이 처음이거나 재배 경험이 많지 않은 사람입니다. 복잡한 관리는 부담스럽고, 최대한 간단하고 쉽게 키울 수 있는 작물을 선호합니다. 텃밭이 '가벼운 시작점'이 되기를 기대합니다.</p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="explanation-item">
+                <h4>H vs P: 상품성 (Hobby vs Profit)</h4>
+                <div className="explanation-comparison">
+                  <div className="explanation-side hobby">
+                    <h5>H (취미형)</h5>
+                    <p className="explanation-summary">힐링과 감성 중심의 재배 목적</p>
+                    <p className="explanation-detail">작물을 키우는 과정에서 정서적인 만족, 힐링, 감성을 중요하게 여깁니다. 예쁜 작물, 소소한 돌봄, 생활 속의 여유를 위한 텃밭을 꿈꾸며, 결과물보다 '과정의 즐거움'에 의미를 둡니다.</p>
+                  </div>
+                  <div className="explanation-side profit">
+                    <h5>P (수익형)</h5>
+                    <p className="explanation-summary">생산성과 수익 중심의 실용적 목적</p>
+                    <p className="explanation-detail">수확량, 효율성, 경제성을 중시하는 경향이 있습니다. 텃밭을 '수익 활동'의 일부로 간주하며, 어떤 작물이 얼마나 잘 자라고 팔릴 수 있는지에 더 큰 관심을 가집니다.</p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="explanation-item">
+                <h4>B vs C: 빈도성 (Care Time)</h4>
+                <div className="explanation-comparison">
+                  <div className="explanation-side busy">
+                    <h5>B (세심 관리형)</h5>
+                    <p className="explanation-summary">자주 텃밭을 돌보며 정성껏 가꾸는 스타일</p>
+                    <p className="explanation-detail">물주기, 병해충 확인, 상태 체크 등을 자주 하며 텃밭을 정성스럽게 관리합니다. 작물 하나하나를 관찰하고 기록하는 걸 좋아하며, 텃밭 활동을 하나의 취미나 루틴으로 여깁니다.</p>
+                  </div>
+                  <div className="explanation-side careless">
+                    <h5>C (간단 관리형)</h5>
+                    <p className="explanation-summary">시간을 많이 들이지 않고 간편하게 키우는 스타일</p>
+                    <p className="explanation-detail">바쁜 생활 속에서 최소한의 시간으로 텃밭을 유지하고 싶어하는 유형입니다. 자동화 시스템이나 돌봄이 쉬운 작물을 선호하며, 결과만 얻을 수 있으면 과정은 간편할수록 좋다고 생각합니다.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
 
           <div className="result-actions">
             <button className="retry-button" onClick={resetTest}>
