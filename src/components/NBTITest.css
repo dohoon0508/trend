@@ -1,0 +1,342 @@
+.nbti-test {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #2d5a27 0%, #4a7c59 25%, #6b8e23 50%, #8fbc8f 75%, #98fb98 100%);
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.test-container,
+.result-container {
+  max-width: 600px;
+  width: 100%;
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 20px;
+  padding: 40px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(10px);
+  text-align: center;
+}
+
+/* 테스트 헤더 */
+.back-button {
+  background: none;
+  border: none;
+  color: #6b8e23;
+  font-size: 1rem;
+  cursor: pointer;
+  padding: 10px;
+  margin-bottom: 20px;
+  transition: color 0.3s ease;
+  align-self: flex-start;
+}
+
+.back-button:hover {
+  color: #2d5a27;
+}
+
+.test-header h1 {
+  font-size: 2.5rem;
+  color: #2d5a27;
+  margin-bottom: 30px;
+  font-weight: 700;
+}
+
+.progress-bar {
+  width: 100%;
+  height: 8px;
+  background: rgba(45, 90, 39, 0.2);
+  border-radius: 4px;
+  margin-bottom: 10px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #32cd32, #228b22);
+  border-radius: 4px;
+  transition: width 0.3s ease;
+}
+
+.progress-text {
+  color: #6b8e23;
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 30px;
+}
+
+/* 질문 컨테이너 */
+.question-container {
+  text-align: left;
+}
+
+.question-category {
+  display: inline-block;
+  background: linear-gradient(45deg, #32cd32, #228b22);
+  color: white;
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+
+.question-text {
+  font-size: 1.5rem;
+  color: #2d5a27;
+  margin-bottom: 15px;
+  line-height: 1.4;
+  font-weight: 600;
+}
+
+.question-description {
+  color: #6b8e23;
+  font-size: 0.95rem;
+  margin-bottom: 30px;
+  line-height: 1.5;
+}
+
+/* 선택지 컨테이너 */
+.options-container {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.option-button {
+  background: white;
+  border: 2px solid #e0e0e0;
+  border-radius: 15px;
+  padding: 20px;
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: #2d5a27;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-align: center;
+}
+
+.option-button:hover {
+  border-color: #32cd32;
+  background: rgba(50, 205, 50, 0.05);
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(50, 205, 50, 0.2);
+}
+
+.option-button:active {
+  transform: translateY(0);
+}
+
+/* 결과 페이지 */
+.result-header h1 {
+  font-size: 2.5rem;
+  color: #2d5a27;
+  margin-bottom: 20px;
+}
+
+.result-code {
+  display: inline-block;
+  background: linear-gradient(45deg, #32cd32, #228b22);
+  color: white;
+  padding: 15px 30px;
+  border-radius: 50px;
+  font-size: 1.8rem;
+  font-weight: 700;
+  margin-bottom: 20px;
+  letter-spacing: 2px;
+}
+
+.result-emoji {
+  font-size: 4rem;
+  margin-bottom: 20px;
+}
+
+.result-header h2 {
+  font-size: 2rem;
+  color: #2d5a27;
+  margin-bottom: 15px;
+  font-weight: 700;
+}
+
+.result-description {
+  color: #6b8e23;
+  font-size: 1.1rem;
+  line-height: 1.6;
+  margin-bottom: 40px;
+}
+
+/* 추천 작물 */
+.recommended-crops {
+  background: rgba(50, 205, 50, 0.05);
+  border-radius: 15px;
+  padding: 30px;
+  margin-bottom: 40px;
+  border: 2px solid rgba(50, 205, 50, 0.2);
+}
+
+.recommended-crops h3 {
+  font-size: 1.5rem;
+  color: #2d5a27;
+  margin-bottom: 20px;
+  font-weight: 600;
+}
+
+.crops-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+}
+
+.crop-tag {
+  background: linear-gradient(45deg, #90ee90, #32cd32);
+  color: white;
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  box-shadow: 0 2px 10px rgba(50, 205, 50, 0.3);
+}
+
+/* 결과 액션 버튼 */
+.result-actions {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.retry-button,
+.share-button {
+  padding: 15px 30px;
+  border: none;
+  border-radius: 50px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  min-width: 150px;
+}
+
+.retry-button {
+  background: linear-gradient(45deg, #32cd32, #228b22);
+  color: white;
+}
+
+.retry-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(50, 205, 50, 0.4);
+}
+
+.share-button {
+  background: white;
+  color: #32cd32;
+  border: 2px solid #32cd32;
+}
+
+.share-button:hover {
+  background: #32cd32;
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(50, 205, 50, 0.4);
+}
+
+/* 반응형 디자인 */
+@media (max-width: 768px) {
+  .nbti-test {
+    padding: 10px;
+  }
+  
+  .test-container,
+  .result-container {
+    padding: 20px;
+    margin: 10px;
+  }
+  
+  .test-header h1 {
+    font-size: 2rem;
+  }
+  
+  .question-text {
+    font-size: 1.3rem;
+  }
+  
+  .option-button {
+    padding: 15px;
+    font-size: 1rem;
+  }
+  
+  .result-header h1 {
+    font-size: 2rem;
+  }
+  
+  .result-code {
+    font-size: 1.5rem;
+    padding: 12px 25px;
+  }
+  
+  .result-emoji {
+    font-size: 3rem;
+  }
+  
+  .result-header h2 {
+    font-size: 1.5rem;
+  }
+  
+  .recommended-crops {
+    padding: 20px;
+  }
+  
+  .result-actions {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .retry-button,
+  .share-button {
+    width: 100%;
+    max-width: 250px;
+  }
+}
+
+@media (max-width: 480px) {
+  .test-header h1 {
+    font-size: 1.8rem;
+  }
+  
+  .question-text {
+    font-size: 1.2rem;
+  }
+  
+  .option-button {
+    padding: 12px;
+    font-size: 0.95rem;
+  }
+  
+  .result-header h1 {
+    font-size: 1.8rem;
+  }
+  
+  .result-code {
+    font-size: 1.3rem;
+    padding: 10px 20px;
+  }
+  
+  .result-emoji {
+    font-size: 2.5rem;
+  }
+  
+  .result-header h2 {
+    font-size: 1.3rem;
+  }
+  
+  .crops-list {
+    gap: 8px;
+  }
+  
+  .crop-tag {
+    font-size: 0.85rem;
+    padding: 6px 12px;
+  }
+} 

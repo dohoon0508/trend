@@ -1,7 +1,10 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import './App.css';
+import NBTITest from './components/NBTITest';
 
 function App() {
+  const [currentPage, setCurrentPage] = useState('intro'); // 'intro' or 'test'
+
   useEffect(() => {
     // 스크롤 애니메이션을 위한 Intersection Observer
     const observerOptions = {
@@ -25,7 +28,12 @@ function App() {
     animateElements.forEach((el) => observer.observe(el));
 
     return () => observer.disconnect();
-  }, []);
+  }, [currentPage]);
+
+  // 테스트 페이지를 보여주는 경우
+  if (currentPage === 'test') {
+    return <NBTITest onBack={() => setCurrentPage('intro')} />;
+  }
   return (
     <div className="App">
       {/* 상단 헤더 영역 */}
@@ -178,7 +186,10 @@ function App() {
           </div>
           <div className="cta-content">
             <h3>나는 어떤 작물 유형일지<br />궁금하다면?</h3>
-            <button className="cta-button scroll-animate-delay-1">
+            <button 
+              className="cta-button scroll-animate-delay-1"
+              onClick={() => setCurrentPage('test')}
+            >
               <span className="button-icon">🥕</span>
               <span className="button-text">N(農)BTI 검사 응시하러 가기</span>
               <span className="button-arrow">→</span>
