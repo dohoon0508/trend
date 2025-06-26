@@ -81,6 +81,28 @@ npm run deploy
 
 GitHub Pages를 통해 자동 배포됩니다.
 
+## 📢 공유 미리보기(썸네일) 안내
+
+- 카카오톡, 페이스북, 오픈채팅 등에서 링크를 공유하면 대표 이미지가 미리보기(썸네일)로 노출됩니다.
+- 대표 미리보기 이미지는 `public/images/share.png` 파일을 사용합니다.
+- 관련 메타 태그는 `public/index.html`의 `<head>`에 아래와 같이 추가되어 있습니다:
+
+```html
+<!-- Open Graph (공유 미리보기) -->
+<meta property="og:title" content="N(농)BTI - 맞춤형 텃밭 성향 테스트" />
+<meta property="og:description" content="질문을 기반으로 한 맞춤형 텃밭 작물 추천 '농(農)BTI'" />
+<meta property="og:image" content="https://dohoon0508.github.io/trend/images/share.png" />
+<meta property="og:url" content="https://dohoon0508.github.io/trend/" />
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="N(농)BTI - 맞춤형 텃밭 성향 테스트" />
+<meta name="twitter:description" content="질문을 기반으로 한 맞춤형 텃밭 작물 추천 '농(農)BTI'" />
+<meta name="twitter:image" content="https://dohoon0508.github.io/trend/images/share.png" />
+```
+
+- 이미지는 1200x630px(16:9 비율) 권장, 실제 파일: `/public/images/share.png`
+
 ## 🎨 디자인 특징
 
 - 반투명 고정 헤더
