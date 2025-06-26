@@ -107,7 +107,7 @@ const ResultCard = ({ code, name, description, emoji, detailDescription, mainCro
     position: 'relative',
     zIndex: 1,
     backdropFilter: 'blur(10px)',
-    margin: '0 auto',
+    margin: '0 5px',
   }}>
     <div style={{ marginBottom: 20, width: '100%', display: 'flex', justifyContent: 'center' }}>
       <span style={{
@@ -190,9 +190,9 @@ const ResultSlider = () => (
       `}
     </style>
     <h2 style={{
-      fontSize: '2.1rem',
+      fontSize: window.innerWidth <= 768 ? '1.4rem' : window.innerWidth <= 480 ? '1.2rem' : '2.1rem',
       fontWeight: 800,
-      margin: '0 0 30px 0',
+      margin: window.innerWidth <= 768 ? '0 0 20px 0' : '0 0 30px 0',
       textAlign: 'center',
       letterSpacing: '0.01em',
       background: 'none',
@@ -204,13 +204,21 @@ const ResultSlider = () => (
       boxShadow: 'none',
       position: 'relative',
     }}>
-      <span role="img" aria-label="leaf" style={{fontSize: '1.5em', verticalAlign: 'middle', marginRight: 8}}>🌱</span>
+      <span role="img" aria-label="leaf" style={{
+        fontSize: window.innerWidth <= 768 ? '1.2em' : window.innerWidth <= 480 ? '1.1em' : '1.5em', 
+        verticalAlign: 'middle', 
+        marginRight: window.innerWidth <= 768 ? 4 : window.innerWidth <= 480 ? 3 : 8
+      }}>🌱</span>
       8가지 농업 성향 유형 미리보기
-      <span role="img" aria-label="leaf" style={{fontSize: '1.5em', verticalAlign: 'middle', marginLeft: 8}}>🌿</span>
+      <span role="img" aria-label="leaf" style={{
+        fontSize: window.innerWidth <= 768 ? '1.2em' : window.innerWidth <= 480 ? '1.1em' : '1.5em', 
+        verticalAlign: 'middle', 
+        marginLeft: window.innerWidth <= 768 ? 4 : window.innerWidth <= 480 ? 3 : 8
+      }}>🌿</span>
     </h2>
     <Swiper
       modules={[Autoplay]}
-      spaceBetween={4}
+      spaceBetween={0}
       slidesPerView={2.5}
       centeredSlides={false}
       loop={true}
@@ -223,6 +231,23 @@ const ResultSlider = () => (
       speed={6000}
       allowTouchMove={true}
       grabCursor={true}
+      breakpoints={{
+        320: {
+          slidesPerView: 1,
+          spaceBetween: 15,
+          centeredSlides: true,
+        },
+        640: {
+          slidesPerView: 1.5,
+          spaceBetween: 20,
+          centeredSlides: true,
+        },
+        768: {
+          slidesPerView: 2,
+          spaceBetween: 30,
+          centeredSlides: false,
+        }
+      }}
       style={{
         width: '100vw',
         height: 'auto',
@@ -239,7 +264,7 @@ const ResultSlider = () => (
           justifyContent: 'center',
           alignItems: 'center',
           minHeight: 650,
-          padding: '20px 0',
+          padding: '20px 5px',
         }}>
           <ResultCard {...type} />
         </SwiperSlide>

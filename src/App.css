@@ -914,21 +914,22 @@
 /* 반응형 디자인 - 모바일 */
 @media (max-width: 768px) {
   .hero-title {
-    font-size: 2.8rem;
-    margin-bottom: 40px;
-    line-height: 1.3;
+    font-size: 2.4rem !important;
+    margin-bottom: 30px !important;
   }
   
   .brand-name {
-    font-size: 2rem;
+    font-size: 1.8rem !important;
+    margin-bottom: 12px !important;
   }
   
   .brand-description {
-    font-size: 1.3rem;
+    font-size: 1.2rem !important;
+    margin-bottom: 16px !important;
   }
   
   .tagline {
-    font-size: 1rem;
+    font-size: 0.95rem !important;
   }
   
   .hero-content {
@@ -946,11 +947,13 @@
   }
   
   .section-title {
-    font-size: 2.2rem;
+    font-size: 1.5rem !important;
+    margin-bottom: 12px !important;
   }
   
   .section-subtitle {
-    font-size: 1.3rem;
+    font-size: 0.9rem !important;
+    line-height: 1.5 !important;
   }
   
   .crop-cards {
@@ -1026,8 +1029,8 @@
   }
   
   .type-question h3 {
-    font-size: 2.2rem;
-    line-height: 1.3;
+    font-size: 1.3rem !important;
+    margin-bottom: 16px !important;
   }
   
   .feature-grid {
@@ -1075,28 +1078,30 @@
   }
   
   .test-button, .intro-button {
-    font-size: 1.1rem;
-    padding: 15px 30px;
+    font-size: 0.95rem !important;
+    padding: 12px 20px !important;
   }
 }
 
 /* 반응형 디자인 - 작은 모바일 */
 @media (max-width: 480px) {
   .hero-title {
-    font-size: 2.2rem;
-    margin-bottom: 30px;
+    font-size: 2rem !important;
+    margin-bottom: 24px !important;
   }
   
   .brand-name {
-    font-size: 1.7rem;
+    font-size: 1.5rem !important;
+    margin-bottom: 10px !important;
   }
   
   .brand-description {
-    font-size: 1.1rem;
+    font-size: 1rem !important;
+    margin-bottom: 12px !important;
   }
   
   .tagline {
-    font-size: 0.9rem;
+    font-size: 0.85rem !important;
   }
   
   .hero-content {
@@ -1113,11 +1118,13 @@
   }
   
   .section-title {
-    font-size: 1.8rem;
+    font-size: 1.3rem !important;
+    margin-bottom: 10px !important;
   }
   
   .type-question h3 {
-    font-size: 1.8rem;
+    font-size: 1.1rem !important;
+    margin-bottom: 12px !important;
   }
   
   .final-cta h3 {

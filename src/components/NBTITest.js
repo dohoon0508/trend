@@ -365,28 +365,6 @@ const NBTITest = ({ onBack }) => {
         { text: "너무 자주 하긴 어려울 것 같아요", value: "careless" }
       ],
       description: "텃밭 활동 빈도"
-    },
-    // 4. 성향분석
-    {
-      id: 10,
-      category: "🧠 성향분석",
-      question: "새로운 재배 방법을 시도하는 걸 좋아하나요?",
-      options: [
-        { text: "네, 도전하는 걸 좋아해요", value: "도전정신" },
-        { text: "아니요, 익숙한 방식이 좋아요", value: "안정추구" }
-      ],
-      description: "도전정신 vs 안정추구"
-    },
-    // 5. 텃밭 특성
-    {
-      id: 11,
-      category: "🌟 텃밭 특성",
-      question: "효율적인 관리 방법을 선호하시나요?",
-      options: [
-        { text: "네, 효율이 중요해요", value: "효율추구" },
-        { text: "아니요, 천천히 즐기는 게 좋아요", value: "여유추구" }
-      ],
-      description: "효율추구 vs 여유추구"
     }
   ];
 

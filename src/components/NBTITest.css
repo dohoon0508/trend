@@ -402,6 +402,17 @@
     width: 100%;
     max-width: 250px;
   }
+  
+  /* 모바일에서 상단바 로고 왼쪽 정렬 */
+  .header-left .logo-tjc {
+    margin-left: 0;
+    font-size: 1.5rem;
+  }
+  
+  /* 모바일에서 헤더 패딩 조정 */
+  .custom-header {
+    padding: 15px 20px;
+  }
 }
 
 @media (max-width: 480px) {
@@ -442,6 +453,17 @@
   .crop-tag {
     font-size: 0.85rem;
     padding: 6px 12px;
+  }
+  
+  /* 작은 모바일에서 상단바 로고 왼쪽 정렬 */
+  .header-left .logo-tjc {
+    margin-left: 0;
+    font-size: 1.3rem;
+  }
+  
+  /* 작은 모바일에서 헤더 패딩 조정 */
+  .custom-header {
+    padding: 12px 15px;
   }
 }
 
@@ -671,5 +693,74 @@
   .type-explanation-section {
     padding: 20px;
     margin: 20px 0;
+  }
+}
+
+/* ResultSlider 모바일 반응형 스타일 */
+@media (max-width: 768px) {
+  .swiper-slide {
+    min-height: 450px !important;
+  }
+  
+  .result-container {
+    min-width: 260px !important;
+    max-width: 320px !important;
+    padding: 20px 16px !important;
+  }
+  
+  .swiper-button-next,
+  .swiper-button-prev {
+    width: 40px !important;
+    height: 40px !important;
+  }
+  
+  .swiper-button-next::after,
+  .swiper-button-prev::after {
+    font-size: 16px !important;
+  }
+  
+  /* ResultSlider 제목 모바일 조정 */
+  .result-gallery h2 {
+    font-size: 1.4rem !important;
+    margin: '0 0 20px 0' !important;
+  }
+  
+  .result-gallery h2 span {
+    font-size: 1.2em !important;
+    margin: '0 4px' !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .swiper-slide {
+    min-height: 400px !important;
+  }
+  
+  .result-container {
+    min-width: 240px !important;
+    max-width: 300px !important;
+    padding: 16px 12px !important;
+  }
+  
+  .swiper-button-next,
+  .swiper-button-prev {
+    width: 35px !important;
+    height: 35px !important;
+  }
+  
+  .swiper-button-next::after,
+  .swiper-button-prev::after {
+    font-size: 14px !important;
+  }
+  
+  /* ResultSlider 제목 작은 모바일 조정 */
+  .result-gallery h2 {
+    font-size: 1.2rem !important;
+    margin: '0 0 15px 0' !important;
+  }
+  
+  .result-gallery h2 span {
+    font-size: 1.1em !important;
+    margin: '0 3px' !important;
   }
 } 
