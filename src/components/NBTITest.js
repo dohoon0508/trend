@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './NBTITest.css';
+import { cropImageMap } from '../App';
 
 // 결과 요약 카드 (상단~성향분석까지만)
 export const ResultCardSummary = ({ code, type }) => (
@@ -105,22 +106,22 @@ const cropInfo = {
 
 // 16가지 유형 데이터
 export const types = [
-  { code: 'AHBS', emoji: '🧑‍🌾', name: '감성 장인', description: '정성 가득 감성 텃밭러', detailDescription: '숙련자 + 취미형 + 세심 관리 + 선택적 환경' },
-  { code: 'AHBV', emoji: '🎋', name: '따뜻한 장인', description: '손길 가득한 텃밭을 유연하게', detailDescription: '숙련자 + 취미형 + 세심 관리 + 다양한 환경' },
-  { code: 'AHCV', emoji: '🌼', name: '감성 실용러', description: '여유롭게, 하지만 간단하게', detailDescription: '숙련자 + 취미형 + 간단 관리 + 다양한 환경' },
-  { code: 'AHPV', emoji: '🪴', name: '여유 농부', description: '힐링도 수확도 모두 챙기는 균형형', detailDescription: '숙련자 + 취미형 + 간단 관리 + 다양한 환경' },
-  { code: 'APBS', emoji: '🛠️', name: '수익 장인', description: '수익도 품질도 놓치지 않는 실전 고수', detailDescription: '숙련자 + 수익형 + 세심 관리 + 선택적 환경' },
-  { code: 'APBV', emoji: '🧃', name: '부지런한 실속러', description: '수익을 위해 꾸준히 정성껏', detailDescription: '숙련자 + 수익형 + 세심 관리 + 다양한 환경' },
-  { code: 'APCS', emoji: '🔧', name: '효율 추구자', description: '최적의 환경에서 효율 극대화', detailDescription: '숙련자 + 수익형 + 간단 관리 + 선택적 환경' },
-  { code: 'APCV', emoji: '📦', name: '전략 농사꾼', description: '생산성과 효율을 최우선으로', detailDescription: '숙련자 + 수익형 + 간단 관리 + 다양한 환경' },
-  { code: 'NHBS', emoji: '🐣', name: '텃밭 입문자', description: '감성으로 시작하는 첫 텃밭', detailDescription: '초보자 + 취미형 + 세심 관리 + 선택적 환경' },
-  { code: 'NHBV', emoji: '🍀', name: '자연 입문자', description: '감성으로 시작하지만 환경엔 유연', detailDescription: '초보자 + 취미형 + 세심 관리 + 다양한 환경' },
-  { code: 'NHCS', emoji: '📚', name: '감성 입문러', description: '쉽게 시작하는 따뜻한 취미', detailDescription: '초보자 + 취미형 + 간단 관리 + 선택적 환경' },
-  { code: 'NHCV', emoji: '🧺', name: '힐링 간편러', description: '간단한 돌봄으로도 정서적 만족', detailDescription: '초보자 + 취미형 + 간단 관리 + 다양한 환경' },
-  { code: 'NPBS', emoji: '💼', name: '실전 입문자', description: '처음이지만 제대로 키워보고 싶어', detailDescription: '초보자 + 수익형 + 세심 관리 + 선택적 환경' },
-  { code: 'NPBV', emoji: '📈', name: '부지런한 도전자', description: '초보지만 수익을 위해 노력파', detailDescription: '초보자 + 수익형 + 세심 관리 + 다양한 환경' },
-  { code: 'NPCS', emoji: '🥕', name: '전략 입문자', description: '쉽게 시작하지만 수익도 고려', detailDescription: '초보자 + 수익형 + 간단 관리 + 선택적 환경' },
-  { code: 'NPCV', emoji: '🚀', name: '실속 초보자', description: '최소 노력, 최대 효율을 추구', detailDescription: '초보자 + 수익형 + 간단 관리 + 다양한 환경' },
+  { code: 'AHBS', emoji: '🧑‍🌾', name: '감성 장인', description: '정성 가득 감성 텃밭러', detailDescription: '숙련자 + 취미형 + 세심 관리 + 선택적 환경', fullDescription: '다양한 경험을 바탕으로 텃밭을 섬세하게 가꾸는 장인. 환경이 다소 까다로워도 이를 감성적으로 극복하며, 수확보다는 가꾸는 즐거움을 우선시합니다. 향기롭고 정갈한 공간을 연출하는 데 능숙합니다.', cropList: ['인삼', '들깨', '아스파라거스', '오미자', '자두', '참나물'] },
+  { code: 'AHBV', emoji: '🎋', name: '따뜻한 장인', description: '손길 가득한 텃밭을 유연하게', detailDescription: '숙련자 + 취미형 + 세심 관리 + 다양한 환경', fullDescription: '감성과 숙련도를 바탕으로 유연하게 텃밭을 가꾸는 유형. 환경에 구애받지 않고 언제든지 새로운 식물을 환영하는 따뜻한 성향. 식물과 대화하듯 교감하며 여유로운 힐링을 추구합니다.', cropList: ['고구마', '마', '무화과', '산약', '오디'] },
+  { code: 'AHCS', emoji: '🌱', name: '감성 실용가', description: '여유와 실용의 균형형', detailDescription: '숙련자 + 취미형 + 간단 관리 + 선택적 환경', fullDescription: '간단한 관리로 감성을 유지하는 실용형 장인. 감성적 만족도 중요하지만 시간을 효율적으로 사용하며, 작물보다는 텃밭 공간 자체에 더 큰 의미를 두는 경우가 많습니다.', cropList: ['상추', '감자', '매실'] },
+  { code: 'AHCV', emoji: '🌼', name: '감성 실용러', description: '여유롭게, 하지만 간단하게', detailDescription: '숙련자 + 취미형 + 간단 관리 + 다양한 환경', fullDescription: '숙련된 감각으로 최소한의 관리로도 감성적 만족을 유지하는 유형. 바쁜 일상 속에서도 힐링을 놓치지 않고 실용성과 감성을 모두 챙기려는 성향입니다.', cropList: ['오이', '감'] },
+  { code: 'APBS', emoji: '🛠️', name: '수익 장인', description: '수익도 품질도 놓치지 않는 실전 고수', detailDescription: '숙련자 + 수익형 + 세심 관리 + 선택적 환경', fullDescription: '작물 품질과 수익 모두를 추구하는 실전형 숙련자. 환경이 까다롭더라도 치밀한 계획과 정성으로 농사에 임하며, 마치 농업 컨설턴트처럼 텃밭을 운영합니다.', cropList: ['사과', '근대', '배', '쪽파'] },
+  { code: 'APBV', emoji: '🧃', name: '부지런한 실속러', description: '수익을 위해 꾸준히 정성껏', detailDescription: '숙련자 + 수익형 + 세심 관리 + 다양한 환경', fullDescription: '텃밭을 수익 수단으로 활용하지만 관리에도 게으르지 않은 성향. 다양한 환경에서도 잘 적응하며, 실속 있게 운영하는 부지런한 농부 타입입니다.', cropList: ['벼'] },
+  { code: 'APCS', emoji: '🔧', name: '효율 추구자', description: '최적의 환경에서 효율 극대화', detailDescription: '숙련자 + 수익형 + 간단 관리 + 선택적 환경', fullDescription: '효율적인 환경에서 작물 수익을 극대화하려는 실용 중심형. 시간과 에너지를 아끼며, 작물 선택과 배치, 수확까지 모든 과정에서 계산된 접근을 선호합니다.', cropList: ['딸기'] },
+  { code: 'APCV', emoji: '📦', name: '전략 농사꾼', description: '생산성과 효율을 최우선으로', detailDescription: '숙련자 + 수익형 + 간단 관리 + 다양한 환경', fullDescription: '다양한 환경에서 효율과 생산성을 동시에 추구하는 전략가형. 관리 시간은 최소화하고 수익은 최대화하는 데 집중하며, 스마트팜에 관심 많은 유형입니다.', cropList: ['수박', '참외', '토마토', '방울토마토'] },
+  { code: 'NHBS', emoji: '🐣', name: '텃밭 입문자', description: '감성으로 시작하는 첫 텃밭', detailDescription: '초보자 + 취미형 + 세심 관리 + 선택적 환경', fullDescription: '텃밭을 처음 시작하지만 감성적 만족을 기대하는 초보자. 관리가 어렵더라도 식물 키우기에 대한 열정이 높으며, 실패도 즐거운 배움으로 여깁니다.', cropList: ['쑥갓', '연근', '우엉', '도라지', '더덕', '취나물'] },
+  { code: 'NHBV', emoji: '🍀', name: '자연 입문자', description: '감성으로 시작하지만 환경엔 유연', detailDescription: '초보자 + 취미형 + 세심 관리 + 다양한 환경', fullDescription: '감성적인 동기로 시작하지만 유연한 환경에서 다양한 작물을 시도해보는 탐험형. 실내외를 넘나드는 초보 가드너입니다.', cropList: ['블루베리'] },
+  { code: 'NHCS', emoji: '📚', name: '감성 입문러', description: '쉽게 시작하는 따뜻한 취미', detailDescription: '초보자 + 취미형 + 간단 관리 + 선택적 환경', fullDescription: '부담 없이 시작할 수 있는 소박한 텃밭을 선호하며, 작은 관리로 큰 만족을 얻습니다. 식물을 가족처럼 대하며 정서적 안정감을 추구합니다.', cropList: ['브로콜리'] },
+  { code: 'NHCV', emoji: '🧺', name: '힐링 간편러', description: '간단한 돌봄으로도 정서적 만족', detailDescription: '초보자 + 취미형 + 간단 관리 + 다양한 환경', fullDescription: '복잡한 관리는 어렵지만 식물과 함께하는 시간 자체를 소중히 여기는 힐링 중심형. 쉽게 기를 수 있는 작물로 감성을 채우는 유형입니다.', cropList: ['파프리카', '풋고추', '청양고추', '비트'] },
+  { code: 'NPBS', emoji: '💼', name: '실전 입문자', description: '처음이지만 제대로 키워보고 싶어', detailDescription: '초보자 + 수익형 + 세심 관리 + 선택적 환경', fullDescription: '텃밭 초보지만 수익과 작물 품질을 동시에 잡고 싶어 하는 도전형. 학습 의지가 높고 다양한 정보를 습득하여 빠르게 실력을 키우는 성향입니다.', cropList: ['마늘', '양파', '얼갈이배추', '청경채', '참다래'] },
+  { code: 'NPBV', emoji: '📈', name: '부지런한 도전자', description: '초보지만 수익을 위해 노력파', detailDescription: '초보자 + 수익형 + 세심 관리 + 다양한 환경', fullDescription: '텃밭으로 수익을 내고자 하는 강한 의지가 있는 유형. 환경에 구애받지 않고 시도하며, 실패 속에서도 꾸준히 개선합니다.', cropList: ['체리', '참깨', '수수', '조', '체리', '생강'] },
+  { code: 'NPCS', emoji: '🥕', name: '전략 입문자', description: '쉽게 시작하지만 수익도 고려', detailDescription: '초보자 + 수익형 + 간단 관리 + 선택적 환경', fullDescription: '간단하게 시작하되 작물 선택에 전략적 접근을 시도하는 초보 농부. 효율과 가능성을 고려한 실용형 시작자입니다.', cropList: ['당근', '무', '미나리', '배추', '부추', '시금치', '양배추', '호박', '복숭아', '케일', '유채', '고추'] },
+  { code: 'NPCV', emoji: '🚀', name: '실속 초보자', description: '최소 노력, 최대 효율을 추구', detailDescription: '초보자 + 수익형 + 간단 관리 + 다양한 환경', fullDescription: '부담 없는 텃밭 운영으로도 실속 있는 결과를 기대하는 유형. 시간과 자원이 적더라도 결과를 뽑아내는 실속파입니다.', cropList: ['메론'] },
 ];
 
 // 코드별 추천 작물 데이터 (이름, 영문명, 설명)
@@ -219,6 +220,49 @@ export const cropDataByCode = {
   NPCV: [
     { name: '메론', en: 'Melon', desc: '달콤한 과일.' },
   ],
+};
+
+const TENDENCY_EXPLANATIONS = {
+  adaptability: {
+    A: {
+      short: 'A (숙련자형)',
+      long: '작물 관리가 익숙하고 다양한 상황에 유연하게 대응\n\n다양한 작물과 환경에서도 재배 경험이 있거나, 스스로 문제를 해결할 수 있는 능력이 있는 유형입니다. 시비나 병해충 대응도 능동적으로 시도하며, 텃밭 활동을 장기적으로 발전시켜 나가려는 경향이 있습니다.'
+    },
+    N: {
+      short: 'N (초보자형)',
+      long: '처음 텃밭을 시작하며 간편하고 쉬운 작물을 선호\n\n텃밭이 처음이거나 재배 경험이 많지 않은 사람입니다. 복잡한 관리는 부담스럽고, 최대한 간단하고 쉽게 키울 수 있는 작물을 선호합니다. 텃밭이 \'가벼운 시작점\'이 되기를 기대합니다.'
+    }
+  },
+  profit: {
+    H: {
+      short: 'H (취미형)',
+      long: '힐링과 감성 중심의 재배 목적\n\n작물을 키우는 과정에서 정서적인 만족, 힐링, 감성을 중요하게 여깁니다. 예쁜 작물, 소소한 돌봄, 생활 속의 여유를 위한 텃밭을 꿈꾸며, 결과물보다 \'과정의 즐거움\'에 의미를 둡니다.'
+    },
+    P: {
+      short: 'P (수익형)',
+      long: '생산성과 수익 중심의 실용적 목적\n\n수확량, 효율성, 경제성을 중시하는 경향이 있습니다. 텃밭을 \'수익 활동\'의 일부로 간주하며, 어떤 작물이 얼마나 잘 자라고 팔릴 수 있는지에 더 큰 관심을 가집니다.'
+    }
+  },
+  busy: {
+    B: {
+      short: 'B (세심 관리형)',
+      long: '자주 텃밭을 돌보며 정성껏 가꾸는 스타일\n\n물주기, 병해충 확인, 상태 체크 등을 자주 하며 텃밭을 정성스럽게 관리합니다. 작물 하나하나를 관찰하고 기록하는 걸 좋아하며, 텃밭 활동을 하나의 취미나 루틴으로 여깁니다.'
+    },
+    C: {
+      short: 'C (간단 관리형)',
+      long: '시간을 많이 들이지 않고 간편하게 키우는 스타일\n\n바쁜 생활 속에서 최소한의 시간으로 텃밭을 유지하고 싶어하는 유형입니다. 자동화 시스템이나 돌봄이 쉬운 작물을 선호하며, 결과만 얻을 수 있으면 과정은 간편할수록 좋다고 생각합니다.'
+    }
+  },
+  env: {
+    S: {
+      short: 'S (까다로운 환경형)',
+      long: '특정 조건을 잘 맞춰야 건강하게 자라는 유형\n\n특정 토양과 조건을 잘 맞춰야 건강하게 자라는 유형의 작물입니다. 재배시 환경 관리와 어느정도의 맞춤형 관리가 필요합니다. 세심한 관심, 계획을 통한 높은 품질을 기대하여, 재배능력에 깊이를 더하고 싶을때 선호합니다.'
+    },
+    V: {
+      short: 'V (어디서나 자라는 유형)',
+      long: '다양한 환경에서 쉽게 재배할 수 있는 유형\n\n토양이나 기후가 크게 까다롭지 않아서 다양한 환경에서 쉽게 재배할수 있습니다. 관리가 비교적 단순하고 안정적이기 때문에 초보자부터 숙련자까지 재배 계획을 세우기 수월하고 키우기 좋습니다.'
+    }
+  }
 };
 
 const NBTITest = ({ onBack }) => {
@@ -432,15 +476,11 @@ const NBTITest = ({ onBack }) => {
 
   // 결과 카드 컴포넌트 분리
   const ResultCard = ({ code, type, answers, onRetry }) => {
-    const [popupOpen, setPopupOpen] = useState(false);
-    const [popupCrop, setPopupCrop] = useState(null);
-    const [popupGarden, setPopupGarden] = useState(false);
-    // cropList가 없으면 빈 배열 유지
-    // 진단용 로그
-    console.log('ResultCard code:', code);
-    console.log('ResultCard answers:', answers);
+    const { name, description, emoji, detailDescription, fullDescription, cropList } = type;
+    const [popupOpen, setPopupOpen] = React.useState(false);
+    const [popupCrop, setPopupCrop] = React.useState('');
     
-    // 33% 단위로 점수 계산 (0, 33, 67, 100%)
+    // 게이지바 계산 함수 (기존 유지)
     const adaptabilityScore = (answers) => {
       const count = answers.filter(a => a.value === 'A').length;
       if (count === 0) return 0;
@@ -469,627 +509,213 @@ const NBTITest = ({ onBack }) => {
       if (count === 2) return 67;
       return 100;
     };
+
+    // 성향별 코드 추출
+    const adaptabilityType = code[0]; // A or N
+    const profitType = code[1]; // H or P
+    const busyType = code[2]; // C or B
+    const envType = code[3]; // S or V
+
     return (
-      <div className="nbti-test">
+      <div style={{ width: '100%', minHeight: '100vh', display: 'flex', flexDirection: 'column', alignItems: 'center', background: 'none' }}>
+        {/* 상단바/헤더 */}
         <header className="custom-header">
           <div className="header-left">
-            <span 
-              className="logo-tjc"
-              onClick={() => window.location.reload()}
-              style={{ cursor: 'pointer' }}
-              title="홈으로 돌아가기"
-            >
+            <span className="logo-tjc" onClick={() => window.location.reload()} style={{ cursor: 'pointer' }} title="홈으로 돌아가기">
               N(農)BTI
             </span>
           </div>
         </header>
-        <div className="result-container">
-          <div className="result-header">
-            <h1 onClick={() => window.location.reload()} style={{ cursor: 'pointer' }} title="홈으로 돌아가기">🎉 N(農)BTI 결과</h1>
-            <div className="result-code">{code}</div>
-            <div className="result-emoji">{type.emoji}</div>
-            <h2>{type.name}</h2>
-            <p className="result-description">{type.description}</p>
-          </div>
-          {type.detailDescription && (
-            <div className="detail-description-section">
-              <h3>📋 유형 상세 설명</h3>
-              <p className="detail-description-text">{type.detailDescription}</p>
-            </div>
-          )}
-          {type.fullDescription && (
-            <div className="full-description-section" style={{
-              margin: '24px 0', 
-              padding: '24px 20px', 
-              background: 'rgba(255,255,255,0.1)', 
-              borderRadius: 16, 
-              border: '1px solid rgba(255,255,255,0.15)'
-            }}>
-              <h3 style={{
-                fontWeight: 700, 
-                fontSize: '1.2em', 
-                marginBottom: 16, 
-                color: '#fff',
+        <div className="result-card-unified" style={{
+          background: 'linear-gradient(135deg, #2d5a27 0%, #4a7c59 25%, #6b8e23 50%, #8fbc8f 75%, #98fb98 100%)',
+          borderRadius: 32,
+          padding: 40,
+          border: 'none',
+          boxShadow: '0 12px 40px rgba(0,0,0,0.18)',
+          minWidth: 350,
+          maxWidth: 700,
+          width: '100%',
                 display: 'flex', 
+          flexDirection: 'column',
                 alignItems: 'center', 
-                gap: 8
+          position: 'relative',
+          zIndex: 1,
+          margin: '0 auto',
+          marginTop: 64, // 최상단 여백 추가
               }}>
-                <span role="img" aria-label="info">💡</span> 유형 자세한 설명
-              </h3>
-              <p style={{
-                color: '#fff', 
-                fontSize: '1em', 
-                lineHeight: '1.6', 
-                margin: 0,
-                textAlign: 'justify'
-              }}>{type.fullDescription}</p>
+          <div style={{ marginBottom: 16, width: '100%', display: 'flex', justifyContent: 'center' }}>
+            <span style={{ fontSize: 44 }}>{emoji}</span>
             </div>
-          )}
-          {/* 성향분석 파트 */}
+          <h2 style={{ fontSize: '2rem', color: '#fff', marginBottom: 8, fontWeight: 800, textAlign: 'center', letterSpacing: 1 }}>{name}</h2>
+          <div style={{ color: '#fff', fontSize: '1.15rem', fontWeight: 500, marginBottom: 24, textAlign: 'center', opacity: 0.97, lineHeight: 1.4 }}>{description}</div>
+
+          {/* 성향 조합 */}
+          <div style={{ background: 'rgba(255,255,255,0.13)', borderRadius: 18, padding: 18, margin: '10px 0', width: '100%' }}>
+            <h3 style={{ color: '#fff', fontSize: '1.05rem', marginBottom: 8, fontWeight: 700, display: 'flex', alignItems: 'center', gap: '6px' }}><span>🔍</span> 성향 조합</h3>
+            <p style={{ color: 'rgba(255,255,255,0.97)', fontSize: '1rem', margin: 0, lineHeight: 1.5 }}>{detailDescription}</p>
+          </div>
+
+          {/* 유형 설명 */}
+          <div style={{ background: 'rgba(255,255,255,0.13)', borderRadius: 18, padding: 18, margin: '10px 0', width: '100%' }}>
+            <h3 style={{ color: '#fff', fontSize: '1.05rem', marginBottom: 8, fontWeight: 700, display: 'flex', alignItems: 'center', gap: '6px' }}><span>📝</span> 유형 설명</h3>
+            <p style={{ color: 'rgba(255,255,255,0.95)', fontSize: '0.98rem', margin: 0, lineHeight: 1.6 }}>{fullDescription}</p>
+          </div>
+
+          {/* 유형 점수 게이지바 */}
           <div className="tendency-analysis-section" style={{
             margin: '32px 0 24px 0', 
             padding: '32px 24px', 
             background: 'rgba(255,255,255,0.12)', 
             borderRadius: 20, 
             boxShadow: '0 4px 16px rgba(0,0,0,0.08)',
-            border: '1px solid rgba(255,255,255,0.2)'
+            border: '1px solid rgba(255,255,255,0.2)',
+            width: '100%',
+            maxWidth: 600,
+            marginLeft: 'auto',
+            marginRight: 'auto',
           }}>
-            <h3 style={{
-              fontWeight: 700, 
-              fontSize: '1.4em', 
-              marginBottom: 28, 
-              display: 'flex', 
-              alignItems: 'center', 
-              gap: 10, 
-              color: '#fff',
-              textAlign: 'center',
-              justifyContent: 'center'
-            }}>
+            <h3 style={{ fontWeight: 700, fontSize: '1.4em', marginBottom: 28, display: 'flex', alignItems: 'center', gap: 10, color: '#fff', textAlign: 'center', justifyContent: 'center' }}>
               <span role="img" aria-label="chart">📊</span> 성향 분석
             </h3>
-            {/* 적응력 */}
-            <div style={{
-              marginBottom: 24, 
-              background: 'rgba(255,255,255,0.15)', 
-              borderRadius: 16, 
-              padding: '20px 16px',
-              border: '1px solid rgba(255,255,255,0.1)'
-            }}>
-              <div style={{
-                display: 'flex', 
-                justifyContent: 'space-between', 
-                alignItems: 'center', 
-                marginBottom: 12
-              }}>
-                <span style={{
-                  fontWeight: 700, 
-                  color: '#fff',
-                  fontSize: '1.1em'
-                }}>🌱 적응력</span>
-                <span style={{
-                  fontSize: '1em', 
-                  color: 'rgba(255,255,255,0.9)',
-                  fontWeight: 500
-                }}>N(초보자) / A(숙련자)</span>
+            {/* 적응력 게이지 */}
+            <div style={{ marginBottom: 24, background: 'rgba(255,255,255,0.15)', borderRadius: 16, padding: '20px 16px', border: '1px solid rgba(255,255,255,0.1)' }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 12 }}>
+                <span style={{ fontWeight: 700, color: '#fff', fontSize: '1.1em' }}>🌱 적응력</span>
+                <span style={{ fontSize: '1em', color: 'rgba(255,255,255,0.9)', fontWeight: 500 }}>N(초보자) / A(숙련자)</span>
               </div>
-              <div style={{
-                display: 'flex', 
-                alignItems: 'center', 
-                gap: 12
-              }}>
-                <span style={{
-                  fontWeight: 700, 
-                  color: '#fff', 
-                  minWidth: 24,
-                  fontSize: '1.1em',
-                  textAlign: 'center'
-                }}>N</span>
-                <div style={{
-                  flex: 1, 
-                  height: 20, 
-                  background: 'rgba(255,255,255,0.2)', 
-                  borderRadius: 10, 
-                  position: 'relative', 
-                  margin: '0 10px',
-                  overflow: 'hidden',
-                  boxShadow: 'inset 0 2px 4px rgba(0,0,0,0.1)'
-                }}>
-                  <div style={{
-                    width: `${100 - adaptabilityScore(answers)}%`, 
-                    height: '100%', 
-                    background: 'linear-gradient(90deg,#e0e0e0,#b2f77c)', 
-                    borderRadius: 10, 
-                    position: 'absolute', 
-                    left: 0, 
-                    top: 0, 
-                    transition: 'width 0.8s ease-in-out'
-                  }}></div>
-                  <div style={{
-                    width: `${adaptabilityScore(answers)}%`, 
-                    height: '100%', 
-                    background: 'linear-gradient(90deg,#1ecb6b,#4be585)', 
-                    borderRadius: 10, 
-                    position: 'absolute', 
-                    right: 0, 
-                    top: 0, 
-                    transition: 'width 0.8s ease-in-out',
-                    boxShadow: '0 2px 8px rgba(30,203,107,0.3)'
-                  }}></div>
-                  <span style={{
-                    position: 'absolute', 
-                    right: 12, 
-                    top: 0, 
-                    height: '100%', 
-                    display: 'flex', 
-                    alignItems: 'center', 
-                    fontWeight: 700, 
-                    color: '#fff',
-                    fontSize: '0.95em',
-                    textShadow: '0 1px 2px rgba(0,0,0,0.5)'
-                  }}>{adaptabilityScore(answers)}%</span>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+                <span style={{ fontWeight: 700, color: '#fff', minWidth: 24, fontSize: '1.1em', textAlign: 'center' }}>N</span>
+                <div style={{ flex: 1, height: 20, background: 'rgba(255,255,255,0.2)', borderRadius: 10, position: 'relative', margin: '0 10px', overflow: 'hidden', boxShadow: 'inset 0 2px 4px rgba(0,0,0,0.1)' }}>
+                  <div style={{ width: `${100 - adaptabilityScore(answers)}%`, height: '100%', background: 'linear-gradient(90deg,#e0e0e0,#b2f77c)', borderRadius: 10, position: 'absolute', left: 0, top: 0, transition: 'width 0.8s ease-in-out' }}></div>
+                  <div style={{ width: `${adaptabilityScore(answers)}%`, height: '100%', background: 'linear-gradient(90deg,#1ecb6b,#4be585)', borderRadius: 10, position: 'absolute', right: 0, top: 0, transition: 'width 0.8s ease-in-out', boxShadow: '0 2px 8px rgba(30,203,107,0.3)' }}></div>
+                  <span style={{ position: 'absolute', right: 12, top: 0, height: '100%', display: 'flex', alignItems: 'center', fontWeight: 700, color: '#fff', fontSize: '0.95em', textShadow: '0 1px 2px rgba(0,0,0,0.5)' }}>{adaptabilityScore(answers)}%</span>
                 </div>
-                <span style={{
-                  fontWeight: 700, 
-                  color: '#fff', 
-                  minWidth: 24,
-                  fontSize: '1.1em',
-                  textAlign: 'center'
-                }}>A</span>
+                <span style={{ fontWeight: 700, color: '#fff', minWidth: 24, fontSize: '1.1em', textAlign: 'center' }}>A</span>
               </div>
+              {/* 설명 추가 */}
+              <div style={{ marginTop: 14, color: '#fff', fontSize: '0.98em', lineHeight: 1.6, background: 'rgba(255,255,255,0.08)', borderRadius: 10, padding: '10px 14px' }}>
+                <b>{TENDENCY_EXPLANATIONS.adaptability[adaptabilityType].short}</b><br/>
+                {TENDENCY_EXPLANATIONS.adaptability[adaptabilityType].long.split('\\n').map((line, i) => <span key={i}>{line}<br/></span>)}
             </div>
-            {/* 상품성 */}
-            <div style={{
-              marginBottom: 24, 
-              background: 'rgba(255,255,255,0.15)', 
-              borderRadius: 16, 
-              padding: '20px 16px',
-              border: '1px solid rgba(255,255,255,0.1)'
-            }}>
-              <div style={{
-                display: 'flex', 
-                justifyContent: 'space-between', 
-                alignItems: 'center', 
-                marginBottom: 12
-              }}>
-                <span style={{
-                  fontWeight: 700, 
-                  color: '#fff',
-                  fontSize: '1.1em'
-                }}>💰 상품성</span>
-                <span style={{
-                  fontSize: '1em', 
-                  color: 'rgba(255,255,255,0.9)',
-                  fontWeight: 500
-                }}>H(취미형) / P(수익형)</span>
               </div>
-              <div style={{
-                display: 'flex', 
-                alignItems: 'center', 
-                gap: 12
-              }}>
-                <span style={{
-                  fontWeight: 700, 
-                  color: '#fff', 
-                  minWidth: 24,
-                  fontSize: '1.1em',
-                  textAlign: 'center'
-                }}>H</span>
-                <div style={{
-                  flex: 1, 
-                  height: 20, 
-                  background: 'rgba(255,255,255,0.2)', 
-                  borderRadius: 10, 
-                  position: 'relative', 
-                  margin: '0 10px',
-                  overflow: 'hidden',
-                  boxShadow: 'inset 0 2px 4px rgba(0,0,0,0.1)'
-                }}>
-                  <div style={{
-                    width: `${100 - profitScore(answers)}%`, 
-                    height: '100%', 
-                    background: 'linear-gradient(90deg,#e0e0e0,#b2f77c)', 
-                    borderRadius: 10, 
-                    position: 'absolute', 
-                    left: 0, 
-                    top: 0, 
-                    transition: 'width 1.2s ease-in-out'
-                  }}></div>
-                  <div style={{
-                    width: `${profitScore(answers)}%`, 
-                    height: '100%', 
-                    background: 'linear-gradient(90deg,#b2f77c,#4be585)', 
-                    borderRadius: 10, 
-                    position: 'absolute', 
-                    right: 0, 
-                    top: 0, 
-                    transition: 'width 1.2s ease-in-out',
-                    boxShadow: '0 2px 8px rgba(178,247,124,0.3)'
-                  }}></div>
-                  <span style={{
-                    position: 'absolute', 
-                    right: 12, 
-                    top: 0, 
-                    height: '100%', 
-                    display: 'flex', 
-                    alignItems: 'center', 
-                    fontWeight: 700, 
-                    color: '#fff',
-                    fontSize: '0.95em',
-                    textShadow: '0 1px 2px rgba(0,0,0,0.5)'
-                  }}>{profitScore(answers)}%</span>
+            {/* 상품성 게이지 */}
+            <div style={{ marginBottom: 24, background: 'rgba(255,255,255,0.15)', borderRadius: 16, padding: '20px 16px', border: '1px solid rgba(255,255,255,0.1)' }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 12 }}>
+                <span style={{ fontWeight: 700, color: '#fff', fontSize: '1.1em' }}>💰 상품성</span>
+                <span style={{ fontSize: '1em', color: 'rgba(255,255,255,0.9)', fontWeight: 500 }}>H(취미형) / P(수익형)</span>
                 </div>
-                <span style={{
-                  fontWeight: 700, 
-                  color: '#fff', 
-                  minWidth: 24,
-                  fontSize: '1.1em',
-                  textAlign: 'center'
-                }}>P</span>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+                <span style={{ fontWeight: 700, color: '#fff', minWidth: 24, fontSize: '1.1em', textAlign: 'center' }}>H</span>
+                <div style={{ flex: 1, height: 20, background: 'rgba(255,255,255,0.2)', borderRadius: 10, position: 'relative', margin: '0 10px', overflow: 'hidden', boxShadow: 'inset 0 2px 4px rgba(0,0,0,0.1)' }}>
+                  <div style={{ width: `${100 - profitScore(answers)}%`, height: '100%', background: 'linear-gradient(90deg,#e0e0e0,#ffe4b2)', borderRadius: 10, position: 'absolute', left: 0, top: 0, transition: 'width 0.8s ease-in-out' }}></div>
+                  <div style={{ width: `${profitScore(answers)}%`, height: '100%', background: 'linear-gradient(90deg,#ffb347,#ffd700)', borderRadius: 10, position: 'absolute', right: 0, top: 0, transition: 'width 0.8s ease-in-out', boxShadow: '0 2px 8px rgba(255,183,71,0.3)' }}></div>
+                  <span style={{ position: 'absolute', right: 12, top: 0, height: '100%', display: 'flex', alignItems: 'center', fontWeight: 700, color: '#fff', fontSize: '0.95em', textShadow: '0 1px 2px rgba(0,0,0,0.5)' }}>{profitScore(answers)}%</span>
               </div>
+                <span style={{ fontWeight: 700, color: '#fff', minWidth: 24, fontSize: '1.1em', textAlign: 'center' }}>P</span>
             </div>
-            {/* 빈도성 */}
-            <div style={{
-              marginBottom: 24, 
-              background: 'rgba(255,255,255,0.15)', 
-              borderRadius: 16, 
-              padding: '20px 16px',
-              border: '1px solid rgba(255,255,255,0.1)'
-            }}>
-              <div style={{
-                display: 'flex', 
-                justifyContent: 'space-between', 
-                alignItems: 'center', 
-                marginBottom: 12
-              }}>
-                <span style={{
-                  fontWeight: 700, 
-                  color: '#fff',
-                  fontSize: '1.1em'
-                }}>⏰ 빈도성</span>
-                <span style={{
-                  fontSize: '1em', 
-                  color: 'rgba(255,255,255,0.9)',
-                  fontWeight: 500
-                }}>C(간단) / B(세심)</span>
+              {/* 설명 추가 */}
+              <div style={{ marginTop: 14, color: '#fff', fontSize: '0.98em', lineHeight: 1.6, background: 'rgba(255,255,255,0.08)', borderRadius: 10, padding: '10px 14px' }}>
+                <b>{TENDENCY_EXPLANATIONS.profit[profitType].short}</b><br/>
+                {TENDENCY_EXPLANATIONS.profit[profitType].long.split('\\n').map((line, i) => <span key={i}>{line}<br/></span>)}
               </div>
-              <div style={{
-                display: 'flex', 
-                alignItems: 'center', 
-                gap: 12
-              }}>
-                <span style={{
-                  fontWeight: 700, 
-                  color: '#fff', 
-                  minWidth: 24,
-                  fontSize: '1.1em',
-                  textAlign: 'center'
-                }}>C</span>
-                <div style={{
-                  flex: 1, 
-                  height: 20, 
-                  background: 'rgba(255,255,255,0.2)', 
-                  borderRadius: 10, 
-                  position: 'relative', 
-                  margin: '0 10px',
-                  overflow: 'hidden',
-                  boxShadow: 'inset 0 2px 4px rgba(0,0,0,0.1)'
-                }}>
-                  <div style={{
-                    width: `${100 - busyScore(answers)}%`, 
-                    height: '100%', 
-                    background: 'linear-gradient(90deg,#e0e0e0,#7ce6f7)', 
-                    borderRadius: 10, 
-                    position: 'absolute', 
-                    left: 0, 
-                    top: 0, 
-                    transition: 'width 1.6s ease-in-out'
-                  }}></div>
-                  <div style={{
-                    width: `${busyScore(answers)}%`, 
-                    height: '100%', 
-                    background: 'linear-gradient(90deg,#7ce6f7,#4be585)', 
-                    borderRadius: 10, 
-                    position: 'absolute', 
-                    right: 0, 
-                    top: 0, 
-                    transition: 'width 1.6s ease-in-out',
-                    boxShadow: '0 2px 8px rgba(124,230,247,0.3)'
-                  }}></div>
-                  <span style={{
-                    position: 'absolute', 
-                    right: 12, 
-                    top: 0, 
-                    height: '100%', 
-                    display: 'flex', 
-                    alignItems: 'center', 
-                    fontWeight: 700, 
-                    color: '#fff',
-                    fontSize: '0.95em',
-                    textShadow: '0 1px 2px rgba(0,0,0,0.5)'
-                  }}>{busyScore(answers)}%</span>
                 </div>
-                <span style={{
-                  fontWeight: 700, 
-                  color: '#fff', 
-                  minWidth: 24,
-                  fontSize: '1.1em',
-                  textAlign: 'center'
-                }}>B</span>
+            {/* 빈도성 게이지 */}
+            <div style={{ marginBottom: 24, background: 'rgba(255,255,255,0.15)', borderRadius: 16, padding: '20px 16px', border: '1px solid rgba(255,255,255,0.1)' }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 12 }}>
+                <span style={{ fontWeight: 700, color: '#fff', fontSize: '1.1em' }}>⏰ 빈도성</span>
+                <span style={{ fontSize: '1em', color: 'rgba(255,255,255,0.9)', fontWeight: 500 }}>C(간단) / B(세심)</span>
               </div>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+                <span style={{ fontWeight: 700, color: '#fff', minWidth: 24, fontSize: '1.1em', textAlign: 'center' }}>C</span>
+                <div style={{ flex: 1, height: 20, background: 'rgba(255,255,255,0.2)', borderRadius: 10, position: 'relative', margin: '0 10px', overflow: 'hidden', boxShadow: 'inset 0 2px 4px rgba(0,0,0,0.1)' }}>
+                  <div style={{ width: `${100 - busyScore(answers)}%`, height: '100%', background: 'linear-gradient(90deg,#e0e0e0,#b2e6ff)', borderRadius: 10, position: 'absolute', left: 0, top: 0, transition: 'width 0.8s ease-in-out' }}></div>
+                  <div style={{ width: `${busyScore(answers)}%`, height: '100%', background: 'linear-gradient(90deg,#4fc3f7,#1976d2)', borderRadius: 10, position: 'absolute', right: 0, top: 0, transition: 'width 0.8s ease-in-out', boxShadow: '0 2px 8px rgba(25,118,210,0.3)' }}></div>
+                  <span style={{ position: 'absolute', right: 12, top: 0, height: '100%', display: 'flex', alignItems: 'center', fontWeight: 700, color: '#fff', fontSize: '0.95em', textShadow: '0 1px 2px rgba(0,0,0,0.5)' }}>{busyScore(answers)}%</span>
             </div>
-            {/* 환경적합성 */}
-            <div style={{
-              marginBottom: 0, 
-              background: 'rgba(255,255,255,0.15)', 
-              borderRadius: 16, 
-              padding: '20px 16px',
-              border: '1px solid rgba(255,255,255,0.1)'
-            }}>
-              <div style={{
-                display: 'flex', 
-                justifyContent: 'space-between', 
-                alignItems: 'center', 
-                marginBottom: 12
-              }}>
-                <span style={{
-                  fontWeight: 700, 
-                  color: '#fff',
-                  fontSize: '1.1em'
-                }}>🌍 환경적합성</span>
-                <span style={{
-                  fontSize: '1em', 
-                  color: 'rgba(255,255,255,0.9)',
-                  fontWeight: 500
-                }}>S(선택) / V(다양)</span>
+                <span style={{ fontWeight: 700, color: '#fff', minWidth: 24, fontSize: '1.1em', textAlign: 'center' }}>B</span>
               </div>
-              <div style={{
-                display: 'flex', 
-                alignItems: 'center', 
-                gap: 12
-              }}>
-                <span style={{
-                  fontWeight: 700, 
-                  color: '#fff', 
-                  minWidth: 24,
-                  fontSize: '1.1em',
-                  textAlign: 'center'
-                }}>S</span>
-                <div style={{
-                  flex: 1, 
-                  height: 20, 
-                  background: 'rgba(255,255,255,0.2)', 
-                  borderRadius: 10, 
-                  position: 'relative', 
-                  margin: '0 10px',
-                  overflow: 'hidden',
-                  boxShadow: 'inset 0 2px 4px rgba(0,0,0,0.1)'
-                }}>
-                  <div style={{
-                    width: `${100 - envScore(answers)}%`, 
-                    height: '100%', 
-                    background: 'linear-gradient(90deg,#e0e0e0,#7cf7a6)', 
-                    borderRadius: 10, 
-                    position: 'absolute', 
-                    left: 0, 
-                    top: 0, 
-                    transition: 'width 2.0s ease-in-out'
-                  }}></div>
-                  <div style={{
-                    width: `${envScore(answers)}%`, 
-                    height: '100%', 
-                    background: 'linear-gradient(90deg,#7cf7a6,#4be585)', 
-                    borderRadius: 10, 
-                    position: 'absolute', 
-                    right: 0, 
-                    top: 0, 
-                    transition: 'width 2.0s ease-in-out',
-                    boxShadow: '0 2px 8px rgba(124,247,166,0.3)'
-                  }}></div>
-                  <span style={{
-                    position: 'absolute', 
-                    right: 12, 
-                    top: 0, 
-                    height: '100%', 
-                    display: 'flex', 
-                    alignItems: 'center', 
-                    fontWeight: 700, 
-                    color: '#fff',
-                    fontSize: '0.95em',
-                    textShadow: '0 1px 2px rgba(0,0,0,0.5)'
-                  }}>{envScore(answers)}%</span>
+              {/* 설명 추가 */}
+              <div style={{ marginTop: 14, color: '#fff', fontSize: '0.98em', lineHeight: 1.6, background: 'rgba(255,255,255,0.08)', borderRadius: 10, padding: '10px 14px' }}>
+                <b>{TENDENCY_EXPLANATIONS.busy[busyType].short}</b><br/>
+                {TENDENCY_EXPLANATIONS.busy[busyType].long.split('\\n').map((line, i) => <span key={i}>{line}<br/></span>)}
                 </div>
-                <span style={{
-                  fontWeight: 700, 
-                  color: '#fff', 
-                  minWidth: 24,
-                  fontSize: '1.1em',
-                  textAlign: 'center'
-                }}>V</span>
               </div>
+            {/* 환경적합성 게이지 */}
+            <div style={{ marginBottom: 0, background: 'rgba(255,255,255,0.15)', borderRadius: 16, padding: '20px 16px', border: '1px solid rgba(255,255,255,0.1)' }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 12 }}>
+                <span style={{ fontWeight: 700, color: '#fff', fontSize: '1.1em' }}>🌎 환경적합성</span>
+                <span style={{ fontSize: '1em', color: 'rgba(255,255,255,0.9)', fontWeight: 500 }}>S(선택) / V(다양)</span>
             </div>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+                <span style={{ fontWeight: 700, color: '#fff', minWidth: 24, fontSize: '1.1em', textAlign: 'center' }}>S</span>
+                <div style={{ flex: 1, height: 20, background: 'rgba(255,255,255,0.2)', borderRadius: 10, position: 'relative', margin: '0 10px', overflow: 'hidden', boxShadow: 'inset 0 2px 4px rgba(0,0,0,0.1)' }}>
+                  <div style={{ width: `${100 - envScore(answers)}%`, height: '100%', background: 'linear-gradient(90deg,#e0e0e0,#b2ffb2)', borderRadius: 10, position: 'absolute', left: 0, top: 0, transition: 'width 0.8s ease-in-out' }}></div>
+                  <div style={{ width: `${envScore(answers)}%`, height: '100%', background: 'linear-gradient(90deg,#7fff7f,#00c853)', borderRadius: 10, position: 'absolute', right: 0, top: 0, transition: 'width 0.8s ease-in-out', boxShadow: '0 2px 8px rgba(0,200,83,0.3)' }}></div>
+                  <span style={{ position: 'absolute', right: 12, top: 0, height: '100%', display: 'flex', alignItems: 'center', fontWeight: 700, color: '#fff', fontSize: '0.95em', textShadow: '0 1px 2px rgba(0,0,0,0.5)' }}>{envScore(answers)}%</span>
           </div>
-          <div className="recommended-crops">
-            <h3>🌱 추천 작물</h3>
+                <span style={{ fontWeight: 700, color: '#fff', minWidth: 24, fontSize: '1.1em', textAlign: 'center' }}>V</span>
+                    </div>
+              {/* 설명 추가 */}
+              <div style={{ marginTop: 14, color: '#fff', fontSize: '0.98em', lineHeight: 1.6, background: 'rgba(255,255,255,0.08)', borderRadius: 10, padding: '10px 14px' }}>
+                <b>{TENDENCY_EXPLANATIONS.env[envType].short}</b><br/>
+                {TENDENCY_EXPLANATIONS.env[envType].long.split('\\n').map((line, i) => <span key={i}>{line}<br/></span>)}
+                  </div>
+                </div>
+              </div>
+
+          {/* 주요 특징 */}
+          <div style={{ background: 'rgba(255,255,255,0.13)', borderRadius: 18, padding: 18, margin: '10px 0', width: '100%' }}>
+            <h3 style={{ color: '#fff', fontSize: '1.05rem', marginBottom: 8, fontWeight: 700, display: 'flex', alignItems: 'center', gap: '6px' }}><span>✨</span> 주요 특징</h3>
+            <ul style={{ color: 'rgba(255,255,255,0.97)', fontSize: '0.98rem', margin: 0, paddingLeft: 18, lineHeight: 1.7 }}>
+              {code.startsWith('A') && <li><b>숙련자:</b> 풍부한 경험과 전문성을 보유</li>}
+              {code.startsWith('N') && <li><b>초보자:</b> 학습 의지가 높고 빠른 성장 가능</li>}
+              {code.includes('H') && <li><b>취미형:</b> 감성적 만족과 힐링을 중시</li>}
+              {code.includes('P') && <li><b>수익형:</b> 경제적 효율과 생산성을 추구</li>}
+              {code.includes('B') && <li><b>세심 관리:</b> 정성과 꼼꼼함으로 작물 돌봄</li>}
+              {code.includes('C') && <li><b>간단 관리:</b> 효율적이고 실용적인 접근</li>}
+              {code.includes('S') && <li><b>선택적 환경:</b> 최적 조건을 선호</li>}
+              {code.includes('V') && <li><b>다양한 환경:</b> 유연한 적응력 보유</li>}
+            </ul>
+              </div>
+
+          {/* 추천 작물 카드형: 2~3열로 넓게 배치 */}
+            <div style={{ 
+            background: 'rgba(255,255,255,0.13)',
+                borderRadius: 18, 
+            padding: 18,
+            margin: '10px 0',
+            width: '100%',
+            maxWidth: 600,
+            marginLeft: 'auto',
+            marginRight: 'auto',
+                display: 'flex', 
+                flexDirection: 'column', 
+                alignItems: 'center', 
+            justifyContent: 'center',
+          }}>
+            <h3 style={{ color: '#fff', fontSize: '1.25rem', marginBottom: 18, fontWeight: 700, display: 'flex', alignItems: 'center', gap: '10px', justifyContent: 'center' }}><span>🌱</span> 추천 작물</h3>
             <div style={{
-              display: 'flex',
-              flexWrap: 'wrap',
+              display: 'grid',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))',
               gap: 24,
               justifyContent: 'center',
-              margin: '24px 0'
+              alignItems: 'center',
+              width: '100%',
             }}>
-              {cropDataByCode[code]
-                ? cropDataByCode[code].map((c, i) => (
-                    <div key={i} style={{
-                      background: 'rgba(255,255,255,0.12)',
-                      borderRadius: 14,
-                      padding: 16,
-                      minWidth: 140,
-                      maxWidth: 180,
-                      color: '#fff',
-                      textAlign: 'center'
-                    }}>
-                      <img
-                        src={`${process.env.PUBLIC_URL}/images/photo/${c.en.replace(/ /g, '%20')}${c.en === 'coli' ? '.jpeg' : '.jpg'}`}
-                        alt={c.name}
-                        style={{ width: 80, height: 80, objectFit: 'cover', borderRadius: 10, marginBottom: 8, background: '#eee' }}
-                        onError={e => { 
-                          // .jpg 파일이 없으면 .webp 파일 시도
-                          if (e.target.src.includes('.jpg')) {
-                            e.target.src = e.target.src.replace('.jpg', '.webp');
-                          } else if (e.target.src.includes('.jpeg')) {
-                            e.target.src = e.target.src.replace('.jpeg', '.webp');
-                          } else {
-                            e.target.style.display='none'; 
-                            const noImgDiv = e.target.parentNode.querySelector('.no-img');
-                            if (noImgDiv) noImgDiv.style.display='flex';
-                          }
-                        }}
-                      />
-                      <div className="no-img" style={{ 
-                        display: 'none', 
-                        width: 80, 
-                        height: 80, 
-                        alignItems: 'center', 
-                        justifyContent: 'center', 
-                        background: 'rgba(255,255,255,0.2)', 
-                        color: '#fff', 
-                        borderRadius: 10, 
-                        margin: '0 auto 8px auto', 
-                        fontSize: '0.8em',
-                        fontWeight: 600
-                      }}>🌱</div>
-                      <div style={{ fontWeight: 700, marginBottom: 6 }}>{c.name}</div>
-                      <div style={{ fontSize: '0.9em', fontWeight: 400, marginBottom: 8, lineHeight: '1.3' }}>{c.desc}</div>
-                      <button
-                        style={{
-                          background: '#32cd32',
-                          color: '#fff',
-                          border: 'none',
-                          borderRadius: 8,
-                          padding: '8px 12px',
-                          fontWeight: 600,
-                          cursor: 'pointer',
-                          fontSize: '0.9em',
-                          marginTop: 4,
-                          transition: 'all 0.2s ease'
-                        }}
-                        onMouseOver={e => e.target.style.background = '#28a428'}
-                        onMouseOut={e => e.target.style.background = '#32cd32'}
-                        onClick={() => window.open(`${process.env.PUBLIC_URL}/images/loading.jpeg`, '_blank', 'width=400,height=400')}
-                      >
-                        씨앗 및 모종 구매
-                      </button>
-                    </div>
-                  ))
-                : <div style={{ 
-                    textAlign: 'center', 
-                    color: '#fff', 
-                    fontSize: '1.1em', 
-                    padding: '20px',
-                    background: 'rgba(255,255,255,0.1)',
-                    borderRadius: 12
-                  }}>추천 작물이 없습니다.</div>
-              }
+              {cropList && cropList.length > 0 ? cropList.map((crop, idx) => (
+                <div key={idx} style={{ background: 'rgba(255,255,255,0.18)', borderRadius: 12, padding: 16, minWidth: 140, maxWidth: 200, textAlign: 'center', marginBottom: 8, display: 'flex', flexDirection: 'column', alignItems: 'center', boxShadow: '0 2px 8px rgba(0,0,0,0.07)' }}>
+                  <img src={`${process.env.PUBLIC_URL}/images/photo/${cropImageMap[crop] || encodeURIComponent(crop) + '.jpg'}`} alt={crop} style={{ width: 80, height: 80, objectFit: 'cover', borderRadius: 10, marginBottom: 10, background: '#eee' }} onError={e => { e.target.src = `${process.env.PUBLIC_URL}/images/photo/${encodeURIComponent(crop)}.webp`; }} />
+                  <div style={{ fontWeight: 700, color: '#fff', marginBottom: 6, fontSize: '1.08em' }}>{crop}</div>
+                  <button style={{ background: '#32cd32', color: '#fff', border: 'none', borderRadius: 8, padding: '8px 16px', fontWeight: 600, cursor: 'pointer', fontSize: '1em', marginTop: 10 }}
+                    onClick={() => { setPopupCrop(crop); setPopupOpen(true); }}>
+                    씨앗 및 모종 구매
+                </button>
+              </div>
+              )) : <span style={{ color: '#fff' }}>추천 작물 준비 중</span>}
             </div>
           </div>
-          {type.characteristics && (
-            <div className="characteristics-section">
-              <h3>✨ 당신의 텃밭 특성</h3>
-              <div className="characteristics-list">
-                {type.characteristics.map((characteristic, index) => (
-                  <span key={index} className="characteristic-tag">{characteristic}</span>
-                ))}
-              </div>
-            </div>
-          )}
-          {type.tips && (
-            <div className="tips-section">
-              <h3>💡 맞춤 재배 팁</h3>
-              <p className="tips-text">{type.tips}</p>
-            </div>
-          )}
-          <div className="type-explanation-section">
-            <h3>📖 유형 해설</h3>
-            <div className="explanation-grid">
-              <div className="explanation-item">
-                <h4>A vs N: 적응력 (Adaptability)</h4>
-                <div className="explanation-comparison">
-                  <div className="explanation-side adaptable">
-                    <h5>A (숙련자형)</h5>
-                    <p className="explanation-summary">작물 관리가 익숙하고 다양한 상황에 유연하게 대응</p>
-                    <p className="explanation-detail">다양한 작물과 환경에서도 재배 경험이 있거나, 스스로 문제를 해결할 수 있는 능력이 있는 유형입니다. 시비나 병해충 대응도 능동적으로 시도하며, 텃밭 활동을 장기적으로 발전시켜 나가려는 경향이 있습니다.</p>
-                  </div>
-                  <div className="explanation-side novice">
-                    <h5>N (초보자형)</h5>
-                    <p className="explanation-summary">처음 텃밭을 시작하며 간편하고 쉬운 작물을 선호</p>
-                    <p className="explanation-detail">텃밭이 처음이거나 재배 경험이 많지 않은 사람입니다. 복잡한 관리는 부담스럽고, 최대한 간단하고 쉽게 키울 수 있는 작물을 선호합니다. 텃밭이 '가벼운 시작점'이 되기를 기대합니다.</p>
-                  </div>
-                </div>
-              </div>
 
-              <div className="explanation-item">
-                <h4>H vs P: 상품성 (Hobby vs Profit)</h4>
-                <div className="explanation-comparison">
-                  <div className="explanation-side hobby">
-                    <h5>H (취미형)</h5>
-                    <p className="explanation-summary">힐링과 감성 중심의 재배 목적</p>
-                    <p className="explanation-detail">작물을 키우는 과정에서 정서적인 만족, 힐링, 감성을 중요하게 여깁니다. 예쁜 작물, 소소한 돌봄, 생활 속의 여유를 위한 텃밭을 꿈꾸며, 결과물보다 '과정의 즐거움'에 의미를 둡니다.</p>
-                  </div>
-                  <div className="explanation-side profit">
-                    <h5>P (수익형)</h5>
-                    <p className="explanation-summary">생산성과 수익 중심의 실용적 목적</p>
-                    <p className="explanation-detail">수확량, 효율성, 경제성을 중시하는 경향이 있습니다. 텃밭을 '수익 활동'의 일부로 간주하며, 어떤 작물이 얼마나 잘 자라고 팔릴 수 있는지에 더 큰 관심을 가집니다.</p>
-                  </div>
-                </div>
-              </div>
-
-              <div className="explanation-item">
-                <h4>B vs C: 빈도성 (Care Time)</h4>
-                <div className="explanation-comparison">
-                  <div className="explanation-side busy">
-                    <h5>B (세심 관리형)</h5>
-                    <p className="explanation-summary">자주 텃밭을 돌보며 정성껏 가꾸는 스타일</p>
-                    <p className="explanation-detail">물주기, 병해충 확인, 상태 체크 등을 자주 하며 텃밭을 정성스럽게 관리합니다. 작물 하나하나를 관찰하고 기록하는 걸 좋아하며, 텃밭 활동을 하나의 취미나 루틴으로 여깁니다.</p>
-                  </div>
-                  <div className="explanation-side careless">
-                    <h5>C (간단 관리형)</h5>
-                    <p className="explanation-summary">시간을 많이 들이지 않고 간편하게 키우는 스타일</p>
-                    <p className="explanation-detail">바쁜 생활 속에서 최소한의 시간으로 텃밭을 유지하고 싶어하는 유형입니다. 자동화 시스템이나 돌봄이 쉬운 작물을 선호하며, 결과만 얻을 수 있으면 과정은 간편할수록 좋다고 생각합니다.</p>
-                  </div>
-                </div>
-              </div>
-
-              <div className="explanation-item">
-                <h4>S vs V: 환경적합성 (Selective vs Versatile)</h4>
-                <div className="explanation-comparison">
-                  <div className="explanation-side selective">
-                    <h5>S (까다로운 환경형)</h5>
-                    <p className="explanation-summary">특정 조건을 잘 맞춰야 건강하게 자라는 유형</p>
-                    <p className="explanation-detail">특정 토양과 조건을 잘 맞춰야 건강하게 자라는 유형의 작물입니다. 재배시 환경 관리와 어느정도의 맞춤형 관리가 필요합니다. 세심한 관심, 계획을 통한 높은 품질을 기대하여, 재배능력에 깊이를 더하고 싶을때 선호합니다.</p>
-                  </div>
-                  <div className="explanation-side versatile">
-                    <h5>V (어디서나 자라는 유형)</h5>
-                    <p className="explanation-summary">다양한 환경에서 쉽게 재배할 수 있는 유형</p>
-                    <p className="explanation-detail">토양이나 기후가 크게 까다롭지 않아서 다양한 환경에서 쉽게 재배할수 있습니다. 관리가 비교적 단순하고 안정적이기 때문에 초보자부터 숙련자까지 재배 계획을 세우기 수월하고 키우기 좋습니다.</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="result-actions" style={{ display: 'flex', gap: 12, justifyContent: 'center', marginTop: 32 }}>
-            <button className="retry-button" onClick={onRetry}>다시 테스트하기</button>
-            <button className="share-button" onClick={() => {
-              navigator.share?.({
-                title: 'N(농)BTI 테스트 결과',
-                text: `나의 텃밭 성향은 "${type.name}"입니다! ${type.tips}`,
-                url: window.location.href
-              }) || alert('결과가 복사되었습니다!');
-            }}>결과 공유하기</button>
-            <button className="garden-button" style={{ background: '#228b22', color: '#fff', border: 'none', borderRadius: 12, padding: '12px 20px', fontWeight: 600, fontSize: '1em', cursor: 'pointer', boxShadow: '0 4px 12px rgba(34,139,34,0.2)' }} onClick={() => window.open(`${process.env.PUBLIC_URL}/images/loading.jpeg`, '_blank', 'width=400,height=400')}>
-              주변 텃밭 찾기
-            </button>
-          </div>
-          {/* 팝업: 모종/씨앗 구매 */}
+          {/* 팝업: 구매하기 */}
           {popupOpen && (
             <div style={{ 
               position: 'fixed', 
@@ -1113,84 +739,20 @@ const NBTITest = ({ onBack }) => {
                 alignItems: 'center', 
                 minWidth: 280 
               }} onClick={e => e.stopPropagation()}>
-                <img 
-                  src={`${process.env.PUBLIC_URL}/images/loading.png`} 
-                  alt="loading" 
-                  style={{ width: 120, height: 120, marginBottom: 18 }} 
-                />
+                <img src={`${process.env.PUBLIC_URL}/images/loading.jpeg`} alt="loading" style={{ width: 120, height: 120, marginBottom: 18 }} />
                 <div style={{ fontWeight: 700, fontSize: '1.1em', marginBottom: 8, textAlign: 'center' }}>
-                  {popupCrop} 모종/씨앗 구매 페이지로 이동 중...
+                  {popupCrop} 구매 페이지로 이동 중...
                 </div>
-                <button 
-                  style={{ 
-                    marginTop: 10, 
-                    background: '#32cd32', 
-                    color: '#fff', 
-                    border: 'none', 
-                    borderRadius: 8, 
-                    padding: '8px 16px', 
-                    fontWeight: 600, 
-                    cursor: 'pointer', 
-                    fontSize: '0.97em' 
-                  }} 
-                  onClick={() => setPopupOpen(false)}
-                >
+                <button style={{ marginTop: 10, background: '#32cd32', color: '#fff', border: 'none', borderRadius: 8, padding: '8px 16px', fontWeight: 600, cursor: 'pointer', fontSize: '0.97em' }} onClick={() => setPopupOpen(false)}>
                   닫기
                 </button>
               </div>
             </div>
           )}
-          {/* 팝업: 주변 텃밭 찾기 */}
-          {popupGarden && (
-            <div style={{ 
-              position: 'fixed', 
-              top: 0, 
-              left: 0, 
-              width: '100vw', 
-              height: '100vh', 
-              background: 'rgba(0,0,0,0.45)', 
-              zIndex: 9999, 
-              display: 'flex', 
-              alignItems: 'center', 
-              justifyContent: 'center' 
-            }} onClick={() => setPopupGarden(false)}>
-              <div style={{ 
-                background: 'white', 
-                borderRadius: 18, 
-                padding: 32, 
-                boxShadow: '0 8px 32px rgba(0,0,0,0.25)', 
-                display: 'flex', 
-                flexDirection: 'column', 
-                alignItems: 'center', 
-                minWidth: 280 
-              }} onClick={e => e.stopPropagation()}>
-                <img 
-                  src={`${process.env.PUBLIC_URL}/images/loading.png`} 
-                  alt="loading" 
-                  style={{ width: 120, height: 120, marginBottom: 18 }} 
-                />
-                <div style={{ fontWeight: 700, fontSize: '1.1em', marginBottom: 8, textAlign: 'center' }}>
-                  주변 텃밭 찾기 서비스로 이동 중...
-                </div>
-                <button 
-                  style={{ 
-                    marginTop: 10, 
-                    background: '#228b22', 
-                    color: '#fff', 
-                    border: 'none', 
-                    borderRadius: 8, 
-                    padding: '8px 16px', 
-                    fontWeight: 600, 
-                    cursor: 'pointer', 
-                    fontSize: '0.97em' 
-                  }} 
-                  onClick={() => setPopupGarden(false)}
-                >
-                  닫기
-                </button>
-              </div>
-            </div>
-          )}
+
+          <div style={{ marginTop: 32, width: '100%', display: 'flex', justifyContent: 'center', gap: 12 }}>
+            <button className="retry-button" onClick={onRetry}>다시 테스트하기</button>
+          </div>
         </div>
       </div>
     );

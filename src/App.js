@@ -3,6 +3,63 @@ import './App.css';
 import NBTITest from './components/NBTITest';
 import ResultSlider from './components/ResultSlider';
 
+// 작물명을 이미지 파일명으로 매핑
+export const cropImageMap = {
+  '인삼': 'ginseng.jpg',
+  '들깨': 'Perilla.jpg',
+  '아스파라거스': 'Asparagus.jpg',
+  '오미자': 'Schisandra.jpg',
+  '자두': 'Plum.jpg',
+  '참나물': 'Chive.jpg',
+  '고구마': 'Sweet Potato.jpg',
+  '마': 'Yam.jpg',
+  '무화과': 'Fig.jpg',
+  '산약': 'Wild Yam.jpg',
+  '오디': 'Mulberry.jpg',
+  '상추': 'Lettuce.jpg',
+  '감자': 'Potato.jpg',
+  '매실': 'Japanese Apricot.jpg',
+  '사과': 'Apple.jpg',
+  '근대': 'Swiss Chard.jpg',
+  '배': 'Pear.jpg',
+  '쪽파': 'Scallion.jpg',
+  '오이': 'Cucumber.jpg',
+  '감': 'Persimmon.jpg',
+  '수박': 'Watermelon.jpg',
+  '참외': 'Korean Melon.jpg',
+  '토마토': 'Tomato.jpg',
+  '방울토마토': 'Cherry Tomato.jpg',
+  '벼': 'Rice.jpg',
+  '딸기': 'Strawberry.jpg',
+  '쑥갓': 'Crown Daisy.jpg',
+  '연근': 'Lotus Root.jpg',
+  '우엉': 'Burdock.webp',
+  '도라지': 'bellflower.jpg',
+  '더덕': 'Deodeok.jpg',
+  '취나물': 'Chive.jpg',
+  '블루베리': 'Blueberry.jpg',
+  '브로콜리': 'coli.jpeg',
+  '파프리카': 'Bell Pepper.jpg',
+  '풋고추': 'Green Chili Pepper.jpg',
+  '청양고추': 'Cheongyang Chili Pepper.jpg',
+  '비트': 'Beet.jpg',
+  '마늘': 'Garlic.jpg',
+  '양파': 'Onion.jpg',
+  '얼갈이배추': 'Napa Cabbage.jpg',
+  '청경채': 'Bok Choy.jpg',
+  '참다래': 'Cherry.jpg',
+  '체리': 'Cherry.jpg',
+  '참깨': 'Sesame.jpg',
+  '수수': 'Sorghum.jpg',
+  '조': 'Millet.jpg',
+  '당근': 'Carrot.jpg',
+  '무': 'Radish.jpg',
+  '미나리': 'Water Parsley.jpg',
+  '시금치': 'Spinach.jpg',
+  '양배추': 'Cabbage.jpg',
+  '생강': 'Ginger.jpg'
+};
+
 // 결과 보기 전용 페이지
 function ResultView({ code, onBack }) {
   // App.js 내부의 types 배열 사용
@@ -131,22 +188,50 @@ function ResultView({ code, onBack }) {
           <h2>{type.name}</h2>
           <p className="result-description">{type.description}</p>
         </div>
-        {type.longDescription && (
+        {type.detailDescription && (
           <div className="detail-description-section">
             <h3>📋 유형 상세 설명</h3>
-            <p className="detail-description-text">{type.longDescription}</p>
+            <div style={{ color: '#fff', fontWeight: 500, marginBottom: 8 }}>
+              {type.detailDescription}
+            </div>
+            {type.longDescription && (
+              <div style={{ color: '#fff', fontSize: '1.05em', lineHeight: 1.7, background: 'rgba(255,255,255,0.07)', borderRadius: 10, padding: '14px 16px' }}>
+                {type.longDescription}
+              </div>
+            )}
           </div>
         )}
         <div className="recommended-crops">
           <h3>🌱 추천 작물</h3>
           <div style={{display:'flex',flexWrap:'wrap',gap:24,justifyContent:'center',margin:'24px 0'}}>
-            {crops.length > 0 ? crops.map((c, i) => (
-              <div key={i} style={{background:'rgba(255,255,255,0.12)',borderRadius:14,padding:16,minWidth:140,maxWidth:180,color:'#fff',textAlign:'center'}}>
-                <img src={`${process.env.PUBLIC_URL}/images/photo/${c.en.replace(/ /g, '%20')}.jpg`} alt={c.name} style={{width:80,height:80,objectFit:'cover',borderRadius:10,marginBottom:8,background:'#eee'}} onError={e=>{if(e.target.src.includes('.jpg')){e.target.src=e.target.src.replace('.jpg','.webp');}else{e.target.style.display='none';}}}/>
-                <div style={{fontWeight:700,marginBottom:6}}>{c.name}</div>
-                <div style={{fontSize:'0.9em',fontWeight:400,marginBottom:8,lineHeight:'1.3'}}>{c.desc}</div>
-              </div>
-            )) : <div style={{color:'#fff',fontSize:'1.1em',padding:'20px'}}>추천 작물이 없습니다.</div>}
+            {crops.length > 0 ? crops.map((c, i) => {
+              // cropImageMap에서 이미지 파일명 가져오기
+              const imageFileName = cropImageMap[c.name] || `${c.en.replace(/ /g, '%20')}.jpg`;
+              
+              return (
+                <div key={i} style={{background:'rgba(255,255,255,0.12)',borderRadius:14,padding:16,minWidth:140,maxWidth:180,color:'#fff',textAlign:'center'}}>
+                  <img 
+                    src={`${process.env.PUBLIC_URL}/images/photo/${imageFileName}`} 
+                    alt={c.name} 
+                    style={{width:80,height:80,objectFit:'cover',borderRadius:10,marginBottom:8,background:'#eee'}} 
+                    onError={(e) => {
+                      const currentSrc = e.target.src;
+                      if (currentSrc.includes('.jpg')) {
+                        e.target.src = currentSrc.replace('.jpg', '.webp');
+                      } else if (currentSrc.includes('.webp')) {
+                        e.target.src = currentSrc.replace('.webp', '.jpeg');
+                      } else if (currentSrc.includes('.jpeg')) {
+                        e.target.style.display = 'none';
+                      } else {
+                        e.target.style.display = 'none';
+                      }
+                    }}
+                  />
+                  <div style={{fontWeight:700,marginBottom:6}}>{c.name}</div>
+                  <div style={{fontSize:'0.9em',fontWeight:400,marginBottom:8,lineHeight:'1.3'}}>{c.desc}</div>
+                </div>
+              );
+            }) : <div style={{color:'#fff',fontSize:'1.1em',padding:'20px'}}>추천 작물이 없습니다.</div>}
           </div>
         </div>
         <div style={{marginTop:24}}>
@@ -161,56 +246,103 @@ function ResultView({ code, onBack }) {
 function TypesGallery({ onResult }) {
   // NBTITest.js의 types 배열을 복사(동일하게 유지)
   const types = [
-    { code: 'AHBS', emoji: '🧑‍🌾', name: '감성 장인', description: '정성 가득 감성 텃밭러', detailDescription: '숙련자 + 취미형 + 세심 관리 + 선택적 환경', longDescription: '다양한 경험을 바탕으로 텃밭을 섬세하게 가꾸는 장인. 환경이 다소 까다로워도 이를 감성적으로 극복하며, 수확보다는 가꾸는 즐거움을 우선시합니다. 향기롭고 정갈한 공간을 연출하는 데 능숙합니다.' },
-    { code: 'AHBV', emoji: '🎋', name: '따뜻한 장인', description: '손길 가득한 텃밭을 유연하게', detailDescription: '숙련자 + 취미형 + 세심 관리 + 다양한 환경', longDescription: '감성과 숙련도를 바탕으로 유연하게 텃밭을 가꾸는 유형. 환경에 구애받지 않고 언제든지 새로운 식물을 환영하는 따뜻한 성향. 식물과 대화하듯 교감하며 여유로운 힐링을 추구합니다.' },
-    { code: 'AHCS', emoji: '🌱', name: '감성 실용가', description: '여유와 실용의 균형형', detailDescription: '숙련자 + 취미형 + 간단 관리 + 선택적 환경', longDescription: '간단한 관리로 감성을 유지하는 실용형 장인. 감성적 만족도 중요하지만 시간을 효율적으로 사용하며, 작물보다는 텃밭 공간 자체에 더 큰 의미를 두는 경우가 많습니다.' },
-    { code: 'AHCV', emoji: '🌼', name: '감성 실용러', description: '여유롭게, 하지만 간단하게', detailDescription: '숙련자 + 취미형 + 간단 관리 + 다양한 환경', longDescription: '숙련된 감각으로 최소한의 관리로도 감성적 만족을 유지하는 유형. 바쁜 일상 속에서도 힐링을 놓치지 않고 실용성과 감성을 모두 챙기려는 성향입니다.' },
-    { code: 'APBS', emoji: '🛠️', name: '수익 장인', description: '수익도 품질도 놓치지 않는 실전 고수', detailDescription: '숙련자 + 수익형 + 세심 관리 + 선택적 환경', longDescription: '작물 품질과 수익 모두를 추구하는 실전형 숙련자. 환경이 까다롭더라도 치밀한 계획과 정성으로 농사에 임하며, 마치 농업 컨설턴트처럼 텃밭을 운영합니다.' },
-    { code: 'APBV', emoji: '🧃', name: '부지런한 실속러', description: '수익을 위해 꾸준히 정성껏', detailDescription: '숙련자 + 수익형 + 세심 관리 + 다양한 환경', longDescription: '텃밭을 수익 수단으로 활용하지만 관리에도 게으르지 않은 성향. 다양한 환경에서도 잘 적응하며, 실속 있게 운영하는 부지런한 농부 타입입니다.' },
-    { code: 'APCS', emoji: '🔧', name: '효율 추구자', description: '최적의 환경에서 효율 극대화', detailDescription: '숙련자 + 수익형 + 간단 관리 + 선택적 환경', longDescription: '효율적인 환경에서 작물 수익을 극대화하려는 실용 중심형. 시간과 에너지를 아끼며, 작물 선택과 배치, 수확까지 모든 과정에서 계산된 접근을 선호합니다.' },
-    { code: 'APCV', emoji: '📦', name: '전략 농사꾼', description: '생산성과 효율을 최우선으로', detailDescription: '숙련자 + 수익형 + 간단 관리 + 다양한 환경', longDescription: '다양한 환경에서 효율과 생산성을 동시에 추구하는 전략가형. 관리 시간은 최소화하고 수익은 최대화하는 데 집중하며, 스마트팜에 관심 많은 유형입니다.' },
-    { code: 'NHBS', emoji: '🐣', name: '텃밭 입문자', description: '감성으로 시작하는 첫 텃밭', detailDescription: '초보자 + 취미형 + 세심 관리 + 선택적 환경', longDescription: '텃밭을 처음 시작하지만 감성적 만족을 기대하는 초보자. 관리가 어렵더라도 식물 키우기에 대한 열정이 높으며, 실패도 즐거운 배움으로 여깁니다.' },
-    { code: 'NHBV', emoji: '🍀', name: '자연 입문자', description: '감성으로 시작하지만 환경엔 유연', detailDescription: '초보자 + 취미형 + 세심 관리 + 다양한 환경', longDescription: '감성적인 동기로 시작하지만 유연한 환경에서 다양한 작물을 시도해보는 탐험형. 실내외를 넘나드는 초보 가드너입니다.' },
-    { code: 'NHCS', emoji: '📚', name: '감성 입문러', description: '쉽게 시작하는 따뜻한 취미', detailDescription: '초보자 + 취미형 + 간단 관리 + 선택적 환경', longDescription: '부담 없이 시작할 수 있는 소박한 텃밭을 선호하며, 작은 관리로 큰 만족을 얻습니다. 식물을 가족처럼 대하며 정서적 안정감을 추구합니다.' },
-    { code: 'NHCV', emoji: '🧺', name: '힐링 간편러', description: '간단한 돌봄으로도 정서적 만족', detailDescription: '초보자 + 취미형 + 간단 관리 + 다양한 환경', longDescription: '복잡한 관리는 어렵지만 식물과 함께하는 시간 자체를 소중히 여기는 힐링 중심형. 쉽게 기를 수 있는 작물로 감성을 채우는 유형입니다.' },
-    { code: 'NPBS', emoji: '💼', name: '실전 입문자', description: '처음이지만 제대로 키워보고 싶어', detailDescription: '초보자 + 수익형 + 세심 관리 + 선택적 환경', longDescription: '텃밭 초보지만 수익과 작물 품질을 동시에 잡고 싶어 하는 도전형. 학습 의지가 높고 다양한 정보를 습득하여 빠르게 실력을 키우는 성향입니다.' },
-    { code: 'NPBV', emoji: '📈', name: '부지런한 도전자', description: '초보지만 수익을 위해 노력파', detailDescription: '초보자 + 수익형 + 세심 관리 + 다양한 환경', longDescription: '텃밭으로 수익을 내고자 하는 강한 의지가 있는 유형. 환경에 구애받지 않고 시도하며, 실패 속에서도 꾸준히 개선합니다.' },
-    { code: 'NPCS', emoji: '🥕', name: '전략 입문자', description: '쉽게 시작하지만 수익도 고려', detailDescription: '초보자 + 수익형 + 간단 관리 + 선택적 환경', longDescription: '간단하게 시작하되 작물 선택에 전략적 접근을 시도하는 초보 농부. 효율과 가능성을 고려한 실용형 시작자입니다.' },
-    { code: 'NPCV', emoji: '🚀', name: '실속 초보자', description: '최소 노력, 최대 효율을 추구', detailDescription: '초보자 + 수익형 + 간단 관리 + 다양한 환경', longDescription: '부담 없는 텃밭 운영으로도 실속 있는 결과를 기대하는 유형. 시간과 자원이 적더라도 결과를 뽑아내는 실속파입니다.' },
+    { code: 'AHBS', emoji: '🧑‍🌾', name: '감성 장인', description: '정성 가득 감성 텃밭러', detailDescription: '숙련자 + 취미형 + 세심 관리 + 선택적 환경', longDescription: '다양한 경험을 바탕으로 텃밭을 섬세하게 가꾸는 장인. 환경이 다소 까다로워도 이를 감성적으로 극복하며, 수확보다는 가꾸는 즐거움을 우선시합니다. 향기롭고 정갈한 공간을 연출하는 데 능숙합니다.', cropList: ['인삼', '들깨', '아스파라거스', '오미자', '자두', '참나물'] },
+    { code: 'AHBV', emoji: '🎋', name: '따뜻한 장인', description: '손길 가득한 텃밭을 유연하게', detailDescription: '숙련자 + 취미형 + 세심 관리 + 다양한 환경', longDescription: '감성과 숙련도를 바탕으로 유연하게 텃밭을 가꾸는 유형. 환경에 구애받지 않고 언제든지 새로운 식물을 환영하는 따뜻한 성향. 식물과 대화하듯 교감하며 여유로운 힐링을 추구합니다.', cropList: ['고구마', '마', '무화과', '산약', '오디'] },
+    { code: 'AHCS', emoji: '🌱', name: '감성 실용가', description: '여유와 실용의 균형형', detailDescription: '숙련자 + 취미형 + 간단 관리 + 선택적 환경', longDescription: '간단한 관리로 감성을 유지하는 실용형 장인. 감성적 만족도 중요하지만 시간을 효율적으로 사용하며, 작물보다는 텃밭 공간 자체에 더 큰 의미를 두는 경우가 많습니다.', cropList: ['상추', '감자', '매실'] },
+    { code: 'AHCV', emoji: '🌼', name: '감성 실용러', description: '여유롭게, 하지만 간단하게', detailDescription: '숙련자 + 취미형 + 간단 관리 + 다양한 환경', longDescription: '숙련된 감각으로 최소한의 관리로도 감성적 만족을 유지하는 유형. 바쁜 일상 속에서도 힐링을 놓치지 않고 실용성과 감성을 모두 챙기려는 성향입니다.', cropList: ['사과', '근대', '배', '쪽파'] },
+    { code: 'APBS', emoji: '🛠️', name: '수익 장인', description: '수익도 품질도 놓치지 않는 실전 고수', detailDescription: '숙련자 + 수익형 + 세심 관리 + 선택적 환경', longDescription: '작물 품질과 수익 모두를 추구하는 실전형 숙련자. 환경이 까다롭더라도 치밀한 계획과 정성으로 농사에 임하며, 마치 농업 컨설턴트처럼 텃밭을 운영합니다.', cropList: ['오이', '감'] },
+    { code: 'APBV', emoji: '🧃', name: '부지런한 실속러', description: '수익을 위해 꾸준히 정성껏', detailDescription: '숙련자 + 수익형 + 세심 관리 + 다양한 환경', longDescription: '텃밭을 수익 수단으로 활용하지만 관리에도 게으르지 않은 성향. 다양한 환경에서도 잘 적응하며, 실속 있게 운영하는 부지런한 농부 타입입니다.', cropList: ['수박', '참외', '토마토', '방울토마토'] },
+    { code: 'APCS', emoji: '🔧', name: '효율 추구자', description: '최적의 환경에서 효율 극대화', detailDescription: '숙련자 + 수익형 + 간단 관리 + 선택적 환경', longDescription: '효율적인 환경에서 작물 수익을 극대화하려는 실용 중심형. 시간과 에너지를 아끼며, 작물 선택과 배치, 수확까지 모든 과정에서 계산된 접근을 선호합니다.', cropList: ['벼'] },
+    { code: 'APCV', emoji: '📦', name: '전략 농사꾼', description: '생산성과 효율을 최우선으로', detailDescription: '숙련자 + 수익형 + 간단 관리 + 다양한 환경', longDescription: '다양한 환경에서 효율과 생산성을 동시에 추구하는 전략가형. 관리 시간은 최소화하고 수익은 최대화하는 데 집중하며, 스마트팜에 관심 많은 유형입니다.', cropList: ['딸기'] },
+    { code: 'NHBS', emoji: '🐣', name: '텃밭 입문자', description: '감성으로 시작하는 첫 텃밭', detailDescription: '초보자 + 취미형 + 세심 관리 + 선택적 환경', longDescription: '텃밭을 처음 시작하지만 감성적 만족을 기대하는 초보자. 관리가 어렵더라도 식물 키우기에 대한 열정이 높으며, 실패도 즐거운 배움으로 여깁니다.', cropList: ['쑥갓', '연근', '우엉', '도라지', '더덕', '취나물'] },
+    { code: 'NHBV', emoji: '🍀', name: '자연 입문자', description: '감성으로 시작하지만 환경엔 유연', detailDescription: '초보자 + 취미형 + 세심 관리 + 다양한 환경', longDescription: '감성적인 동기로 시작하지만 유연한 환경에서 다양한 작물을 시도해보는 탐험형. 실내외를 넘나드는 초보 가드너입니다.', cropList: ['블루베리'] },
+    { code: 'NHCS', emoji: '📚', name: '감성 입문러', description: '쉽게 시작하는 따뜻한 취미', detailDescription: '초보자 + 취미형 + 간단 관리 + 선택적 환경', longDescription: '부담 없이 시작할 수 있는 소박한 텃밭을 선호하며, 작은 관리로 큰 만족을 얻습니다. 식물을 가족처럼 대하며 정서적 안정감을 추구합니다.', cropList: ['브로콜리'] },
+    { code: 'NHCV', emoji: '🧺', name: '힐링 간편러', description: '간단한 돌봄으로도 정서적 만족', detailDescription: '초보자 + 취미형 + 간단 관리 + 다양한 환경', longDescription: '복잡한 관리는 어렵지만 식물과 함께하는 시간 자체를 소중히 여기는 힐링 중심형. 쉽게 기를 수 있는 작물로 감성을 채우는 유형입니다.', cropList: ['파프리카', '풋고추', '청양고추', '비트'] },
+    { code: 'NPBS', emoji: '💼', name: '실전 입문자', description: '처음이지만 제대로 키워보고 싶어', detailDescription: '초보자 + 수익형 + 세심 관리 + 선택적 환경', longDescription: '텃밭 초보지만 수익과 작물 품질을 동시에 잡고 싶어 하는 도전형. 학습 의지가 높고 다양한 정보를 습득하여 빠르게 실력을 키우는 성향입니다.', cropList: ['마늘', '양파', '얼갈이배추', '청경채', '참다래'] },
+    { code: 'NPBV', emoji: '📈', name: '부지런한 도전자', description: '초보지만 수익을 위해 노력파', detailDescription: '초보자 + 수익형 + 세심 관리 + 다양한 환경', longDescription: '텃밭으로 수익을 내고자 하는 강한 의지가 있는 유형. 환경에 구애받지 않고 시도하며, 실패 속에서도 꾸준히 개선합니다.', cropList: ['체리', '참깨', '수수', '조'] },
+    { code: 'NPCS', emoji: '🥕', name: '전략 입문자', description: '쉽게 시작하지만 수익도 고려', detailDescription: '초보자 + 수익형 + 간단 관리 + 선택적 환경', longDescription: '간단하게 시작하되 작물 선택에 전략적 접근을 시도하는 초보 농부. 효율과 가능성을 고려한 실용형 시작자입니다.', cropList: ['당근', '무', '미나리', '시금치'] },
+    { code: 'NPCV', emoji: '🚀', name: '실속 초보자', description: '최소 노력, 최대 효율을 추구', detailDescription: '초보자 + 수익형 + 간단 관리 + 다양한 환경', longDescription: '부담 없는 텃밭 운영으로도 실속 있는 결과를 기대하는 유형. 시간과 자원이 적더라도 결과를 뽑아내는 실속파입니다.', cropList: ['양배추', '마늘', '양파', '생강'] },
   ];
+
+  const [selectedType, setSelectedType] = useState(null);
+
   return (
-    <div style={{ height: '100vh', background: 'linear-gradient(135deg, #2d5a27 0%, #4a7c59 25%, #6b8e23 50%, #8fbc8f 75%, #98fb98 100%)', paddingTop: 100, overflow: 'auto' }}>
-      <div style={{ padding: '20px', maxHeight: 'calc(100vh - 120px)', overflow: 'auto' }}>
-        <section style={{ display: 'flex', flexWrap: 'wrap', gap: 24, justifyContent: 'center', alignItems: 'flex-start' }}>
-          {types.map((type, i) => (
-            <div key={i} style={{
-              background: 'rgba(255,255,255,0.22)',
-              borderRadius: 24,
-              padding: 28,
-              minWidth: 240,
-              maxWidth: 280,
-              color: '#222',
-              textAlign: 'center',
-              boxShadow: '0 6px 24px rgba(60,180,120,0.18)',
-              marginBottom: 20,
-              backdropFilter: 'blur(10px)',
-              display: 'flex', flexDirection: 'column', alignItems: 'center',
-              transition: 'transform 0.18s',
-              cursor: 'pointer',
-            }}
-            onMouseOver={e => e.currentTarget.style.transform = 'translateY(-4px) scale(1.02)'}
-            onMouseOut={e => e.currentTarget.style.transform = 'none'}
-            >
-              <div style={{ fontSize: '2.8rem', marginBottom: 14 }}>{type.emoji}</div>
-              <div style={{ fontWeight: 800, fontSize: '1.3em', marginBottom: 8, color: '#222', letterSpacing: '-1px' }}>{type.name}</div>
-              <div style={{ fontSize: '1.05em', fontWeight: 400, marginBottom: 8, color: '#32cd32', letterSpacing: '1px' }}>{type.code}</div>
-              <div style={{ fontSize: '0.95em', color: '#444', marginBottom: 10, fontWeight: 500 }}>{type.description}</div>
-              <div style={{ fontSize: '0.9em', color: '#222', marginBottom: 14, minHeight: 36, fontWeight: 600, lineHeight: 1.5 }}>{type.detailDescription}</div>
-              <button style={{ background: 'linear-gradient(90deg,#32cd32,#43ea7f)', color: '#fff', border: 'none', borderRadius: 16, padding: '12px 0', width: '100%', fontWeight: 700, fontSize: '1em', marginTop: 6, transition: 'background 0.2s', boxShadow: '0 2px 8px rgba(44,200,120,0.10)', letterSpacing: '-1px', cursor: 'pointer' }} onMouseOver={e => e.target.style.background = '#228b22'} onMouseOut={e => e.target.style.background = 'linear-gradient(90deg,#32cd32,#43ea7f)'} onClick={() => onResult(type.code)}>해당 결과 보기</button>
-            </div>
-          ))}
-        </section>
+    <div className="types-gallery" style={{ padding: '64px 0 32px 0', minHeight: '100vh', background: 'linear-gradient(135deg, #2d5a27 0%, #4a7c59 25%, #6b8e23 50%, #8fbc8f 75%, #98fb98 100%)' }}>
+      <h1 style={{ color: '#fff', textAlign: 'center', fontWeight: 800, fontSize: '2.2rem', marginBottom: 32 }}>전체 유형 보기</h1>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: 32, maxWidth: 1100, margin: '0 auto' }}>
+        {types.map(type => (
+          <div key={type.code} style={{ background: 'rgba(255,255,255,0.13)', borderRadius: 22, padding: 28, boxShadow: '0 2px 12px rgba(0,0,0,0.08)', display: 'flex', flexDirection: 'column', alignItems: 'center', cursor: 'pointer', transition: 'box-shadow 0.2s', position: 'relative' }}
+            onClick={() => setSelectedType(type)}>
+            <div style={{ fontSize: 44, marginBottom: 10 }}>{type.emoji}</div>
+            <div style={{
+              fontSize: '1.5rem',
+              fontWeight: 900,
+              color: '#32cd32',
+              background: '#fff', // 흰색 배경
+              borderRadius: 12,
+              padding: '8px 22px',
+              marginBottom: 10,
+              letterSpacing: 2,
+              boxShadow: '0 1px 4px rgba(44,200,120,0.10)',
+              border: '2px solid #32cd32',
+              textShadow: '0 2px 8px rgba(44,200,120,0.10)',
+              display: 'inline-block',
+            }}>{type.code}</div>
+            <div style={{ fontWeight: 700, color: '#fff', fontSize: '1.15rem', marginBottom: 6, textAlign: 'center' }}>{type.name}</div>
+            <div style={{ color: '#fff', fontSize: '1rem', opacity: 0.93, textAlign: 'center', marginBottom: 8 }}>{type.description}</div>
+            <div style={{ color: '#fff', fontSize: '0.98rem', opacity: 0.85, textAlign: 'center', marginBottom: 0 }}>{type.detailDescription}</div>
+            <button style={{ background: 'linear-gradient(90deg,#32cd32,#43ea7f)', color: '#fff', border: 'none', borderRadius: 16, padding: '12px 0', width: '100%', fontWeight: 700, fontSize: '1em', marginTop: 16, transition: 'background 0.2s', boxShadow: '0 2px 8px rgba(44,200,120,0.10)', letterSpacing: '-1px', cursor: 'pointer' }} onMouseOver={e => e.target.style.background = '#228b22'} onMouseOut={e => e.target.style.background = 'linear-gradient(90deg,#32cd32,#43ea7f)'} onClick={e => { e.stopPropagation(); onResult(type.code); }}>해당 결과 보기</button>
+          </div>
+        ))}
       </div>
+      {/* 유형 카드 클릭 시 상세 모달/박스 */}
+      {selectedType && (
+        <div style={{ position: 'fixed', top: 0, left: 0, width: '100vw', height: '100vh', background: 'rgba(0,0,0,0.45)', zIndex: 9999, display: 'flex', alignItems: 'center', justifyContent: 'center' }} onClick={() => setSelectedType(null)}>
+          <div style={{ background: '#fff', borderRadius: 24, padding: 40, minWidth: 340, maxWidth: 480, boxShadow: '0 8px 32px rgba(0,0,0,0.18)', position: 'relative' }} onClick={e => e.stopPropagation()}>
+            <button onClick={() => setSelectedType(null)} style={{ position: 'absolute', top: 18, right: 18, background: 'none', border: 'none', fontSize: 22, color: '#222', cursor: 'pointer', fontWeight: 700 }}>×</button>
+            <div style={{ fontSize: 44, marginBottom: 10, textAlign: 'center' }}>{selectedType.emoji}</div>
+            <div style={{ fontSize: '1.7rem', fontWeight: 900, color: '#32cd32', background: '#fff', borderRadius: 12, padding: '8px 22px', marginBottom: 10, letterSpacing: 2, border: '2px solid #32cd32', textAlign: 'center', display: 'inline-block' }}>{selectedType.code}</div>
+            <div style={{ fontWeight: 700, color: '#222', fontSize: '1.25rem', marginBottom: 6, textAlign: 'center' }}>{selectedType.name}</div>
+            <div style={{ color: '#444', fontSize: '1.05rem', opacity: 0.93, textAlign: 'center', marginBottom: 8 }}>{selectedType.description}</div>
+            <div style={{ color: '#444', fontSize: '0.98rem', opacity: 0.85, textAlign: 'center', marginBottom: 18 }}>{selectedType.detailDescription}</div>
+            <div style={{ color: '#222', fontSize: '1.08rem', fontWeight: 600, marginBottom: 18, textAlign: 'center' }}>{selectedType.longDescription}</div>
+            {/* 추천 작물 이미지 및 구매링크 */}
+            <div style={{ marginTop: 18, marginBottom: 0 }}>
+              <h4 style={{ color: '#228b22', fontWeight: 800, fontSize: '1.1em', marginBottom: 12, textAlign: 'center' }}>추천 작물</h4>
+              <div style={{ display: 'flex', flexWrap: 'wrap', gap: 18, justifyContent: 'center' }}>
+                {(selectedType.cropList || []).map((crop, idx) => {
+                  // cropImageMap에서 이미지 파일명 가져오기
+                  const imageFileName = cropImageMap[crop] || `${encodeURIComponent(crop)}.jpg`;
+                  
+                  return (
+                    <div key={idx} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', minWidth: 90, maxWidth: 120 }}>
+                      <img 
+                        src={`${process.env.PUBLIC_URL}/images/photo/${imageFileName}`} 
+                        alt={crop} 
+                        style={{ width: 60, height: 60, objectFit: 'cover', borderRadius: 8, marginBottom: 6, background: '#eee' }} 
+                        onError={(e) => {
+                          const currentSrc = e.target.src;
+                          if (currentSrc.includes('.jpg')) {
+                            e.target.src = currentSrc.replace('.jpg', '.webp');
+                          } else if (currentSrc.includes('.webp')) {
+                            e.target.src = currentSrc.replace('.webp', '.jpeg');
+                          } else if (currentSrc.includes('.jpeg')) {
+                            e.target.style.display = 'none';
+                          } else {
+                            e.target.style.display = 'none';
+                          }
+                        }}
+                      />
+                      <div style={{ fontWeight: 700, color: '#228b22', fontSize: '1em', marginBottom: 2 }}>{crop}</div>
+                      <a href={`https://search.shopping.naver.com/search/all?query=${encodeURIComponent(crop + ' 씨앗 모종')}`} target="_blank" rel="noopener noreferrer" style={{ color: '#fff', background: '#32cd32', borderRadius: 8, padding: '4px 10px', fontWeight: 600, fontSize: '0.92em', marginTop: 4, textDecoration: 'none', display: 'inline-block' }}>씨앗 및 모종 구매</a>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
@@ -246,11 +378,7 @@ function CropsGallery() {
     { name: '산약', en: 'Wild Yam', desc: '산에서 자라는 마.' },
     { name: '오디', en: 'Mulberry', desc: '달콤한 열매.' },
     { name: '벼', en: 'Rice', desc: '주식이 되는 곡물.' },
-    { name: '블루베리', en: 'Blueberry', desc: '항산화가 풍부한 과일.' },
-    { name: '배추', en: 'Napa Cabbage', desc: '김치의 주재료.' },
-    { name: '부추', en: 'Chive', desc: '향긋한 향과 영양.' },
-    { name: '케일', en: 'Kale', desc: '슈퍼푸드로 인기.' },
-    { name: '유채', en: 'Rapeseed', desc: '노란 꽃이 아름다운 채소.' },
+    { name: '딸기', en: 'Strawberry', desc: '봄철 인기 과일.' },
     { name: '쑥갓', en: 'Crown Daisy', desc: '국거리, 쌈채로 인기.' },
     { name: '연근', en: 'Lotus Root', desc: '아삭한 식감의 뿌리채소.' },
     { name: '우엉', en: 'Burdock', desc: '영양이 풍부한 뿌리채소.' },
@@ -286,38 +414,72 @@ function CropsGallery() {
     <div style={{ height: '100vh', background: 'linear-gradient(135deg, #2d5a27 0%, #4a7c59 25%, #6b8e23 50%, #8fbc8f 75%, #98fb98 100%)', paddingTop: 100, overflow: 'auto' }}>
       <div style={{ padding: '20px', maxHeight: 'calc(100vh - 120px)', overflow: 'auto' }}>
         <section style={{ display: 'flex', flexWrap: 'wrap', gap: 24, justifyContent: 'center', alignItems: 'flex-start' }}>
-          {crops.map((crop, i) => (
-            <div key={i} style={{
-              background: 'rgba(255,255,255,0.22)',
-              borderRadius: 24,
-              padding: 28,
-              minWidth: 240,
-              maxWidth: 280,
-              color: '#222',
-              textAlign: 'center',
-              boxShadow: '0 6px 24px rgba(60,180,120,0.18)',
-              marginBottom: 20,
-              backdropFilter: 'blur(10px)',
-              display: 'flex', flexDirection: 'column', alignItems: 'center',
-              transition: 'transform 0.18s',
-              cursor: 'pointer',
-            }}
-            onMouseOver={e => e.currentTarget.style.transform = 'translateY(-4px) scale(1.02)'}
-            onMouseOut={e => e.currentTarget.style.transform = 'none'}
-            >
-              <img src={`${process.env.PUBLIC_URL}/images/photo/${crop.en.replace(/ /g, '%20')}${crop.en === 'coli' ? '.jpeg' : '.jpg'}`} alt={crop.name} style={{ width: 120, height: 120, objectFit: 'cover', borderRadius: 20, marginBottom: 14, background: '#eee', boxShadow: '0 2px 12px rgba(44,200,120,0.10)' }} onError={e => { 
-                if (e.target.src.includes('.jpg')) { 
-                  e.target.src = e.target.src.replace('.jpg', '.webp'); 
-                } else if (e.target.src.includes('.jpeg')) {
-                  e.target.src = e.target.src.replace('.jpeg', '.webp');
-                } else { 
-                  e.target.style.display = 'none'; 
-                }
-              }}/>
-              <div style={{ fontWeight: 700, marginBottom: 6, fontSize: '1.1em' }}>{crop.name}</div>
-              <div style={{ fontSize: '0.9em', fontWeight: 400, marginBottom: 8, lineHeight: '1.3', color: '#444' }}>{crop.desc}</div>
-            </div>
-          ))}
+          {crops.map((crop, i) => {
+            // cropImageMap에서 이미지 파일명 가져오기
+            const imageFileName = cropImageMap[crop.name] || `${crop.en.replace(/ /g, '%20')}.jpg`;
+            
+            return (
+              <div key={i} style={{
+                background: 'rgba(255,255,255,0.22)',
+                borderRadius: 24,
+                padding: 28,
+                minWidth: 240,
+                maxWidth: 280,
+                color: '#222',
+                textAlign: 'center',
+                boxShadow: '0 6px 24px rgba(60,180,120,0.18)',
+                marginBottom: 20,
+                backdropFilter: 'blur(10px)',
+                display: 'flex', flexDirection: 'column', alignItems: 'center',
+                transition: 'transform 0.18s',
+                cursor: 'pointer',
+              }}
+              onMouseOver={e => e.currentTarget.style.transform = 'translateY(-4px) scale(1.02)'}
+              onMouseOut={e => e.currentTarget.style.transform = 'none'}
+              >
+                <img 
+                  src={`${process.env.PUBLIC_URL}/images/photo/${imageFileName}`} 
+                  alt={crop.name} 
+                  style={{ width: 120, height: 120, objectFit: 'cover', borderRadius: 20, marginBottom: 14, background: '#eee', boxShadow: '0 2px 12px rgba(44,200,120,0.10)' }} 
+                  onError={(e) => {
+                    const currentSrc = e.target.src;
+                    if (currentSrc.includes('.jpg')) {
+                      e.target.src = currentSrc.replace('.jpg', '.webp');
+                    } else if (currentSrc.includes('.webp')) {
+                      e.target.src = currentSrc.replace('.webp', '.jpeg');
+                    } else if (currentSrc.includes('.jpeg')) {
+                      e.target.style.display = 'none';
+                    } else {
+                      e.target.style.display = 'none';
+                    }
+                  }}
+                />
+                <div style={{ fontWeight: 700, marginBottom: 6, fontSize: '1.1em' }}>{crop.name}</div>
+                <div style={{ fontSize: '0.9em', fontWeight: 400, marginBottom: 12, lineHeight: '1.3', color: '#444' }}>{crop.desc}</div>
+                <a 
+                  href={`https://search.shopping.naver.com/search/all?query=${encodeURIComponent(crop.name + ' 씨앗 모종')}`} 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  style={{ 
+                    color: '#fff', 
+                    background: 'linear-gradient(90deg,#32cd32,#43ea7f)', 
+                    borderRadius: 12, 
+                    padding: '8px 16px', 
+                    fontWeight: 600, 
+                    fontSize: '0.9em', 
+                    textDecoration: 'none', 
+                    display: 'inline-block',
+                    transition: 'background 0.2s',
+                    boxShadow: '0 2px 8px rgba(44,200,120,0.15)'
+                  }}
+                  onMouseOver={e => e.target.style.background = '#228b22'}
+                  onMouseOut={e => e.target.style.background = 'linear-gradient(90deg,#32cd32,#43ea7f)'}
+                >
+                  씨앗 및 모종 구매
+                </a>
+              </div>
+            );
+          })}
         </section>
       </div>
     </div>
@@ -527,7 +689,7 @@ function App() {
                 <li>✔ 계절별 작물 가이드</li>
                 <li>✔ 실시간 재배 팁 제공</li>
               </ul>
-              <button style={{background:'linear-gradient(90deg,#32cd32,#43ea7f)', color:'#fff', border:'none', borderRadius:14, padding:'10px 0', width:'100%', fontWeight:700, fontSize:'0.95em', marginTop:4, transition:'background 0.2s', boxShadow:'0 2px 6px rgba(44,200,120,0.10)', letterSpacing:'-0.5px', cursor:'pointer'}} onMouseOver={e => e.target.style.background = '#228b22'} onMouseOut={e => e.target.style.background = 'linear-gradient(90deg,#32cd32,#43ea7f)'}>👉 지금 이용하기</button>
+              <button style={{background:'linear-gradient(90deg,#32cd32,#43ea7f)', color:'#fff', border:'none', borderRadius:14, padding:'10px 0', width:'100%', fontWeight:700, fontSize:'0.95em', marginTop:4, transition:'background 0.2s', boxShadow:'0 2px 6px rgba(44,200,120,0.10)', letterSpacing:'-0.5px', cursor:'pointer'}} onMouseOver={e => e.target.style.background = '#228b22'} onMouseOut={e => e.target.style.background = 'linear-gradient(90deg,#32cd32,#43ea7f)'} onClick={() => window.open(`${process.env.PUBLIC_URL}/images/loading.jpeg`, '_blank', 'width=400,height=400')}>👉 지금 이용하기</button>
             </div>
             {/* 비료 추천 서비스 */}
             <div style={{background:'#f6fbf6', borderRadius:18, boxShadow:'0 4px 20px rgba(60,180,120,0.10)', padding:'28px 20px 24px 20px', minWidth:200, maxWidth:280, flex:'1 1 250px', display:'flex', flexDirection:'column', alignItems:'center', justifyContent:'space-between'}}>
@@ -541,7 +703,7 @@ function App() {
                 <li>✔ 작물 맞춤 비료 가이드</li>
                 <li>✔ 시기별 시비 플랜 제공</li>
               </ul>
-              <button style={{background:'linear-gradient(90deg,#32cd32,#43ea7f)', color:'#fff', border:'none', borderRadius:14, padding:'10px 0', width:'100%', fontWeight:700, fontSize:'0.95em', marginTop:4, transition:'background 0.2s', boxShadow:'0 2px 6px rgba(44,200,120,0.10)', letterSpacing:'-0.5px', cursor:'pointer'}} onMouseOver={e => e.target.style.background = '#228b22'} onMouseOut={e => e.target.style.background = 'linear-gradient(90deg,#32cd32,#43ea7f)'}>👉 비료 추천 받기</button>
+              <button style={{background:'linear-gradient(90deg,#32cd32,#43ea7f)', color:'#fff', border:'none', borderRadius:14, padding:'10px 0', width:'100%', fontWeight:700, fontSize:'0.95em', marginTop:4, transition:'background 0.2s', boxShadow:'0 2px 6px rgba(44,200,120,0.10)', letterSpacing:'-0.5px', cursor:'pointer'}} onMouseOver={e => e.target.style.background = '#228b22'} onMouseOut={e => e.target.style.background = 'linear-gradient(90deg,#32cd32,#43ea7f)'} onClick={() => window.open(`${process.env.PUBLIC_URL}/images/loading.jpeg`, '_blank', 'width=400,height=400')}>👉 비료 추천 받기</button>
             </div>
             {/* 농약 추천 서비스 */}
             <div style={{background:'#f6fbf6', borderRadius:18, boxShadow:'0 4px 20px rgba(60,180,120,0.10)', padding:'28px 20px 24px 20px', minWidth:200, maxWidth:280, flex:'1 1 250px', display:'flex', flexDirection:'column', alignItems:'center', justifyContent:'space-between'}}>
@@ -555,7 +717,7 @@ function App() {
                 <li>✔ 안전한 사용법 안내</li>
                 <li>✔ 효과적인 방제 스케줄 제공</li>
               </ul>
-              <button style={{background:'linear-gradient(90deg,#32cd32,#43ea7f)', color:'#fff', border:'none', borderRadius:14, padding:'10px 0', width:'100%', fontWeight:700, fontSize:'0.95em', marginTop:4, transition:'background 0.2s', boxShadow:'0 2px 6px rgba(44,200,120,0.10)', letterSpacing:'-0.5px', cursor:'pointer'}} onMouseOver={e => e.target.style.background = '#228b22'} onMouseOut={e => e.target.style.background = 'linear-gradient(90deg,#32cd32,#43ea7f)'}>👉 농약 정보 확인하기</button>
+              <button style={{background:'linear-gradient(90deg,#32cd32,#43ea7f)', color:'#fff', border:'none', borderRadius:14, padding:'10px 0', width:'100%', fontWeight:700, fontSize:'0.95em', marginTop:4, transition:'background 0.2s', boxShadow:'0 2px 6px rgba(44,200,120,0.10)', letterSpacing:'-0.5px', cursor:'pointer'}} onMouseOver={e => e.target.style.background = '#228b22'} onMouseOut={e => e.target.style.background = 'linear-gradient(90deg,#32cd32,#43ea7f)'} onClick={() => window.open(`${process.env.PUBLIC_URL}/images/loading.jpeg`, '_blank', 'width=400,height=400')}>👉 농약 정보 확인하기</button>
             </div>
           </div>
           {/* 팝업 */}
