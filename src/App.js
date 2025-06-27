@@ -190,7 +190,7 @@ function App() {
               <li>✔ 계절별 작물 가이드</li>
               <li>✔ 실시간 재배 팁 제공</li>
             </ul>
-            <button style={{background:'#2ecc71', color:'#fff', border:'none', borderRadius:8, padding:'12px 0', width:'100%', fontWeight:600, fontSize:'1.07em', marginTop:8, cursor:'pointer'}} onClick={()=>setShowPopup('seeds')}>👉 지금 이용하기</button>
+            <button style={{background:'#2ecc71', color:'#fff', border:'none', borderRadius:8, padding:'12px 0', width:'100%', fontWeight:600, fontSize:'1.07em', marginTop:8, cursor:'pointer'}} onClick={()=>window.open(`${process.env.PUBLIC_URL}/images/loading.jpeg`, '_blank', 'width=400,height=400')}>👉 지금 이용하기</button>
           </div>
           {/* 비료 추천 서비스 */}
           <div style={{background:'#e6f4ea', borderRadius:18, boxShadow:'0 2px 12px rgba(0,0,0,0.06)', padding:'36px 28px 32px 28px', minWidth:320, maxWidth:360, flex:'1 1 320px', position:'relative', marginBottom:24}}>
@@ -202,7 +202,7 @@ function App() {
               <li>✔ 작물 맞춤 비료 가이드</li>
               <li>✔ 시기별 시비 플랜 제공</li>
             </ul>
-            <button style={{background:'#2ecc71', color:'#fff', border:'none', borderRadius:8, padding:'12px 0', width:'100%', fontWeight:600, fontSize:'1.07em', marginTop:8, cursor:'pointer'}} onClick={()=>setShowPopup('fertilizer')}>👉 비료 추천 받기</button>
+            <button style={{background:'#2ecc71', color:'#fff', border:'none', borderRadius:8, padding:'12px 0', width:'100%', fontWeight:600, fontSize:'1.07em', marginTop:8, cursor:'pointer'}} onClick={()=>window.open(`${process.env.PUBLIC_URL}/images/loading.jpeg`, '_blank', 'width=400,height=400')}>👉 비료 추천 받기</button>
           </div>
           {/* 농약 추천 서비스 */}
           <div style={{background:'#e6f4ea', borderRadius:18, boxShadow:'0 2px 12px rgba(0,0,0,0.06)', padding:'36px 28px 32px 28px', minWidth:320, maxWidth:360, flex:'1 1 320px', position:'relative', marginBottom:24}}>
@@ -214,24 +214,12 @@ function App() {
               <li>✔ 안전한 사용법 안내</li>
               <li>✔ 효과적인 방제 스케줄 제공</li>
             </ul>
-            <button style={{background:'#2ecc71', color:'#fff', border:'none', borderRadius:8, padding:'12px 0', width:'100%', fontWeight:600, fontSize:'1.07em', marginTop:8, cursor:'pointer'}} onClick={()=>setShowPopup('pesticide')}>👉 농약 정보 확인하기</button>
+            <button style={{background:'#2ecc71', color:'#fff', border:'none', borderRadius:8, padding:'12px 0', width:'100%', fontWeight:600, fontSize:'1.07em', marginTop:8, cursor:'pointer'}} onClick={()=>window.open(`${process.env.PUBLIC_URL}/images/loading.jpeg`, '_blank', 'width=400,height=400')}>👉 농약 정보 확인하기</button>
           </div>
         </div>
         {/* 팝업 */}
         {showPopup && (
-          <div style={{position:'fixed', top:0, left:0, right:0, bottom:0, background:'rgba(0,0,0,0.7)', display:'flex', alignItems:'center', justifyContent:'center', zIndex:1000}} onClick={()=>setShowPopup(false)}>
-            <div style={{background:'#fff', borderRadius:20, padding:30, maxWidth:400, width:'90%', textAlign:'center', position:'relative', boxShadow:'0 20px 60px rgba(0,0,0,0.3)'}} onClick={e=>e.stopPropagation()}>
-              <button style={{position:'absolute', top:15, right:20, background:'none', border:'none', fontSize:'2rem', color:'#999', cursor:'pointer'}} onClick={()=>setShowPopup(false)}>×</button>
-              <div style={{marginBottom:20}}>
-                <img src={process.env.PUBLIC_URL + '/images/loading.jpeg'} alt="서비스 준비 중" style={{width:'100%', maxWidth:300, borderRadius:10, boxShadow:'0 4px 15px rgba(0,0,0,0.1)'}} />
-              </div>
-              <div>
-                <h3 style={{color:'#2d5a27', fontSize:'1.3rem', marginBottom:10, fontWeight:600}}>서비스 준비 중입니다</h3>
-                <p style={{color:'#666', marginBottom:8, lineHeight:1.5}}>더 나은 서비스를 위해 열심히 준비하고 있습니다.</p>
-                <p style={{color:'#666', marginBottom:8, lineHeight:1.5}}>곧 만나뵙겠습니다! 🌱</p>
-              </div>
-            </div>
-          </div>
+          <></>
         )}
       </section>
       {/* 페이지 하단 주석 */}
