@@ -88,7 +88,6 @@ const cropInfo = {
   '사과': { en: 'Apple', desc: '대표적인 과일.' },
   '매실': { en: 'Japanese Apricot', desc: '청매실청의 재료.' },
   '배': { en: 'Pear', desc: '아삭한 과일.' },
-  '마늘': { en: 'Garlic', desc: '향신료로 인기.' },
   '블루베리': { en: 'Blueberry', desc: '항산화가 풍부한 과일.' },
   '인삼': { en: 'ginseng', desc: '건강에 좋은 뿌리.' },
   '수박': { en: 'Watermelon', desc: '여름 대표 과일.' },
@@ -99,169 +98,126 @@ const cropInfo = {
   '자두': { en: 'Plum', desc: '새콤달콤한 과일.' },
   '딸기': { en: 'Strawberry', desc: '봄철 인기 과일.' },
   '무화과': { en: 'Fig', desc: '달콤한 과일.' },
+  '참다래': { en: 'Cherry', desc: '비타민이 풍부한 과일.' },
+  '호박': { en: 'Sweet Potato', desc: '가을 대표 채소.' },
+  '브로콜리': { en: 'coli', desc: '비타민이 풍부한 녹색 채소.' },
 };
 
-// 8가지 유형 데이터 (ResultSlider.js와 동일하게 배열로 선언)
-const types = [
-  {
-    code: 'NHB',
-    name: '힐링형 감성 초보자',
-    description: '초보자 + 감성 위주 + 시간 많음',
-    emoji: '🥬',
-    detailDescription: '자연 속에서 여유롭게 감성과 힐링을 추구하는 유형입니다. 관리에 시간을 들이는 것을 부담스럽지 않게 여기며, 작물을 돌보는 과정에서 안정감과 정서적 만족을 얻습니다.',
-    mainCrop: '무',
-    cropList: ['당근', '무', '미나리', '시금치', '쑥갓', '양배추', '연근', '우엉', '고구마', '감', '청경채', '근대', '유채', '수수', '조', '비트', '참나물', '취나물', '쪽파'],
-    adaptabilityScore: 35, hobbyScore: 82, busyScore: 85
-  },
-  {
-    code: 'NHC',
-    name: '감성형 간편 입문자',
-    description: '초보자 + 감성 위주 + 시간 없음',
-    emoji: '🍆',
-    detailDescription: '작물 재배에 로망이 있지만, 현실적인 시간 여유가 부족한 유형입니다. 간단하게 키울 수 있는 예쁜 작물이나 힐링 감성 중심의 재배를 선호하며, 짧은 시간 안에 즐거움을 얻을 수 있는 구조를 좋아합니다.',
-    mainCrop: '가지',
-    cropList: ['가지', '부추', '풋고추', '청양고추', '케일'],
-    adaptabilityScore: 32, hobbyScore: 76, busyScore: 30
-  },
-  {
-    code: 'NPB',
-    name: '실속형 초보 농부',
-    description: '초보자 + 수익 위주 + 시간 많음',
-    emoji: '🌾',
-    detailDescription: '수익성과 효율성도 중요하지만, 작물 관리에는 어느 정도 시간을 투자할 준비가 되어 있는 유형입니다. 현실적 판단력을 바탕으로 안정적이고 실용적인 재배 방식을 따르며, 장기적으로 텃밭을 확장해보고 싶어합니다.',
-    mainCrop: '부추',
-    cropList: ['도라지', '더덕', '들깨', '참깨', '마', '산약', '생강', '오디', '오미자'],
-    adaptabilityScore: 38, hobbyScore: 24, busyScore: 80
-  },
-  {
-    code: 'NPC',
-    name: '도전형 초보 경작자',
-    description: '초보자 + 수익 위주 + 시간 없음',
-    emoji: '🍓',
-    detailDescription: '텃밭을 수익의 출발점으로 바라보며, 간편하게 관리 가능한 수익 작물 위주로 키우려는 경향이 있습니다. 재배 경험은 부족하지만, ROI(수익률)에 대한 관심은 높으며, 기술적 솔루션이나 자동화를 선호합니다.',
-    mainCrop: '딸기',
-    cropList: ['메론', '파프리카', '체리', '아스파라거스'],
-    adaptabilityScore: 34, hobbyScore: 20, busyScore: 25
-  },
-  {
-    code: 'AHB',
-    name: '세심한 감성 마스터',
-    description: '숙련자 + 감성 위주 + 시간 많음',
-    emoji: '🌾',
-    detailDescription: '풍부한 경험을 바탕으로 작물을 세심하게 돌보며, 감성과 미학을 텃밭에 반영하는 유형입니다. 힐링은 물론, 작물과의 교감 그 자체를 중요하게 생각하고, 매일의 변화를 관찰하는 것을 즐깁니다.',
-    mainCrop: '벼',
-    cropList: ['배추', '상추', '감자', '복숭아', '사과', '매실', '배'],
-    adaptabilityScore: 96, hobbyScore: 85, busyScore: 90
-  },
-  {
-    code: 'AHC',
-    name: '감성형 도시 마스터',
-    description: '숙련자 + 감성 위주 + 시간 없음',
-    emoji: '🍃',
-    detailDescription: '감성을 중요시하지만, 바쁜 일상 속에서 최소한의 시간으로 작물을 즐기는 고수 유형입니다. 작은 공간에서도 감성적 성취를 추구하며, 자동화나 스마트팜 기술을 효과적으로 활용할 줄 압니다.',
-    mainCrop: '매실',
-    cropList: ['마늘', '블루베리', '인삼'],
-    adaptabilityScore: 92, hobbyScore: 78, busyScore: 25
-  },
-  {
-    code: 'APB',
-    name: '실속형 수익 마스터',
-    description: '숙련자 + 수익 위주 + 시간 많음',
-    emoji: '🌿',
-    detailDescription: '수익을 내기 위한 철저한 계획과 노하우를 갖춘 유형입니다. 고수익 작물 중심으로 재배하면서도, 품질과 생산성을 모두 고려하며, 작물에 대한 이해도와 관리 능력이 뛰어납니다.',
-    mainCrop: '아스파라거스',
-    cropList: ['수박', '오이', '참외', '토마토', '방울토마토', '자두'],
-    adaptabilityScore: 94, hobbyScore: 22, busyScore: 88
-  },
-  {
-    code: 'APC',
-    name: '전략형 수익 실천가',
-    description: '숙련자 + 수익 위주 + 시간 없음',
-    emoji: '🍓',
-    detailDescription: '시간은 부족하지만, 목표는 확실한 유형입니다. 빠르게 성장하는 작물, 시장성 있는 품목을 선호하며, 철저한 관리보다는 효율적 수익 창출에 집중합니다. 자동화, 위탁 재배 등 전략적 운영에 강점을 가집니다.',
-    mainCrop: '딸기',
-    cropList: ['딸기', '무화과'],
-    adaptabilityScore: 90, hobbyScore: 18, busyScore: 28
-  }
+// 16가지 유형 데이터
+export const types = [
+  { code: 'AHBS', emoji: '🧑‍🌾', name: '감성 장인', description: '정성 가득 감성 텃밭러', detailDescription: '숙련자 + 취미형 + 세심 관리 + 선택적 환경' },
+  { code: 'AHBV', emoji: '🎋', name: '따뜻한 장인', description: '손길 가득한 텃밭을 유연하게', detailDescription: '숙련자 + 취미형 + 세심 관리 + 다양한 환경' },
+  { code: 'AHCV', emoji: '🌼', name: '감성 실용러', description: '여유롭게, 하지만 간단하게', detailDescription: '숙련자 + 취미형 + 간단 관리 + 다양한 환경' },
+  { code: 'AHPV', emoji: '🪴', name: '여유 농부', description: '힐링도 수확도 모두 챙기는 균형형', detailDescription: '숙련자 + 취미형 + 간단 관리 + 다양한 환경' },
+  { code: 'APBS', emoji: '🛠️', name: '수익 장인', description: '수익도 품질도 놓치지 않는 실전 고수', detailDescription: '숙련자 + 수익형 + 세심 관리 + 선택적 환경' },
+  { code: 'APBV', emoji: '🧃', name: '부지런한 실속러', description: '수익을 위해 꾸준히 정성껏', detailDescription: '숙련자 + 수익형 + 세심 관리 + 다양한 환경' },
+  { code: 'APCS', emoji: '🔧', name: '효율 추구자', description: '최적의 환경에서 효율 극대화', detailDescription: '숙련자 + 수익형 + 간단 관리 + 선택적 환경' },
+  { code: 'APCV', emoji: '📦', name: '전략 농사꾼', description: '생산성과 효율을 최우선으로', detailDescription: '숙련자 + 수익형 + 간단 관리 + 다양한 환경' },
+  { code: 'NHBS', emoji: '🐣', name: '텃밭 입문자', description: '감성으로 시작하는 첫 텃밭', detailDescription: '초보자 + 취미형 + 세심 관리 + 선택적 환경' },
+  { code: 'NHBV', emoji: '🍀', name: '자연 입문자', description: '감성으로 시작하지만 환경엔 유연', detailDescription: '초보자 + 취미형 + 세심 관리 + 다양한 환경' },
+  { code: 'NHCS', emoji: '📚', name: '감성 입문러', description: '쉽게 시작하는 따뜻한 취미', detailDescription: '초보자 + 취미형 + 간단 관리 + 선택적 환경' },
+  { code: 'NHCV', emoji: '🧺', name: '힐링 간편러', description: '간단한 돌봄으로도 정서적 만족', detailDescription: '초보자 + 취미형 + 간단 관리 + 다양한 환경' },
+  { code: 'NPBS', emoji: '💼', name: '실전 입문자', description: '처음이지만 제대로 키워보고 싶어', detailDescription: '초보자 + 수익형 + 세심 관리 + 선택적 환경' },
+  { code: 'NPBV', emoji: '📈', name: '부지런한 도전자', description: '초보지만 수익을 위해 노력파', detailDescription: '초보자 + 수익형 + 세심 관리 + 다양한 환경' },
+  { code: 'NPCS', emoji: '🥕', name: '전략 입문자', description: '쉽게 시작하지만 수익도 고려', detailDescription: '초보자 + 수익형 + 간단 관리 + 선택적 환경' },
+  { code: 'NPCV', emoji: '🚀', name: '실속 초보자', description: '최소 노력, 최대 효율을 추구', detailDescription: '초보자 + 수익형 + 간단 관리 + 다양한 환경' },
 ];
 
 // 코드별 추천 작물 데이터 (이름, 영문명, 설명)
-const cropDataByCode = {
-  NHB: [
-    { name: '무', en: 'Radish', desc: '건강하게 잘 자라는 뿌리채소입니다.' },
-    { name: '당근', en: 'Carrot', desc: '비타민이 풍부한 대표 뿌리채소.' },
-    { name: '미나리', en: 'Water Parsley', desc: '향긋한 향과 아삭한 식감의 채소.' },
-    { name: '시금치', en: 'Spinach', desc: '철분이 풍부한 잎채소.' },
-    { name: '쑥갓', en: 'Crown Daisy', desc: '국거리, 쌈채로 인기.' },
-    { name: '양배추', en: 'Cabbage', desc: '다양한 요리에 활용되는 채소.' },
-    { name: '연근', en: 'Lotus Root', desc: '아삭한 식감의 뿌리채소.' },
-    { name: '우엉', en: 'Burdock', desc: '영양이 풍부한 뿌리채소.' },
-    { name: '고구마', en: 'Sweet Potato', desc: '달콤한 맛의 대표 작물.' },
-    { name: '감', en: 'Persimmon', desc: '가을을 대표하는 과일.' },
-    { name: '청경채', en: 'Bok Choy', desc: '부드러운 식감의 잎채소.' },
-    { name: '근대', en: 'Swiss Chard', desc: '컬러풀한 잎채소.' },
-    { name: '유채', en: 'Rapeseed', desc: '노란 꽃이 아름다운 채소.' },
-    { name: '수수', en: 'Sorghum', desc: '곡물로도 쓰이는 작물.' },
-    { name: '조', en: 'Millet', desc: '영양이 풍부한 곡물.' },
-    { name: '비트', en: 'Beet', desc: '붉은 색이 특징인 뿌리채소.' },
-    { name: '참나물', en: 'Chive', desc: '향긋한 나물.' },
-    { name: '취나물', en: 'Chive', desc: '봄철 산나물.' },
-    { name: '쪽파', en: 'Scallion', desc: '다양한 요리에 활용.' },
-  ],
-  NHC: [
-    { name: '가지', en: 'Eggplant', desc: '보라색이 매력적인 채소.' },
-    { name: '부추', en: 'Chive', desc: '향긋한 향과 영양.' },
-    { name: '풋고추', en: 'Green Chili Pepper', desc: '매콤한 맛의 고추.' },
-    { name: '청양고추', en: 'Cheongyang Chili Pepper', desc: '매운맛의 대표 고추.' },
-    { name: '케일', en: 'Kale', desc: '슈퍼푸드로 인기.' },
-  ],
-  NPB: [
-    { name: '부추', en: 'Chive', desc: '향긋한 향과 영양.' },
-    { name: '도라지', en: 'bellflower', desc: '기관지에 좋은 뿌리채소.' },
-    { name: '더덕', en: 'Deodeok', desc: '향이 좋은 산채.' },
+export const cropDataByCode = {
+  AHBS: [
+    { name: '인삼', en: 'ginseng', desc: '건강에 좋은 뿌리.' },
     { name: '들깨', en: 'Perilla', desc: '고소한 맛의 잎채소.' },
-    { name: '참깨', en: 'Sesame', desc: '고소한 맛의 씨앗.' },
-    { name: '마', en: 'Yam', desc: '건강식으로 인기.' },
-    { name: '산약', en: 'Wild Yam', desc: '산에서 자라는 마.' },
-    { name: '생강', en: 'Ginger', desc: '매운맛과 향이 특징.' },
-    { name: '오디', en: 'Mulberry', desc: '달콤한 열매.' },
-    { name: '오미자', en: 'Schisandra', desc: '다섯 가지 맛의 열매.' },
-  ],
-  NPC: [
-    { name: '딸기', en: 'Strawberry', desc: '봄철 인기 과일.' },
-    { name: '메론', en: 'Melon', desc: '달콤한 과일.' },
-    { name: '파프리카', en: 'Bell Pepper', desc: '다채로운 색의 채소.' },
-    { name: '체리', en: 'Cherry', desc: '상큼한 맛의 과일.' },
     { name: '아스파라거스', en: 'Asparagus', desc: '고급 채소.' },
+    { name: '오미자', en: 'Schisandra', desc: '다섯 가지 맛의 열매.' },
+    { name: '자두', en: 'Plum', desc: '새콤달콤한 과일.' },
+    { name: '참나물', en: 'Chive', desc: '향긋한 나물.' },
   ],
-  AHB: [
-    { name: '벼', en: 'Rice', desc: '주식이 되는 곡물.' },
-    { name: '배추', en: 'Napa Cabbage', desc: '김치의 주재료.' },
+  AHBV: [
+    { name: '고구마', en: 'Sweet Potato', desc: '달콤한 맛의 대표 작물.' },
+    { name: '마', en: 'Yam', desc: '건강식으로 인기.' },
+    { name: '무화과', en: 'Fig', desc: '달콤한 과일.' },
+    { name: '산약', en: 'Wild Yam', desc: '산에서 자라는 마.' },
+    { name: '오디', en: 'Mulberry', desc: '달콤한 열매.' },
+  ],
+  AHCS: [
     { name: '상추', en: 'Lettuce', desc: '쌈채소의 대표.' },
     { name: '감자', en: 'Potato', desc: '다양한 요리에 활용.' },
-    { name: '복숭아', en: 'Peach', desc: '달콤한 과일.' },
+    { name: '매실', en: 'Japanese Apricot', desc: '청매실청의 재료.' },
+  ],
+  AHCV: [
     { name: '사과', en: 'Apple', desc: '대표적인 과일.' },
-    { name: '매실', en: 'Japanese Apricot', desc: '청매실청의 재료.' },
+    { name: '근대', en: 'Swiss Chard', desc: '컬러풀한 잎채소.' },
     { name: '배', en: 'Pear', desc: '아삭한 과일.' },
+    { name: '쪽파', en: 'Scallion', desc: '다양한 요리에 활용.' },
   ],
-  AHC: [
-    { name: '매실', en: 'Japanese Apricot', desc: '청매실청의 재료.' },
-    { name: '마늘', en: 'Garlic', desc: '향신료로 인기.' },
-    { name: '블루베리', en: 'Blueberry', desc: '항산화가 풍부한 과일.' },
-    { name: '인삼', en: 'ginseng', desc: '건강에 좋은 뿌리.' },
-  ],
-  APB: [
-    { name: '아스파라거스', en: 'Asparagus', desc: '고급 채소.' },
-    { name: '수박', en: 'Watermelon', desc: '여름 대표 과일.' },
+  APBS: [
     { name: '오이', en: 'Cucumber', desc: '수분이 풍부한 채소.' },
+    { name: '감', en: 'Persimmon', desc: '가을을 대표하는 과일.' },
+  ],
+  APBV: [
+    { name: '수박', en: 'Watermelon', desc: '여름 대표 과일.' },
     { name: '참외', en: 'Korean Melon', desc: '달콤한 노란 과일.' },
     { name: '토마토', en: 'Tomato', desc: '다양한 요리에 활용.' },
     { name: '방울토마토', en: 'Cherry Tomato', desc: '작고 귀여운 토마토.' },
-    { name: '자두', en: 'Plum', desc: '새콤달콤한 과일.' },
   ],
-  APC: [
+  APCS: [
+    { name: '벼', en: 'Rice', desc: '주식이 되는 곡물.' },
+  ],
+  APCV: [
     { name: '딸기', en: 'Strawberry', desc: '봄철 인기 과일.' },
-    { name: '무화과', en: 'Fig', desc: '달콤한 과일.' },
+  ],
+  NHBS: [
+    { name: '쑥갓', en: 'Crown Daisy', desc: '국거리, 쌈채로 인기.' },
+    { name: '연근', en: 'Lotus Root', desc: '아삭한 식감의 뿌리채소.' },
+    { name: '우엉', en: 'Burdock', desc: '영양이 풍부한 뿌리채소.' },
+    { name: '도라지', en: 'bellflower', desc: '기관지에 좋은 뿌리채소.' },
+    { name: '더덕', en: 'Deodeok', desc: '향이 좋은 산채.' },
+    { name: '취나물', en: 'Chive', desc: '봄철 산나물.' },
+  ],
+  NHBV: [
+    { name: '블루베리', en: 'Blueberry', desc: '항산화가 풍부한 과일.' },
+  ],
+  NHCS: [
+    { name: '브로콜리', en: 'coli', desc: '비타민이 풍부한 녹색 채소.' },
+  ],
+  NHCV: [
+    { name: '파프리카', en: 'Bell Pepper', desc: '다채로운 색의 채소.' },
+    { name: '풋고추', en: 'Green Chili Pepper', desc: '매콤한 맛의 고추.' },
+    { name: '청양고추', en: 'Cheongyang Chili Pepper', desc: '매운맛의 대표 고추.' },
+    { name: '비트', en: 'Beet', desc: '붉은 색이 특징인 뿌리채소.' },
+  ],
+  NPBS: [
+    { name: '마늘', en: 'Garlic', desc: '향신료로 인기.' },
+    { name: '양파', en: 'Onion', desc: '기본 양념채소.' },
+    { name: '얼갈이배추', en: 'Napa Cabbage', desc: '김치의 주재료.' },
+    { name: '청경채', en: 'Bok Choy', desc: '부드러운 식감의 잎채소.' },
+    { name: '참다래', en: 'Cherry', desc: '비타민이 풍부한 과일.' },
+  ],
+  NPBV: [
+    { name: '체리', en: 'Cherry', desc: '상큼한 맛의 과일.' },
+    { name: '참깨', en: 'Sesame', desc: '고소한 맛의 씨앗.' },
+    { name: '수수', en: 'Sorghum', desc: '곡물로도 쓰이는 작물.' },
+    { name: '조', en: 'Millet', desc: '영양이 풍부한 곡물.' },
+    { name: '체리', en: 'Cherry', desc: '상큼한 맛의 과일.' },
+    { name: '생강', en: 'Ginger', desc: '매운맛과 향이 특징.' },
+  ],
+  NPCS: [
+    { name: '당근', en: 'Carrot', desc: '비타민이 풍부한 대표 뿌리채소.' },
+    { name: '무', en: 'Radish', desc: '건강하게 잘 자라는 뿌리채소입니다.' },
+    { name: '미나리', en: 'Water Parsley', desc: '향긋한 향과 아삭한 식감의 채소.' },
+    { name: '배추', en: 'Napa Cabbage', desc: '김치의 주재료.' },
+    { name: '부추', en: 'Chive', desc: '향긋한 향과 영양.' },
+    { name: '시금치', en: 'Spinach', desc: '철분이 풍부한 잎채소.' },
+    { name: '양배추', en: 'Cabbage', desc: '다양한 요리에 활용되는 채소.' },
+    { name: '호박', en: 'Sweet Potato', desc: '가을 대표 채소.' },
+    { name: '복숭아', en: 'Peach', desc: '달콤한 과일.' },
+    { name: '케일', en: 'Kale', desc: '슈퍼푸드로 인기.' },
+    { name: '유채', en: 'Rapeseed', desc: '노란 꽃이 아름다운 채소.' },
+    { name: '고추', en: 'Green Chili Pepper', desc: '매콤한 맛의 고추.' },
+  ],
+  NPCV: [
+    { name: '메론', en: 'Melon', desc: '달콤한 과일.' },
   ],
 };
 
@@ -273,99 +229,118 @@ const NBTITest = ({ onBack }) => {
 
   // 질문 데이터
   const questions = [
-    // 1. 적응력 (Adaptable vs Novice) - A/N
+    // 1. 적응력 (A vs N) - Q1,Q2,Q3
     {
       id: 1,
-      category: "🌱 적응력",
-      question: "다양한 환경에서 작물을 재배해본 경험이 있나요?",
+      question: "농작물 재배 경험이 있으신가요?",
       options: [
-        { text: "아니요, 처음 시도해보는 거예요", value: "novice" },
-        { text: "네, 다양한 상황에서 키워본 적 있어요", value: "adaptable" }
+        { text: "거의 처음이에요. 배우는 중이에요.", value: "N" },
+        { text: "어느 정도 경험이 있어서 익숙한 편이에요.", value: "A" }
       ],
       description: "초보자형(N) vs 숙련자형(A)"
     },
     {
       id: 2,
-      category: "🌱 적응력",
-      question: "작물 키우기를 어떻게 생각하시나요?",
+      question: "작물을 키우다 문제가 생기면 어떻게 하시겠어요?",
       options: [
-        { text: "최대한 간단했으면 좋겠어요", value: "novice" },
-        { text: "어렵더라도 직접 관리하는 걸 즐깁니다", value: "adaptable" }
-      ],
-      description: "관리 복잡도에 대한 태도"
-    },
-    {
-      id: 3,
-      category: "🌱 적응력",
-      question: "작물에 문제가 생기면?",
-      options: [
-        { text: "잘 모르겠고 도움을 받아야 할 것 같아요", value: "novice" },
-        { text: "스스로 해결하려고 찾아보거나 시도해요", value: "adaptable" }
+        { text: "복잡한 건 어렵고, 최대한 문제가 안 생기길 바라요.", value: "N" },
+        { text: "인터넷을 찾아보거나 직접 해결해봐요.", value: "A" }
       ],
       description: "문제 해결 의지"
     },
-    // 2. 상품성 (Hobby vs Profit) - H/P
+    {
+      id: 3,
+      question: "물주기나 비료주기 등 작물 관리를 어떻게 생각하시나요?",
+      options: [
+        { text: "너무 자주 관리하는 건 부담돼요. 간단한 게 좋아요.", value: "N" },
+        { text: "신경 쓰는 편이에요. 작물 상태를 자주 확인해요.", value: "A" }
+      ],
+      description: "관리 복잡도에 대한 태도"
+    },
+    // 2. 상품성 (H vs P) - Q4,Q5,Q6
     {
       id: 4,
-      category: "💝 상품성",
-      question: "작물을 키우는 이유는 무엇인가요?",
+      question: "텃밭을 시작하려는 가장 큰 이유는 무엇인가요?",
       options: [
-        { text: "힐링과 즐거움을 위해서예요", value: "hobby" },
-        { text: "수확해서 판매하거나 경제적 이익이 목적이에요", value: "profit" }
+        { text: "힐링과 재미를 위해서요.", value: "H" },
+        { text: "수확해서 직접 먹거나 팔고 싶어서요.", value: "P" }
       ],
       description: "취미형(H) vs 수익형(P)"
     },
     {
       id: 5,
-      category: "💝 상품성",
-      question: "작물 선택 기준은?",
+      question: "예쁘지만 수확이 적은 작물과 수확이 많은 작물 중 어느 쪽이 더 끌리나요?",
       options: [
-        { text: "예쁘고 재미있어 보이는 작물", value: "hobby" },
-        { text: "많이 수확 가능하고 경제성 있는 작물", value: "profit" }
+        { text: "예쁘고 키우는 재미가 있는 작물", value: "H" },
+        { text: "수확량이 많고 실속 있는 작물", value: "P" }
       ],
       description: "작물 선택 우선순위"
     },
     {
       id: 6,
-      category: "💝 상품성",
-      question: "수익이나 생산량에 대해?",
+      question: "수익을 낼 수 있는 재배 방식에 대해 관심이 있으신가요?",
       options: [
-        { text: "중요하지 않아요", value: "hobby" },
-        { text: "매우 중요해요, 손익계산도 합니다", value: "profit" }
+        { text: "아니요, 즐거우면 충분해요.", value: "H" },
+        { text: "네, 어떻게 하면 실속 있게 할 수 있을지 고민돼요.", value: "P" }
       ],
       description: "경제적 관점"
     },
-    // 3. 빈도성 (Busy(많음) vs Careless(부족)) - B/C
+    // 3. 빈도성 (B vs C) - Q7,Q8,Q9
     {
       id: 7,
-      category: "⏰ 빈도성",
-      question: "얼마나 자주 텃밭을 관리할 수 있나요?",
+      question: "텃밭을 얼마나 자주 돌볼 수 있을 것 같나요?",
       options: [
-        { text: "매일 혹은 자주 가꿉니다", value: "busy" },
-        { text: "가끔, 시간이 날 때만 관리할 수 있어요", value: "careless" }
+        { text: "바빠서 자주는 어렵고 가끔 돌보는 게 좋아요.", value: "C" },
+        { text: "하루에 한 번 이상은 볼 수 있어요.", value: "B" }
       ],
       description: "시간 많음/세심관리형(B) vs 시간 부족형/간단관리형(C)"
     },
     {
       id: 8,
-      category: "⏰ 빈도성",
-      question: "작물에 관심을 쏟는 정도는?",
+      question: "병충해나 잡초 관리는 어떻게 생각하시나요?",
       options: [
-        { text: "물 주기, 성장 확인, 병해 관리까지 정성껏 해요", value: "busy" },
-        { text: "자동화나 방치 가능 작물을 선호해요", value: "careless" }
+        { text: "간편하게 최소한만 하고 싶어요.", value: "C" },
+        { text: "꼼꼼히 챙기고 싶어요.", value: "B" }
       ],
       description: "관리 정성도"
     },
     {
       id: 9,
-      category: "⏰ 빈도성",
-      question: "텃밭 활동을 어떻게 생각하시나요?",
+      question: "작물의 성장 과정을 기록하거나 관찰하는 걸 좋아하시나요?",
       options: [
-        { text: "주기적인 취미 활동으로 삼고 있어요", value: "busy" },
-        { text: "너무 자주 하긴 어려울 것 같아요", value: "careless" }
+        { text: "아니요, 그런 건 귀찮아서 안 해요.", value: "C" },
+        { text: "네, 세심하게 관리하는 게 재밌어요.", value: "B" }
       ],
       description: "텃밭 활동 빈도"
-    }
+    },
+    // 4. 환경적합성 (S vs V) - Q10,Q11,Q12
+    {
+      id: 10,
+      question: "텃밭은 어떤 공간에서 운영할 계획인가요?",
+      options: [
+        { text: "햇빛이 부족하거나 좁은 실내 공간이에요 (예: 베란다, 창가).", value: "S" },
+        { text: "햇빛이 잘 들고 넉넉한 야외 공간이에요 (예: 옥상, 마당).", value: "V" }
+      ],
+      description: "공간 환경"
+    },
+    {
+      id: 11,
+      question: "작물이 잘 자라려면 어떤 조건이 중요하다고 생각하시나요?",
+      options: [
+        { text: "토양, 물, 햇빛 조건을 잘 맞춰야 한다고 생각해요.", value: "S" },
+        { text: "웬만한 조건에서도 잘 자라는 작물이 좋아요.", value: "V" }
+      ],
+      description: "환경 조절 가능성"
+    },
+    {
+      id: 12,
+      question: "주변 환경에 따라 작물을 바꾸는 걸 고려하시나요?",
+      options: [
+        { text: "네, 환경에 맞는 작물을 신중히 고르고 싶어요.", value: "S" },
+        { text: "어떤 환경에서도 쉽게 키울 수 있는 작물을 찾고 있어요.", value: "V" }
+      ],
+      description: "작물 선택 기준"
+    },
   ];
 
   const handleAnswer = (option) => {
@@ -386,8 +361,8 @@ const NBTITest = ({ onBack }) => {
     // 1. 적응력 (N/A) - Q1,Q2,Q3 중 다수결
     const adaptabilityAnswers = allAnswers.slice(0, 3);
     const adaptabilityCount = {
-      novice: adaptabilityAnswers.filter(answer => answer.value === 'novice').length,
-      adaptable: adaptabilityAnswers.filter(answer => answer.value === 'adaptable').length
+      novice: adaptabilityAnswers.filter(answer => answer.value === 'N').length,
+      adaptable: adaptabilityAnswers.filter(answer => answer.value === 'A').length
     };
     const adaptabilityCode = adaptabilityCount.adaptable >= 2 ? 'A' : 'N';
     console.log('적응력 카운트:', adaptabilityCount, '코드:', adaptabilityCode);
@@ -395,31 +370,40 @@ const NBTITest = ({ onBack }) => {
     // 2. 상품성 (H/P) - Q4,Q5,Q6 중 다수결
     const profitAnswers = allAnswers.slice(3, 6);
     const profitCount = {
-      hobby: profitAnswers.filter(answer => answer.value === 'hobby').length,
-      profit: profitAnswers.filter(answer => answer.value === 'profit').length
+      hobby: profitAnswers.filter(answer => answer.value === 'H').length,
+      profit: profitAnswers.filter(answer => answer.value === 'P').length
     };
     const profitCode = profitCount.profit >= 2 ? 'P' : 'H';
     console.log('상품성 카운트:', profitCount, '코드:', profitCode);
 
-    // 3. 빈도성 (B/C) - Q7,Q8,Q9 중 다수결
+    // 3. 빈도성 (B vs C) - Q7,Q8,Q9 중 다수결
     const careAnswers = allAnswers.slice(6, 9);
     const careCount = {
-      busy: careAnswers.filter(answer => answer.value === 'busy').length,
-      careless: careAnswers.filter(answer => answer.value === 'careless').length
+      busy: careAnswers.filter(answer => answer.value === 'B').length,
+      careless: careAnswers.filter(answer => answer.value === 'C').length
     };
     const careCode = careCount.busy >= 2 ? 'B' : 'C';
     console.log('빈도성 카운트:', careCount, '코드:', careCode);
 
-    // 최종 코드 조합 (3자리)
-    const finalCode = adaptabilityCode + profitCode + careCode;
+    // 4. 환경적합성 (S vs V) - Q10,Q11,Q12 중 다수결
+    const envAnswers = allAnswers.slice(9, 12);
+    const envCount = {
+      selective: envAnswers.filter(answer => answer.value === 'S').length,
+      versatile: envAnswers.filter(answer => answer.value === 'V').length
+    };
+    const envCode = envCount.versatile >= 2 ? 'V' : 'S';
+    console.log('환경적합성 카운트:', envCount, '코드:', envCode);
+
+    // 최종 코드 조합 (4자리)
+    const finalCode = adaptabilityCode + profitCode + careCode + envCode;
     console.log('최종 코드:', finalCode);
     console.log('유형 존재 여부:', types.find(t => t.code === finalCode) ? '존재' : '없음');
     
     // types 배열에서 코드로 찾기
     const foundType = types.find(t => t.code === finalCode);
     // 성향분석, 텃밭특성 답변 추출
-    const tendencyAnswer = allAnswers[9]?.value || "-";
-    const gardenFeatureAnswer = allAnswers[10]?.value || "-";
+    const tendencyAnswer = allAnswers[12]?.value || "-";
+    const gardenFeatureAnswer = allAnswers[13]?.value || "-";
     setResult({
       code: finalCode,
       type: foundType || {
@@ -447,15 +431,44 @@ const NBTITest = ({ onBack }) => {
   const progress = ((currentQuestion + 1) / questions.length) * 100;
 
   // 결과 카드 컴포넌트 분리
-  const ResultCard = ({ code, type, onRetry }) => {
+  const ResultCard = ({ code, type, answers, onRetry }) => {
     const [popupOpen, setPopupOpen] = useState(false);
     const [popupCrop, setPopupCrop] = useState(null);
     const [popupGarden, setPopupGarden] = useState(false);
     // cropList가 없으면 빈 배열 유지
     // 진단용 로그
     console.log('ResultCard code:', code);
-    console.log('최종 cropList:', cropDataByCode[code] || []);
-    const cropList = cropDataByCode[code] || [];
+    console.log('ResultCard answers:', answers);
+    
+    // 33% 단위로 점수 계산 (0, 33, 67, 100%)
+    const adaptabilityScore = (answers) => {
+      const count = answers.filter(a => a.value === 'A').length;
+      if (count === 0) return 0;
+      if (count === 1) return 33;
+      if (count === 2) return 67;
+      return 100;
+    };
+    const profitScore = (answers) => {
+      const count = answers.filter(a => a.value === 'P').length;
+      if (count === 0) return 0;
+      if (count === 1) return 33;
+      if (count === 2) return 67;
+      return 100;
+    };
+    const busyScore = (answers) => {
+      const count = answers.filter(a => a.value === 'B').length;
+      if (count === 0) return 0;
+      if (count === 1) return 33;
+      if (count === 2) return 67;
+      return 100;
+    };
+    const envScore = (answers) => {
+      const count = answers.filter(a => a.value === 'V').length;
+      if (count === 0) return 0;
+      if (count === 1) return 33;
+      if (count === 2) return 67;
+      return 100;
+    };
     return (
       <div className="nbti-test">
         <header className="custom-header">
@@ -484,57 +497,414 @@ const NBTITest = ({ onBack }) => {
               <p className="detail-description-text">{type.detailDescription}</p>
             </div>
           )}
+          {type.fullDescription && (
+            <div className="full-description-section" style={{
+              margin: '24px 0', 
+              padding: '24px 20px', 
+              background: 'rgba(255,255,255,0.1)', 
+              borderRadius: 16, 
+              border: '1px solid rgba(255,255,255,0.15)'
+            }}>
+              <h3 style={{
+                fontWeight: 700, 
+                fontSize: '1.2em', 
+                marginBottom: 16, 
+                color: '#fff',
+                display: 'flex', 
+                alignItems: 'center', 
+                gap: 8
+              }}>
+                <span role="img" aria-label="info">💡</span> 유형 자세한 설명
+              </h3>
+              <p style={{
+                color: '#fff', 
+                fontSize: '1em', 
+                lineHeight: '1.6', 
+                margin: 0,
+                textAlign: 'justify'
+              }}>{type.fullDescription}</p>
+            </div>
+          )}
           {/* 성향분석 파트 */}
-          <div className="tendency-analysis-section" style={{margin: '32px 0 24px 0', padding: '28px 18px', background: 'rgba(255,255,255,0.08)', borderRadius: 18, boxShadow: '0 2px 8px rgba(0,0,0,0.04)'}}>
-            <h3 style={{fontWeight: 700, fontSize: '1.25em', marginBottom: 24, display: 'flex', alignItems: 'center', gap: 8, color: '#fff'}}>
+          <div className="tendency-analysis-section" style={{
+            margin: '32px 0 24px 0', 
+            padding: '32px 24px', 
+            background: 'rgba(255,255,255,0.12)', 
+            borderRadius: 20, 
+            boxShadow: '0 4px 16px rgba(0,0,0,0.08)',
+            border: '1px solid rgba(255,255,255,0.2)'
+          }}>
+            <h3 style={{
+              fontWeight: 700, 
+              fontSize: '1.4em', 
+              marginBottom: 28, 
+              display: 'flex', 
+              alignItems: 'center', 
+              gap: 10, 
+              color: '#fff',
+              textAlign: 'center',
+              justifyContent: 'center'
+            }}>
               <span role="img" aria-label="chart">📊</span> 성향 분석
             </h3>
             {/* 적응력 */}
-            <div style={{marginBottom: 18, background: 'rgba(255,255,255,0.10)', borderRadius: 14, padding: '16px 12px'}}>
-              <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 6}}>
-                <span style={{fontWeight: 600, color: '#fff'}}>적응력</span>
-                <span style={{fontSize: '0.98em', color: '#fff'}}>재배 경험</span>
-                <span style={{fontWeight: 500, fontSize: '0.98em', color: '#fff'}}>초보자형</span>
+            <div style={{
+              marginBottom: 24, 
+              background: 'rgba(255,255,255,0.15)', 
+              borderRadius: 16, 
+              padding: '20px 16px',
+              border: '1px solid rgba(255,255,255,0.1)'
+            }}>
+              <div style={{
+                display: 'flex', 
+                justifyContent: 'space-between', 
+                alignItems: 'center', 
+                marginBottom: 12
+              }}>
+                <span style={{
+                  fontWeight: 700, 
+                  color: '#fff',
+                  fontSize: '1.1em'
+                }}>🌱 적응력</span>
+                <span style={{
+                  fontSize: '1em', 
+                  color: 'rgba(255,255,255,0.9)',
+                  fontWeight: 500
+                }}>N(초보자) / A(숙련자)</span>
               </div>
-              <div style={{display: 'flex', alignItems: 'center', gap: 10}}>
-                <span style={{fontWeight: 700, color: '#fff', minWidth: 18}}>A</span>
-                <div style={{flex: 1, height: 16, background: '#e0f5e7', borderRadius: 8, position: 'relative', margin: '0 8px'}}>
-                  <div style={{width: `${type.adaptabilityScore || 0}%`, height: '100%', background: 'linear-gradient(90deg,#1ecb6b,#4be585)', borderRadius: 8, transition: 'width 0.5s'}}></div>
-                  <span style={{position: 'absolute', right: 10, top: 0, height: '100%', display: 'flex', alignItems: 'center', fontWeight: 700, color: '#fff'}}>{type.adaptabilityScore || 0}</span>
+              <div style={{
+                display: 'flex', 
+                alignItems: 'center', 
+                gap: 12
+              }}>
+                <span style={{
+                  fontWeight: 700, 
+                  color: '#fff', 
+                  minWidth: 24,
+                  fontSize: '1.1em',
+                  textAlign: 'center'
+                }}>N</span>
+                <div style={{
+                  flex: 1, 
+                  height: 20, 
+                  background: 'rgba(255,255,255,0.2)', 
+                  borderRadius: 10, 
+                  position: 'relative', 
+                  margin: '0 10px',
+                  overflow: 'hidden',
+                  boxShadow: 'inset 0 2px 4px rgba(0,0,0,0.1)'
+                }}>
+                  <div style={{
+                    width: `${100 - adaptabilityScore(answers)}%`, 
+                    height: '100%', 
+                    background: 'linear-gradient(90deg,#e0e0e0,#b2f77c)', 
+                    borderRadius: 10, 
+                    position: 'absolute', 
+                    left: 0, 
+                    top: 0, 
+                    transition: 'width 0.8s ease-in-out'
+                  }}></div>
+                  <div style={{
+                    width: `${adaptabilityScore(answers)}%`, 
+                    height: '100%', 
+                    background: 'linear-gradient(90deg,#1ecb6b,#4be585)', 
+                    borderRadius: 10, 
+                    position: 'absolute', 
+                    right: 0, 
+                    top: 0, 
+                    transition: 'width 0.8s ease-in-out',
+                    boxShadow: '0 2px 8px rgba(30,203,107,0.3)'
+                  }}></div>
+                  <span style={{
+                    position: 'absolute', 
+                    right: 12, 
+                    top: 0, 
+                    height: '100%', 
+                    display: 'flex', 
+                    alignItems: 'center', 
+                    fontWeight: 700, 
+                    color: '#fff',
+                    fontSize: '0.95em',
+                    textShadow: '0 1px 2px rgba(0,0,0,0.5)'
+                  }}>{adaptabilityScore(answers)}%</span>
                 </div>
-                <span style={{fontWeight: 700, color: '#fff', minWidth: 18}}>N</span>
+                <span style={{
+                  fontWeight: 700, 
+                  color: '#fff', 
+                  minWidth: 24,
+                  fontSize: '1.1em',
+                  textAlign: 'center'
+                }}>A</span>
               </div>
             </div>
             {/* 상품성 */}
-            <div style={{marginBottom: 18, background: 'rgba(255,255,255,0.10)', borderRadius: 14, padding: '16px 12px'}}>
-              <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 6}}>
-                <span style={{fontWeight: 600, color: '#fff'}}>상품성</span>
-                <span style={{fontSize: '0.98em', color: '#fff'}}>재배 목적</span>
-                <span style={{fontWeight: 500, fontSize: '0.98em', color: '#fff'}}>수익형</span>
+            <div style={{
+              marginBottom: 24, 
+              background: 'rgba(255,255,255,0.15)', 
+              borderRadius: 16, 
+              padding: '20px 16px',
+              border: '1px solid rgba(255,255,255,0.1)'
+            }}>
+              <div style={{
+                display: 'flex', 
+                justifyContent: 'space-between', 
+                alignItems: 'center', 
+                marginBottom: 12
+              }}>
+                <span style={{
+                  fontWeight: 700, 
+                  color: '#fff',
+                  fontSize: '1.1em'
+                }}>💰 상품성</span>
+                <span style={{
+                  fontSize: '1em', 
+                  color: 'rgba(255,255,255,0.9)',
+                  fontWeight: 500
+                }}>H(취미형) / P(수익형)</span>
               </div>
-              <div style={{display: 'flex', alignItems: 'center', gap: 10}}>
-                <span style={{fontWeight: 700, color: '#fff', minWidth: 18}}>H</span>
-                <div style={{flex: 1, height: 16, background: '#fff7e0', borderRadius: 8, position: 'relative', margin: '0 8px'}}>
-                  <div style={{width: `${type.hobbyScore || 0}%`, height: '100%', background: 'linear-gradient(90deg,#ffb300,#ffe066)', borderRadius: 8, transition: 'width 0.5s'}}></div>
-                  <span style={{position: 'absolute', right: 10, top: 0, height: '100%', display: 'flex', alignItems: 'center', fontWeight: 700, color: '#fff'}}>{type.hobbyScore || 0}</span>
+              <div style={{
+                display: 'flex', 
+                alignItems: 'center', 
+                gap: 12
+              }}>
+                <span style={{
+                  fontWeight: 700, 
+                  color: '#fff', 
+                  minWidth: 24,
+                  fontSize: '1.1em',
+                  textAlign: 'center'
+                }}>H</span>
+                <div style={{
+                  flex: 1, 
+                  height: 20, 
+                  background: 'rgba(255,255,255,0.2)', 
+                  borderRadius: 10, 
+                  position: 'relative', 
+                  margin: '0 10px',
+                  overflow: 'hidden',
+                  boxShadow: 'inset 0 2px 4px rgba(0,0,0,0.1)'
+                }}>
+                  <div style={{
+                    width: `${100 - profitScore(answers)}%`, 
+                    height: '100%', 
+                    background: 'linear-gradient(90deg,#e0e0e0,#b2f77c)', 
+                    borderRadius: 10, 
+                    position: 'absolute', 
+                    left: 0, 
+                    top: 0, 
+                    transition: 'width 1.2s ease-in-out'
+                  }}></div>
+                  <div style={{
+                    width: `${profitScore(answers)}%`, 
+                    height: '100%', 
+                    background: 'linear-gradient(90deg,#b2f77c,#4be585)', 
+                    borderRadius: 10, 
+                    position: 'absolute', 
+                    right: 0, 
+                    top: 0, 
+                    transition: 'width 1.2s ease-in-out',
+                    boxShadow: '0 2px 8px rgba(178,247,124,0.3)'
+                  }}></div>
+                  <span style={{
+                    position: 'absolute', 
+                    right: 12, 
+                    top: 0, 
+                    height: '100%', 
+                    display: 'flex', 
+                    alignItems: 'center', 
+                    fontWeight: 700, 
+                    color: '#fff',
+                    fontSize: '0.95em',
+                    textShadow: '0 1px 2px rgba(0,0,0,0.5)'
+                  }}>{profitScore(answers)}%</span>
                 </div>
-                <span style={{fontWeight: 700, color: '#fff', minWidth: 18}}>P</span>
+                <span style={{
+                  fontWeight: 700, 
+                  color: '#fff', 
+                  minWidth: 24,
+                  fontSize: '1.1em',
+                  textAlign: 'center'
+                }}>P</span>
               </div>
             </div>
             {/* 빈도성 */}
-            <div style={{background: 'rgba(255,255,255,0.10)', borderRadius: 14, padding: '16px 12px'}}>
-              <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 6}}>
-                <span style={{fontWeight: 600, color: '#fff'}}>빈도성</span>
-                <span style={{fontSize: '0.98em', color: '#fff'}}>관리 시간</span>
-                <span style={{fontWeight: 500, fontSize: '0.98em', color: '#fff'}}>간단관리형</span>
+            <div style={{
+              marginBottom: 24, 
+              background: 'rgba(255,255,255,0.15)', 
+              borderRadius: 16, 
+              padding: '20px 16px',
+              border: '1px solid rgba(255,255,255,0.1)'
+            }}>
+              <div style={{
+                display: 'flex', 
+                justifyContent: 'space-between', 
+                alignItems: 'center', 
+                marginBottom: 12
+              }}>
+                <span style={{
+                  fontWeight: 700, 
+                  color: '#fff',
+                  fontSize: '1.1em'
+                }}>⏰ 빈도성</span>
+                <span style={{
+                  fontSize: '1em', 
+                  color: 'rgba(255,255,255,0.9)',
+                  fontWeight: 500
+                }}>C(간단) / B(세심)</span>
               </div>
-              <div style={{display: 'flex', alignItems: 'center', gap: 10}}>
-                <span style={{fontWeight: 700, color: '#fff', minWidth: 18}}>B</span>
-                <div style={{flex: 1, height: 16, background: '#e0eaff', borderRadius: 8, position: 'relative', margin: '0 8px'}}>
-                  <div style={{width: `${type.busyScore || 0}%`, height: '100%', background: 'linear-gradient(90deg,#2979ff,#6ec6ff)', borderRadius: 8, transition: 'width 0.5s'}}></div>
-                  <span style={{position: 'absolute', right: 10, top: 0, height: '100%', display: 'flex', alignItems: 'center', fontWeight: 700, color: '#fff'}}>{type.busyScore || 0}</span>
+              <div style={{
+                display: 'flex', 
+                alignItems: 'center', 
+                gap: 12
+              }}>
+                <span style={{
+                  fontWeight: 700, 
+                  color: '#fff', 
+                  minWidth: 24,
+                  fontSize: '1.1em',
+                  textAlign: 'center'
+                }}>C</span>
+                <div style={{
+                  flex: 1, 
+                  height: 20, 
+                  background: 'rgba(255,255,255,0.2)', 
+                  borderRadius: 10, 
+                  position: 'relative', 
+                  margin: '0 10px',
+                  overflow: 'hidden',
+                  boxShadow: 'inset 0 2px 4px rgba(0,0,0,0.1)'
+                }}>
+                  <div style={{
+                    width: `${100 - busyScore(answers)}%`, 
+                    height: '100%', 
+                    background: 'linear-gradient(90deg,#e0e0e0,#7ce6f7)', 
+                    borderRadius: 10, 
+                    position: 'absolute', 
+                    left: 0, 
+                    top: 0, 
+                    transition: 'width 1.6s ease-in-out'
+                  }}></div>
+                  <div style={{
+                    width: `${busyScore(answers)}%`, 
+                    height: '100%', 
+                    background: 'linear-gradient(90deg,#7ce6f7,#4be585)', 
+                    borderRadius: 10, 
+                    position: 'absolute', 
+                    right: 0, 
+                    top: 0, 
+                    transition: 'width 1.6s ease-in-out',
+                    boxShadow: '0 2px 8px rgba(124,230,247,0.3)'
+                  }}></div>
+                  <span style={{
+                    position: 'absolute', 
+                    right: 12, 
+                    top: 0, 
+                    height: '100%', 
+                    display: 'flex', 
+                    alignItems: 'center', 
+                    fontWeight: 700, 
+                    color: '#fff',
+                    fontSize: '0.95em',
+                    textShadow: '0 1px 2px rgba(0,0,0,0.5)'
+                  }}>{busyScore(answers)}%</span>
                 </div>
-                <span style={{fontWeight: 700, color: '#fff', minWidth: 18}}>C</span>
+                <span style={{
+                  fontWeight: 700, 
+                  color: '#fff', 
+                  minWidth: 24,
+                  fontSize: '1.1em',
+                  textAlign: 'center'
+                }}>B</span>
+              </div>
+            </div>
+            {/* 환경적합성 */}
+            <div style={{
+              marginBottom: 0, 
+              background: 'rgba(255,255,255,0.15)', 
+              borderRadius: 16, 
+              padding: '20px 16px',
+              border: '1px solid rgba(255,255,255,0.1)'
+            }}>
+              <div style={{
+                display: 'flex', 
+                justifyContent: 'space-between', 
+                alignItems: 'center', 
+                marginBottom: 12
+              }}>
+                <span style={{
+                  fontWeight: 700, 
+                  color: '#fff',
+                  fontSize: '1.1em'
+                }}>🌍 환경적합성</span>
+                <span style={{
+                  fontSize: '1em', 
+                  color: 'rgba(255,255,255,0.9)',
+                  fontWeight: 500
+                }}>S(선택) / V(다양)</span>
+              </div>
+              <div style={{
+                display: 'flex', 
+                alignItems: 'center', 
+                gap: 12
+              }}>
+                <span style={{
+                  fontWeight: 700, 
+                  color: '#fff', 
+                  minWidth: 24,
+                  fontSize: '1.1em',
+                  textAlign: 'center'
+                }}>S</span>
+                <div style={{
+                  flex: 1, 
+                  height: 20, 
+                  background: 'rgba(255,255,255,0.2)', 
+                  borderRadius: 10, 
+                  position: 'relative', 
+                  margin: '0 10px',
+                  overflow: 'hidden',
+                  boxShadow: 'inset 0 2px 4px rgba(0,0,0,0.1)'
+                }}>
+                  <div style={{
+                    width: `${100 - envScore(answers)}%`, 
+                    height: '100%', 
+                    background: 'linear-gradient(90deg,#e0e0e0,#7cf7a6)', 
+                    borderRadius: 10, 
+                    position: 'absolute', 
+                    left: 0, 
+                    top: 0, 
+                    transition: 'width 2.0s ease-in-out'
+                  }}></div>
+                  <div style={{
+                    width: `${envScore(answers)}%`, 
+                    height: '100%', 
+                    background: 'linear-gradient(90deg,#7cf7a6,#4be585)', 
+                    borderRadius: 10, 
+                    position: 'absolute', 
+                    right: 0, 
+                    top: 0, 
+                    transition: 'width 2.0s ease-in-out',
+                    boxShadow: '0 2px 8px rgba(124,247,166,0.3)'
+                  }}></div>
+                  <span style={{
+                    position: 'absolute', 
+                    right: 12, 
+                    top: 0, 
+                    height: '100%', 
+                    display: 'flex', 
+                    alignItems: 'center', 
+                    fontWeight: 700, 
+                    color: '#fff',
+                    fontSize: '0.95em',
+                    textShadow: '0 1px 2px rgba(0,0,0,0.5)'
+                  }}>{envScore(answers)}%</span>
+                </div>
+                <span style={{
+                  fontWeight: 700, 
+                  color: '#fff', 
+                  minWidth: 24,
+                  fontSize: '1.1em',
+                  textAlign: 'center'
+                }}>V</span>
               </div>
             </div>
           </div>
@@ -559,14 +929,37 @@ const NBTITest = ({ onBack }) => {
                       textAlign: 'center'
                     }}>
                       <img
-                        src={`${process.env.PUBLIC_URL}/images/photo/${c.en.replace(/ /g, '%20')}.jpg`}
+                        src={`${process.env.PUBLIC_URL}/images/photo/${c.en.replace(/ /g, '%20')}${c.en === 'coli' ? '.jpeg' : '.jpg'}`}
                         alt={c.name}
                         style={{ width: 80, height: 80, objectFit: 'cover', borderRadius: 10, marginBottom: 8, background: '#eee' }}
-                        onError={e => { e.target.style.display='none'; e.target.parentNode.querySelector('.no-img').style.display='flex'; }}
+                        onError={e => { 
+                          // .jpg 파일이 없으면 .webp 파일 시도
+                          if (e.target.src.includes('.jpg')) {
+                            e.target.src = e.target.src.replace('.jpg', '.webp');
+                          } else if (e.target.src.includes('.jpeg')) {
+                            e.target.src = e.target.src.replace('.jpeg', '.webp');
+                          } else {
+                            e.target.style.display='none'; 
+                            const noImgDiv = e.target.parentNode.querySelector('.no-img');
+                            if (noImgDiv) noImgDiv.style.display='flex';
+                          }
+                        }}
                       />
-                      <div className="no-img" style={{ display: 'none', width: 80, height: 80, alignItems: 'center', justifyContent: 'center', background: '#eee', color: '#888', borderRadius: 10, margin: '0 auto 8px auto', fontSize: '0.9em' }}>이미지 없음</div>
+                      <div className="no-img" style={{ 
+                        display: 'none', 
+                        width: 80, 
+                        height: 80, 
+                        alignItems: 'center', 
+                        justifyContent: 'center', 
+                        background: 'rgba(255,255,255,0.2)', 
+                        color: '#fff', 
+                        borderRadius: 10, 
+                        margin: '0 auto 8px auto', 
+                        fontSize: '0.8em',
+                        fontWeight: 600
+                      }}>🌱</div>
                       <div style={{ fontWeight: 700, marginBottom: 6 }}>{c.name}</div>
-                      <div style={{ fontSize: '0.95em', fontWeight: 400, marginBottom: 8 }}>{c.desc}</div>
+                      <div style={{ fontSize: '0.9em', fontWeight: 400, marginBottom: 8, lineHeight: '1.3' }}>{c.desc}</div>
                       <button
                         style={{
                           background: '#32cd32',
@@ -576,16 +969,26 @@ const NBTITest = ({ onBack }) => {
                           padding: '8px 12px',
                           fontWeight: 600,
                           cursor: 'pointer',
-                          fontSize: '0.97em',
-                          marginTop: 4
+                          fontSize: '0.9em',
+                          marginTop: 4,
+                          transition: 'all 0.2s ease'
                         }}
+                        onMouseOver={e => e.target.style.background = '#28a428'}
+                        onMouseOut={e => e.target.style.background = '#32cd32'}
                         onClick={() => window.open(`${process.env.PUBLIC_URL}/images/loading.jpeg`, '_blank', 'width=400,height=400')}
                       >
                         씨앗 및 모종 구매
                       </button>
                     </div>
                   ))
-                : <div>추천 작물이 없습니다.</div>
+                : <div style={{ 
+                    textAlign: 'center', 
+                    color: '#fff', 
+                    fontSize: '1.1em', 
+                    padding: '20px',
+                    background: 'rgba(255,255,255,0.1)',
+                    borderRadius: 12
+                  }}>추천 작물이 없습니다.</div>
               }
             </div>
           </div>
@@ -652,6 +1055,22 @@ const NBTITest = ({ onBack }) => {
                     <h5>C (간단 관리형)</h5>
                     <p className="explanation-summary">시간을 많이 들이지 않고 간편하게 키우는 스타일</p>
                     <p className="explanation-detail">바쁜 생활 속에서 최소한의 시간으로 텃밭을 유지하고 싶어하는 유형입니다. 자동화 시스템이나 돌봄이 쉬운 작물을 선호하며, 결과만 얻을 수 있으면 과정은 간편할수록 좋다고 생각합니다.</p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="explanation-item">
+                <h4>S vs V: 환경적합성 (Selective vs Versatile)</h4>
+                <div className="explanation-comparison">
+                  <div className="explanation-side selective">
+                    <h5>S (까다로운 환경형)</h5>
+                    <p className="explanation-summary">특정 조건을 잘 맞춰야 건강하게 자라는 유형</p>
+                    <p className="explanation-detail">특정 토양과 조건을 잘 맞춰야 건강하게 자라는 유형의 작물입니다. 재배시 환경 관리와 어느정도의 맞춤형 관리가 필요합니다. 세심한 관심, 계획을 통한 높은 품질을 기대하여, 재배능력에 깊이를 더하고 싶을때 선호합니다.</p>
+                  </div>
+                  <div className="explanation-side versatile">
+                    <h5>V (어디서나 자라는 유형)</h5>
+                    <p className="explanation-summary">다양한 환경에서 쉽게 재배할 수 있는 유형</p>
+                    <p className="explanation-detail">토양이나 기후가 크게 까다롭지 않아서 다양한 환경에서 쉽게 재배할수 있습니다. 관리가 비교적 단순하고 안정적이기 때문에 초보자부터 숙련자까지 재배 계획을 세우기 수월하고 키우기 좋습니다.</p>
                   </div>
                 </div>
               </div>
@@ -778,7 +1197,7 @@ const NBTITest = ({ onBack }) => {
   };
 
   if (isCompleted && result) {
-    return <ResultCard code={result.code} type={result.type} onRetry={resetTest} />;
+    return <ResultCard code={result.code} type={result.type} answers={answers} onRetry={resetTest} />;
   }
 
   return (
@@ -818,9 +1237,6 @@ const NBTITest = ({ onBack }) => {
         </div>
 
         <div className="question-container">
-          <div className="question-category">
-            {questions[currentQuestion].category}
-          </div>
           <h2 className="question-text">
             {questions[currentQuestion].question}
           </h2>
